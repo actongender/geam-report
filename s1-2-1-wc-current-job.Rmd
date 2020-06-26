@@ -1,0 +1,146 @@
+# Working Conditions 
+
+## About your current job
+
+Includes questions 2-8, codes: WCJC001, WCJC003, WCJC004, WCJC005, WCJ005a, WCJC010, WCJC011. 
+
+
+### `r if (!is.null(data$WCJC001)) get_label(data$WCJC001)`
+
+```{r your_position, eval=!is.null(data$WCJC001) }
+data %>% 
+    filter(!is.na(WCJC001) & hideNA) %>% 
+    ggplot(aes(x=WCJC001)) + 
+    geom_bar()+ 
+    labs(y="Total count") +
+    theme_light() +
+    theme(axis.title.x = element_blank())
+```
+
+
+```{r your_position_tab, eval=!is.null(data$WCJC001)}
+
+print_frqtable(data$WCJC001) 
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$WCJC003)) get_label(data$WCJC003)`
+
+```{r academic_field, eval=!is.null(data$WCJC003), fig.width=10, fig.height=10}
+data %>% 
+    filter(!is.na(WCJC003) & hideNA) %>% 
+    ggplot(aes(x=WCJC003, fill=WCJC003)) + 
+    geom_bar() + 
+    coord_flip() + 
+    labs(y="Total count") +
+    guides(fill=F) +
+    theme_light() +
+    theme(axis.title.y=element_blank())
+```
+
+```{r academic_field_tab, eval=!is.null(data$WCJC004)}
+
+print_frqtable(data$WCJC003) 
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$WCJC004)) get_label(data$WCJC004)`
+```{r your_post, eval=!is.null(data$WCJC004), fig.width=8, fig.height=4}
+data %>% 
+    filter(!is.na(WCJC004) & hideNA) %>% 
+    ggplot(aes(x=WCJC004, fill=WCJC004)) + 
+    geom_bar() + 
+    coord_flip() + 
+    labs(y="Total count") +
+    guides(fill=F) +
+    theme_light() +
+    theme(axis.title.y=element_blank())
+```
+
+```{r your_post_tab, eval=!is.null(data$WCJC004)}
+print_frqtable(data$WCJC004)
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$WCJC005)) get_label(data$WCJC005)`
+
+```{r net_salary, eval=!is.null(data$WCJC005)}
+data %>% 
+    ggplot(aes(x=WCJC005)) + 
+    geom_bar()+ 
+    labs(y="Total count") +
+    theme_light() +
+    theme(axis.title.x = element_blank())
+
+```
+
+```{r}
+summary(data$WCJC005)
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$WCJ005a)) get_label(data$WCJ005a)`
+
+```{r bonus, eval=!is.null(data$WCJ005a) }
+data %>% 
+    filter(!is.na(WCJ005a) & hideNA) %>% 
+    ggplot(aes(x=WCJ005a)) + 
+    geom_bar()+ 
+    labs(y="Total count") +
+    theme_light() +
+    theme(axis.title.x = element_blank())
+```
+
+```{r bonus_tab, eval=!is.null(data$WCJ005a)}
+print_frqtable(data$WCJ005) 
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$WCJC010)) get_label(data$WCJC010)`
+
+```{r fullpart_time, eval=!is.null(data$WCJC010) }
+data %>% 
+    filter(!is.na(WCJC010) & hideNA) %>% 
+    ggplot(aes(x=WCJC010)) + 
+    geom_bar()+ 
+    labs(y="Total count") +
+    theme_light() +
+    theme(axis.title.x = element_blank())
+```
+
+```{r fullpart_time_tab, eval=!is.null(data$WCJC010)}
+print_frqtable(data$WCJC010) 
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+
+### `r if (!is.null(data$WCJC011)) get_label(data$WCJC011)`
+
+```{r temp_fixed, eval=!is.null(data$WCJC011) }
+data %>% 
+    filter(!is.na(WCJC011) & hideNA) %>% 
+    ggplot(aes(x=WCJC011)) + 
+    geom_bar()+ 
+    labs(y="Total count") +
+    theme_light() +
+    theme(axis.title.x = element_blank())
+```
+
+```{r temp_fixed_tab, eval=!is.null(data$WCJC011)}
+print_frqtable(data$WCJC011)
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+

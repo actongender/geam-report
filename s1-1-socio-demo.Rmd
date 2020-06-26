@@ -1,0 +1,306 @@
+# (PART) Part - Descriptive Statistics {-}
+
+
+# Socio-demographics
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  echo = FALSE, 
+  message = FALSE, 
+  warning = FALSE,
+  comment = "#>"
+)
+
+
+library(tidyverse)
+library(sjPlot)
+library(sjmisc)
+library(sjlabelled)
+library(RColorBrewer)
+
+source("util/util.fn.R")
+
+load("~/Documents/limbo/df_369612_20DEC2019.rdata")
+
+pal2 <-  brewer.pal(2, "Set1")
+pal3 <-  brewer.pal(3, "Set1")
+pal4 <-  brewer.pal(4, "Set1")
+pal5 <-  brewer.pal(5, "Set1")
+pal6 <-  brewer.pal(6, "Set1")
+pal7 <-  brewer.pal(7, "Set1")
+
+hideNA = T
+
+```
+
+
+## Core demographics: age, gender, ...
+
+###  `r if (!is.null(data$SDEM001)) get_label(data$SDEM001)`
+
+```{r year_born, eval=!is.null(data$SDEM001)}
+
+data %>% 
+    mutate(age = SDEM001) %>% 
+    ggplot(aes(x=SDEM001)) + 
+    geom_bar()+ 
+    labs(title="") +
+    theme_light() +
+    theme(axis.title.x = element_blank())
+
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$SDEM004)) get_label(data$SDEM004)`
+```{r gender, eval=!is.null(data$SDEM004), fig.align='center'}
+
+data %>% 
+    filter(!is.na(SDEM004) & hideNA) %>% 
+    ggplot(aes(x=SDEM004, fill=SDEM004)) + 
+    geom_bar(width=.5) +
+    scale_fill_manual(values=pal2) +
+    labs(y="Total count") +
+    guides(fill=F) +
+    theme_light() +
+    theme(axis.title.x = element_blank())
+```
+
+<p>&nbsp;</p>
+
+```{r gender_tab, eval=!is.null(data$SDEM004)}
+
+print_frqtable(data$SDEM004)
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$SDEM007)) get_label(data$SDEM007)`
+```{r sex_orientation, eval=!is.null(data$SDEM007)}
+
+data %>% 
+    filter(!is.na(SDEM007) & hideNA) %>% 
+    ggplot(aes(x=SDEM007, fill=SDEM007)) + 
+    geom_bar(width=.5) +
+    scale_fill_manual(values=pal4) +
+    labs(y="Total count") +
+    guides(fill=F) +
+    theme_light() +
+    theme(axis.title.x = element_blank())
+```
+
+
+
+```{r sex_orientation_tab, eval=!is.null(data$SDEM007)}
+
+print_frqtable(data$SDEM007) 
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$SDEM009)) get_label(data$SDEM009)`
+```{r disability, eval=!is.null(data$SDEM009)}
+
+data %>% 
+    filter(!is.na(SDEM009) & hideNA) %>% 
+    ggplot(aes(x=SDEM009, fill=SDEM009)) + 
+    geom_bar(width=.5) +
+    scale_fill_manual(values=pal2) +
+    labs(y="Total count") +
+    guides(fill=F) +
+    theme_light() +
+    theme(axis.title.x = element_blank())
+```
+
+```{r disability_tab, eval=!is.null(data$SDEM009)}
+
+print_frqtable(data$SDEM009) 
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$SDEM005)) get_label(data$SDEM005)`
+```{r trans_history, eval=!is.null(data$SDEM005)}
+
+data %>% 
+    filter(!is.na(SDEM005) & hideNA) %>% 
+    ggplot(aes(x=SDEM005, fill=SDEM005)) + 
+    geom_bar(width=.5) +
+    scale_fill_manual(values=pal3) +
+    labs(y="Total count") +
+    guides(fill=F) +
+    theme_light() +
+    theme(axis.title.x = element_blank())
+```
+
+
+```{r trans_history_tab, eval=!is.null(data$SDEM005)}
+
+print_frqtable(data$SDEM005)
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$SDEM006)) get_label(data$SDEM006)`
+```{r marital_status, eval=!is.null(data$SDEM006)}
+
+data %>% 
+    filter(!is.na(SDEM006) & hideNA) %>% 
+    ggplot(aes(x=SDEM006, fill=SDEM006)) + 
+    geom_bar(width=.5) + 
+    scale_fill_manual(values=pal7) +
+    coord_flip() + 
+    labs(y="Total count") +
+    guides(fill=F) +
+    theme_light() +
+    theme(axis.title.y=element_blank())
+```
+
+```{r marital_status_tab, eval=!is.null(data$SDEM006)}
+
+print_frqtable(data$SDEM006)
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+## Nationality, citizenship, social class
+
+### `r if (!is.null(data$SDEM002)) get_label(data$SDEM002)`
+```{r ethnicity, eval=!is.null(data$SDEM002)}
+
+data %>% 
+    filter(!is.na(SDEM002) & hideNA) %>% 
+    ggplot(aes(x=SDEM002, fill=SDEM002)) + 
+    geom_bar(width=.5) +
+    scale_fill_manual(values=pal3) +
+    labs(y="Total count") +
+    guides(fill=F) +
+    theme_light() +
+    theme(axis.title.x = element_blank())
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$SDEM012)) get_label(data$SDEM012)`
+```{r nationality, eval=!is.null(data$SDEM012)}
+
+data %>% 
+    filter(!is.na(SDEM012) & hideNA) %>% 
+    ggplot(aes(x=SDEM012)) + 
+    geom_bar(width=.5) + 
+    coord_flip() + 
+    labs(y="Total count") +
+    guides(fill=F) +
+    theme_light() +
+    theme(axis.title.y=element_blank())
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$SDEM013)) get_label(data$SDEM013)`
+```{r country_citizen, eval=!is.null(data$SDEM013)}
+
+data %>% 
+   filter(!is.na(SDEM013) & hideNA) %>% 
+    ggplot(aes(x=SDEM013)) + 
+    geom_bar(width=.5) + 
+    coord_flip() + 
+    labs(y="Total count") +
+    guides(fill=F) +
+    theme_light() +
+    theme(axis.title.y=element_blank())
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+
+### `r if (!is.null(data$SDEM016)) get_label(data$SDEM016)`
+```{r high_qual, eval=!is.null(data$SDEM016), fig.width=10, fig.height=5}
+
+data %>% 
+    filter(!is.na(SDEM016) & hideNA) %>% 
+    ggplot(aes(x=SDEM016, fill=SDEM016)) + 
+    geom_bar(width=.5) + 
+    coord_flip() +
+    labs(y="Total count") +
+    guides(fill=F) + 
+    theme_light() +
+    theme(axis.title.y=element_blank())
+```
+
+```{r high_qual_tab, eval=!is.null(data$SDEM016)}
+
+print_frqtable(data$SDEM016)
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$SDEM017)) get_label(data$SDEM017)`
+```{r high_qual_p1, eval=!is.null(data$SDEM017), fig.width=10, fig.height=5}
+
+data %>% 
+    filter(!is.na(SDEM017) & hideNA) %>% 
+    ggplot(aes(x=SDEM017, fill=SDEM017)) + 
+    geom_bar(width=.5) + 
+    coord_flip() +
+    labs(y="Total count") +
+    guides(fill=F) + 
+    theme_light() +
+    theme(axis.title.y=element_blank())
+```
+
+```{r high_qual_p1_tab, eval=!is.null(data$SDEM017)}
+
+print_frqtable(data$SDEM017)
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$SDEM018)) get_label(data$SDEM018)`
+```{r high_qual_p2, eval=!is.null(data$SDEM018), fig.width=10, fig.height=5}
+
+data %>% 
+    filter(!is.na(SDEM018) & hideNA) %>% 
+    ggplot(aes(x=SDEM018, fill=SDEM018)) + 
+    geom_bar(width=.5) + 
+    coord_flip() +
+    labs(y="Total count") +
+    guides(fill=F) + 
+    theme_light() +
+    theme(axis.title.y=element_blank())
+```
+
+```{r high_qual_p2_tab, eval=!is.null(data$SDEM018)}
+
+print_frqtable(data$SDEM018) 
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

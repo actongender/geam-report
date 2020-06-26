@@ -1,0 +1,150 @@
+## Parental Leave
+
+Includes questions 22-31, codes: WCWI011a, WCWI011b, WCWI014, WCWI015, WCWI016, WCWI017, WCWI018, WCWI020, WCWI021, WCWI023. 
+
+
+### `r if (!is.null(data$WCWI011a)) get_label(data$WCWI011a)`
+
+```{r takenparental, eval=!is.null(data$WCWI011a) }
+
+# ever taken parental leave 
+
+data %>% 
+    filter(!is.na(WCWI011a) & hideNA) %>% 
+    ggplot(aes(x=WCWI011a)) + 
+    geom_bar()+ 
+    labs(title="") +
+    theme_light() +
+    theme(axis.title.x = element_blank())
+```
+
+```{r eval=!is.null(data$WCWI011a)}
+print_frqtable(data$WCWI011a) 
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+
+### `r if (!is.null(data$WCWI011b_SQ001)) attr(data$WCWI011b_SQ001, "question_label")`
+```{r eval=!is.null(data$WCWI011b_SQ001), fig.height=3, fig.width=10}
+data %>%
+  select(starts_with("WCWI011b_SQ0")) %>%
+  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, cat.neutral = NULL) + 
+  theme_light()
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$WCWI014)) get_label(data$WCWI014)`
+```{r eval=!is.null(data$WCWI014)}
+data %>% 
+    filter(!is.na(WCWI014) & hideNA) %>% 
+    ggplot(aes(x=WCWI014)) + 
+    geom_bar()+ 
+    labs(y="Total count") +
+    theme_light() +
+    theme(axis.title.x = element_blank())
+```
+
+```{r eval=!is.null(data$WCWI014)}
+print_frqtable(data$WCWI014) 
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$WCWI015)) get_label(data$WCWI015)`
+```{r eval=!is.null(data$WCWI015), fig.width=10}
+data %>% 
+    filter(!is.na(WCWI015) & hideNA) %>% 
+    ggplot(aes(x=WCWI015, fill=WCWI015)) + 
+    geom_bar() + 
+    scale_fill_manual(values=pal6) +
+    coord_flip() + 
+    labs(y="Total count") +
+    guides(fill=F) +
+    theme_light() +
+    theme(axis.title.y=element_blank())
+```
+
+```{r eval=!is.null(data$WCWI015)}
+print_frqtable(data$WCWI015) 
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$WCWI016_SQ001)) attr(data$WCWI016_SQ001, "question_label")`
+
+```{r eval=!is.null(data$WCWI016_SQ001), fig.height=8, fig.width=10}
+
+# Indicate availability of parental leave  
+
+data %>%
+  select(starts_with("WCWI016_SQ0")) %>%
+  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
+  theme_light() 
+
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$WCWI018_SQ001)) attr(data$WCWI018_SQ001, "question_label")`
+
+```{r eval=!is.null(data$WCWI018_SQ001), fig.height=8, fig.width=10}
+
+# Helpfullness preparing leave
+
+data %>%
+  select(starts_with("WCWI018_SQ0")) %>%
+  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, catcount = 6, cat.neutral = NULL) + 
+  theme_light()
+
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+
+### `r if (!is.null(data$WCWI020)) get_label(data$WCWI020)`
+```{r eval=!is.null(data$WCWI020), fig.width=10}
+
+# Most recent parental leave: preparedness
+
+data %>% 
+    filter(!is.na(WCWI020) & hideNA) %>% 
+    ggplot(aes(x=WCWI020, fill=WCWI020)) + 
+    geom_bar() + 
+    scale_fill_manual(values=pal6) +
+    coord_flip() + 
+    labs(y="Total count") +
+    guides(fill=F) +
+    theme_light() +
+    theme(axis.title.y=element_blank())
+```
+
+```{r eval=!is.null(data$WCWI020)}
+print_frqtable(data$WCWI020)
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+
+### `r if (!is.null(data$WCWI021_SQ001)) attr(data$WCWI021_SQ001, "question_label")`
+
+```{r eval=!is.null(data$WCWI021_SQ001), fig.height=10, fig.width=10}
+
+# Helpfullness preparing return
+
+data %>%
+  select(starts_with("WCWI021_SQ0")) %>%
+  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
+  theme_light()
+
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>

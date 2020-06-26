@@ -1,0 +1,60 @@
+---
+title: "Gender Equality Audit and Monitoring (GEAM)"
+subtitle: "Report for Organization X"
+author: "Author first and last name"
+date: "Place, `r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+output:
+  bookdown::gitbook: default
+  bookdown::pdf_book: default
+  bookdown::word_document2: default
+cover-image: images/ACT_GEAM_Logo_1.png
+url: 'https\://www.act-on-gender.eu'
+description: "A template for generating reports from the GEAM Core questionnaire."
+---
+
+
+# Introduction {-}
+
+
+```{r echo=FALSE, fig.align='center'}
+knitr::include_graphics(path="images/ACT_GEAM_Logo_1.png")
+```
+
+
+## ACTOnGender {-}
+
+ACT is a Horizon 2020 project that involves universities, research centres and research funding organisations with the aim to advance institutional change for gender equality in the European Research Area. 
+
+The ACT project will provide resources to support and sustain Communities of Practice – collaborating groups of practitioners, academics and experts-, who implement gender equality actions, especially for addressing known inequalities in three fields: gender bias in human resource management (i.e. recruitment, retention and career progression); gender imbalance in decision-making processes; and strengthening the gender dimension in R&I content and teaching.
+
+The ACT project website is available under <https://www-act-on-gender.eu>
+
+<p>&nbsp;</p>
+
+
+## Gender Equality Audit and Monitoring (GEAM) tool {-}
+
+The GEAM is an integrated environment for carrying out survey-based gender equality audits in organizations (e.g. university or research performing organization) or organizational units (faculty, departments). It aims to enable interested researchers as well as gender equality practitioners with little experience in the social sciences and survey methodology to construct high-quality questionnaires. 
+
+The GEAM tool is based upon the Athena Survey of Science, Engineering and Technology (ASSET). It has been extended with new questions/topics and adapted to better fit the varying national contexts in Europe. The GEAM tool has been developed within the framework of the ACT project. Development was lead by Advance HE (UK), FUOC (Spain) and Notus (Spain) in collaboration with the Consortium. 
+
+<p>&nbsp;</p>
+
+## About this report {-}
+
+The present report summarizes the results of the GEAM Survey. 
+
+
+
+```{r echo=FALSE, fig.align='center'}
+knitr::include_graphics(path="images/ACT_logo_300dpi_high.jpg")
+```
+
+```{r echo=FALSE, fig.align='left'}
+knitr::include_graphics(path="images/EUflag.jpg")
+```
+This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 788204
+
+ 

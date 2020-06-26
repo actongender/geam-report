@@ -1,0 +1,26 @@
+# (PART) Part - Exploring Relations {-}
+
+# Socio-demographic cross-tabs 
+
+## Gender
+
+### Complementary bonus
+```{r}
+sjPlot::sjt.xtab(data$SDEM004, data$WCJ005a)
+```
+
+
+### Full/part-time contract
+```{r}
+sjPlot::sjt.xtab(data$SDEM004, data$WCJC010)
+```
+
+### Fixed/open ended contract
+```{r}
+sjPlot::sjt.xtab(data$SDEM004, data$WCJC011)
+```
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+

@@ -1,0 +1,80 @@
+## Perceptions of Gender Equality 
+
+
+Includes questions 32-37, codes: OCPER001, OCPER002, OCPER003, OCPER004, OCPER005 (txt), OCWC002 
+
+
+### `r if (!is.null(data$OCPER001_SQ001)) attr(data$OCPER001_SQ001, "question_label")`
+
+```{r eval=!is.null(data$OCPER001_SQ001), fig.height=4, fig.width=10}
+data %>%
+  select(starts_with("OCPER001_SQ")) %>%
+  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, catcount = 4, cat.neutral=3 ) + 
+  theme_light()
+
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+
+### `r if (!is.null(data$OCPER002_SQ001)) attr(data$OCPER002_SQ001, "question_label")`
+
+```{r eval=!is.null(data$OCPER002_SQ001), fig.height=4, fig.width=10}
+data %>%
+  select(starts_with("OCPER002_SQ")) %>%
+  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, catcount = 3, cat.neutral=NULL ) + 
+  theme_light()
+
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$OCPER003_SQ001)) attr(data$OCPER003_SQ001, "question_label")`
+
+```{r eval=!is.null(data$OCPER003_SQ001), fig.height=15, fig.width=10}
+data %>%
+  select(starts_with("OCPER003_SQ")) %>%
+  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T,  catcount=5, cat.neutral = 3 ) + 
+  theme_light()
+
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$OCPER004)) get_label(data$OCPER004)`
+
+```{r eval=!is.null(data$OCPER004)}
+
+# Ease with which senior positions can be reachedc
+
+data %>% 
+    filter(!is.na(OCPER004) & hideNA) %>% 
+    ggplot(aes(x=OCPER004)) + 
+    geom_bar()+ 
+    labs(y="Total count") +
+    theme_light() +
+    theme(axis.title.x = element_blank())
+```
+
+```{r eval=!is.null(data$OCPER004)}
+print_frqtable(data$OCPER004)
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$OCWC002_SQ001)) attr(data$OCWC002_SQ001, "question_label")`
+
+```{r eval=!is.null(data$WCWI021_SQ001), fig.height=12, fig.width=10, fig.height=20}
+
+# Statements life work place
+
+data %>%
+  select(starts_with("OCWC002_S")) %>%
+  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, catcount=5, cat.neutral = 3) + 
+  theme_light()
+
+```

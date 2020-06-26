@@ -1,0 +1,26 @@
+## Training
+
+
+Includes question 11, 12, 13 codes: WCJC019, WCJC021, WCJC022 (txt). 
+
+### `r if (!is.null(data$WCJC019_SQ001)) attr(data$WCJC019_SQ001, "question_label") `
+```{r opport_train, eval=!is.null(data$WCJC019_SQ001), fig.height=8, fig.width=8}
+data %>%
+  select(starts_with("WCJC019_SQ")) %>%
+  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T,sort.frq = "pos.desc") + 
+  theme_light()
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r if (!is.null(data$WCJC021_SQ001)) attr(data$WCJC021_SQ001, "question_label") `
+```{r train_past12, eval=!is.null(data$WCJC021_SQ001), fig.height=8, fig.width=8}
+data %>%
+  select(starts_with("WCJC021_SQ")) %>%
+  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, sort.frq = "pos.desc") + 
+  theme_light()
+``` 
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
