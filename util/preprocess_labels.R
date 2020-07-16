@@ -7,24 +7,26 @@ rm(list=ls())
 source("util/util.fn.R")
 
 
-path_code <- "path/to/survey_R_data_file_code.csv"
+path_data <- "data-raw/survey_R_data_file_code.csv"
 
-path_source <- "path/to/survey_R_syntax_file.R"
+path_source <- "data-raw/to/survey_R_syntax_file.R"
 
 # store data frame. 
-path_save <- ""
+path_save <- "survey_data.Rdata"
 
 # Read LimeSurvey exported R data file (with tabs!)
-data <- read_tsv(path_code)
+data <- read_tsv(path_data)
 data <- as.data.frame(data)
 
-# Conversion to factor 
-# 1. Remove first line of syntax file before source! LimeSurvey writes the read.csv into it. 
+# Conversion to factor
 #
-# 2. Country and citizenship: use variables from country_labels.R Otherwise will throw error. 
+# 1. Open Syntax file MANUALLY ! 
+# 2. Remove first line of syntax file before source! LimeSurvey writes the read.csv into it. 
+# 3. Country and citizenship: use variables from country_labels.R Otherwise will throw error. 
 #    Comment out var 247 and var 248 before source. 
+# 4. Save file.
 
-source(path_data) 
+source(path_syntax) 
 
 # 3. Load country labels into variable "clabels"
 source("util/country_labels_EN.R") 
@@ -59,7 +61,7 @@ for (i in cols){
 data[,cols] <- set_label(data[,cols], sapply(data[,cols],match_label, type="answer", orgtype=orgtype))
 
 
-save(data, file=path_save)
+save(data, file=paste0("data/",path_save))
 
 
 
