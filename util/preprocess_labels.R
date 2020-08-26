@@ -11,13 +11,13 @@ source("util/util.fn.R")
 # Set global variables 
 #
 # LS survey number which determines the name of the downloaded file
-lsid <- 813685
+lsid <- NULL
 
 # Path to the folder where R data and syntax files have been stored
 download.path <- "~/Downloads/surveys/"
 
 # GPG encryption receiver. Requires corresponding public keys to be available 
-gpg.receiver <- c("jmuller@uoc.edu")
+gpg.receiver <- c("name@email.com")
 
 
 
