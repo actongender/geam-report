@@ -5,12 +5,12 @@
 
 Includes questions 38-41, codes: BACD003, BACD005, BACD007, GlickMasculCont8
 
-### `r if (!is.null(data$BACD003_SQ001)) attr(data$BACD003_SQ001, "question_label")`
+### `r varlabel("BACD003_SQ001")`
 
-```{r eval=!is.null(data$BACD003_SQ001), fig.height=6, fig.width=10}
+```{r eval=varexists("BACD003_SQ001"), fig.height=6, fig.width=10}
 data %>%
   select(starts_with("BACD003_SQ")) %>%
-  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
+  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
   theme_light()
 
 ```
@@ -18,12 +18,12 @@ data %>%
 <p>&nbsp;</p>
 
 
-### `r if (!is.null(data$BACD005_SQ001)) attr(data$BACD005_SQ001, "question_label")`
+### `r varlabel("BACD005_SQ001")`
 
-```{r eval=!is.null(data$BACD005_SQ001), fig.height=6, fig.width=10}
+```{r eval=varexists("BACD005_SQ001"), fig.height=6, fig.width=10}
 data %>%
   select(starts_with("BACD005_SQ")) %>%
-  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
+  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
   theme_light()
 
 ```
@@ -31,9 +31,9 @@ data %>%
 <p>&nbsp;</p>
 
 
-### `r if (!is.null(data$BACD007)) get_label(data$BACD007)`
+### `r varlabel("BACD007")`
 
-```{r eval=!is.null(data$BACD007), fig.height=4, fig.width=10}
+```{r eval=varexists("BACD007"), fig.height=4, fig.width=10}
 data %>% 
     filter(!is.na(BACD007) & hideNA) %>% 
     ggplot(aes(x=BACD007, fill=BACD007)) + 
@@ -45,7 +45,7 @@ data %>%
     theme(axis.title.y=element_blank())
 ```
 
-```{r eval=!is.null(data$BACD007)}
+```{r eval=varexists("BACD007")}
 print_frqtable(data$BACD007)
 ```
 
@@ -54,12 +54,12 @@ print_frqtable(data$BACD007)
 <p>&nbsp;</p>
 
 
-### `r if (!is.null(data$GlickMasculCont8_SQ001)) attr(data$GlickMasculCont8_SQ001, "question_label")`
+### `r varlabel("GlickMasculCont8_SQ001")`
 
-```{r eval=!is.null(data$GlickMasculCont8_SQ001), fig.height=6, fig.width=10}
+```{r eval=varexists("GlickMasculCont8_SQ001"), fig.height=6, fig.width=10}
 data %>%
   select(starts_with("GlickMasculCont8_SQ")) %>%
-  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, catcount = 4, cat.neutral =3) + 
+  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral =3) + 
   theme_light()
 
 ```

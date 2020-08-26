@@ -2,31 +2,34 @@
 
 Includes questions 9-10, codes: WCJC013, WCJC014 
 
-### `r if (!is.null(data$WCJC013)) get_label(data$WCJC013)`
+### `r varlabel("WCJC013")`
 
-```{r invite_promo, eval=!is.null(data$WCJC013) }
+```{r invite_promo, eval=varexists("WCJC013") }
 data %>% 
     filter(!is.na(WCJC013) & hideNA) %>% 
-    ggplot(aes(x=WCJC013)) + 
+    ggplot(aes(x=WCJC013, fill=WCJC013)) + 
     geom_bar()+ 
+    scale_fill_brewer(palette="Set1") +
     labs(title="") +
+    guides(fill=F) +
     theme_light() +
     theme(axis.title.x = element_blank())
 ```
 
-```{r invite_promot_tab, eval=!is.null(data$WCJC013)}
+```{r invite_promot_tab, eval=varexists("WCJC013")}
 print_frqtable(data$WCJC013)
 ```
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
 
-### `r if (!is.null(data$WCJC014)) get_label(data$WCJC014)`
-```{r obtain_post, eval=!is.null(data$WCJC014), fig.width=8, fig.height=4}
+### `r varlabel("WCJC014")`
+```{r obtain_post, eval=varexists("WCJC014"), fig.width=8, fig.height=4}
 data %>% 
     filter(!is.na(WCJC014) & hideNA) %>% 
     ggplot(aes(x=WCJC014, fill=WCJC014)) + 
     geom_bar() + 
+    scale_fill_brewer(palette="Set1") +
     coord_flip() + 
     labs(y="Total count") +
     guides(fill=F) +
@@ -34,7 +37,7 @@ data %>%
     theme(axis.title.y=element_blank())
 ```
 
-```{r obtain_post_tab, eval=!is.null(data$WCJC014)}
+```{r obtain_post_tab, eval=varexists("WCJC014")}
 print_frqtable(data$WCJC014) 
 ```
 <p>&nbsp;</p>

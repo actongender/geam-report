@@ -5,15 +5,13 @@
 
 Includes questions 42, codes: BIMA001
 
-### `r if (!is.null(data$BIMA001_SQ001)) attr(data$BIMA001_SQ001, "question_label")`
+### `r varlabel("BIMA001_SQ001")`
 
-```{r eval=!is.null(data$BIMA001_SQ001), fig.height=10, fig.width=10}
-
-# Experience of microagressions
+```{r ExperienceMicroaggression, eval=varexists("BIMA001_SQ001"), fig.height=10, fig.width=10}
 
 data %>%
   select(starts_with("BIMA001_SQ")) %>%
-  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
+  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
   theme_light()
 
 ```
@@ -25,15 +23,13 @@ data %>%
 
 Includes questions 43,44, 45, 47, 48  codes: BISB001, BISB002, BISB003, BISB005, BISB006. 
 
-### `r if (!is.null(data$BISB001_SQ001)) attr(data$BISB001_SQ001, "question_label")`
+### `r varlabel("BISB001_SQ001")`
 
-```{r eval=!is.null(data$BISB001_SQ001), fig.height=6, fig.width=10}
-
-# Confidence for reporting
+```{r ConfidenceReporting, eval=varexists("BISB001_SQ001"), fig.height=6, fig.width=10}
 
 data %>%
   select(starts_with("BISB001")) %>%
-  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
+  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
   theme_light()
 
 ```
@@ -41,11 +37,9 @@ data %>%
 <p>&nbsp;</p>
 
 
-### `r if (!is.null(data$BISB003)) get_label(data$BISB003)`
+### `r varlabel("BISB003")`
 
-```{r eval=!is.null(data$BISB003)}
-
-# Personallly experience harassment 
+```{r HasExperiencedGBV, eval=varexists("BISB003")}
 
 data %>% 
     filter(!is.na(BISB003) & hideNA) %>% 
@@ -57,11 +51,44 @@ data %>%
 ```
 
 
-```{r eval=!is.null(data$BISB003)}
+```{r HasExperiencedGBV_tab, eval=varexists("BISB003")}
 print_frqtable(data$BISB003) 
 ```
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
+
+### `r varlabel("BISB004_SQ001")`
+
+```{r GBVWhom, eval=varexists("BISB004_SQ001")}
+
+data %>%
+  select(starts_with("BISB004")) %>%
+  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
+  theme_light()
+```
+
+
+```{r eval=varexists("BISB004")}
+print_frqtable(data$BISB004) 
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+
+### `r varlabel("Neosexism_SQ002")`
+(Neosexism scale)
+```{r Neosexism, eval=varexists("Neosexism_SQ002"), fig.height=12}
+
+data %>%
+  select(starts_with("Neosexism_SQ0")) %>%
+  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
+  theme_light()
+```
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 

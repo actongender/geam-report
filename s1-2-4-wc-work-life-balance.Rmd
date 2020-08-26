@@ -3,9 +3,9 @@
 Includes questions 14-21, codes: WCWI006, WCWI008, WCWI009, WCWI010, WCWI005, EWCS89JobSatisfact8, EWCS36WorkIntensity2, WorkFamConfISSP 
 
 
-### `r if (!is.null(data$WCWI006)) get_label(data$WCWI006)`
+### `r varlabel("WCWI006")`
 
-```{r primecare, eval=!is.null(data$WCWI006) }
+```{r primecare, eval=varexists("WCWI006") }
 
 data %>% 
     filter(!is.na(WCWI006) & hideNA) %>% 
@@ -16,15 +16,15 @@ data %>%
     theme(axis.title.x = element_blank())
 ```
 
-```{r primecare_tab, eval=!is.null(data$WCWI006)}
+```{r primecare_tab, eval=varexists("WCWI006")}
 print_frqtable(data$WCWI006) 
 ```
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
 
-### `r if (!is.null(data$WCWI008)) get_label(data$WCWI008)`
-```{r guardian18, eval=!is.null(data$WCWI008) }
+### `r varlabel("WCWI008")`
+```{r guardian18, eval=varexists("WCWI008") }
 
 # parent or legal guardian for children 18 years or younger
 
@@ -37,20 +37,64 @@ data %>%
     theme(axis.title.x = element_blank())
 ```
 
-```{r guardian18_tab, eval=!is.null(data$WCWI008)}
+```{r guardian18_tab, eval=varexists("WCWI008")}
 print_frqtable(data$WCWI008) 
 ```
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
 
-### `r if (!is.null(data$WCWI005_SQ001)) attr(data$WCWI005_SQ001, "question_label")`
 
-```{r eval=!is.null(data$WCWI005_SQ001), fig.height=4, fig.width=10}
+### `r varlabel("WCWI010")`
+```{r single_guardian18, eval=varexists("WCWI008") }
+
+# parent or legal guardian for children 18 years or younger
+
+data %>% 
+    filter(!is.na(WCWI010) & hideNA) %>% 
+    ggplot(aes(x=WCWI010)) + 
+    geom_bar()+ 
+    labs(title="") +
+    theme_light() +
+    theme(axis.title.x = element_blank())
+```
+
+```{r single_guardian18_tab, eval=varexists("WCWI010")}
+print_frqtable(data$WCWI010) 
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+
+### `r varlabel("WCWI009")`
+```{r nr_children, eval=varexists("WCWI009"), fig.width=8, fig.height=4}
+data %>% 
+    filter(!is.na(WCJC014) & hideNA) %>% 
+    ggplot(aes(x=WCWI009, fill=WCWI009)) + 
+    geom_bar() + 
+    scale_fill_brewer(palette="Set1") +
+    coord_flip() + 
+    labs(y="Total count") +
+    guides(fill=F) +
+    theme_light() +
+    theme(axis.title.y=element_blank())
+```
+
+```{r nr_children_tab, eval=varexists("WCWI009")}
+print_frqtable(data$WCWI009) 
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### `r varlabel("WCWI005_SQ001")`
+
+```{r eval=varexists("WCWI005_SQ001"), fig.height=4, fig.width=10}
 
 data %>%
   select(starts_with("WCWI005_SQ0")) %>%
-  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
+  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
   #theme_sjplot(base_size = 20, base_family = "")
   #font_size(title=10, axis_title.x=10, axis_title.y=12, labels.x=8, labels.y=12)
   theme_light() +
@@ -62,12 +106,12 @@ data %>%
 
 
 
-### `r if (!is.null(data$EWCS89JobSatisfact8_SQ001)) attr(data$EWCS89JobSatisfact8_SQ001, "question_label")`
+### `r varlabel("EWCS89JobSatisfact8_SQ001")`
 
-```{r eval=!is.null(data$EWCS89JobSatisfact8_SQ001), fig.height=8, fig.width=10}
+```{r eval=varexists("EWCS89JobSatisfact8_SQ001"), fig.height=8, fig.width=10}
 data %>%
   select(starts_with("EWCS89JobSatisfact8_SQ0")) %>%
-  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, catcount = 4, cat.neutral = 3) + 
+  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = 3) + 
   theme_light()
 
 ```
@@ -75,24 +119,24 @@ data %>%
 <p>&nbsp;</p>
 
 
-### `r if (!is.null(data$EWCS36WorkIntensity2_SQ001)) attr(data$EWCS36WorkIntensity2_SQ001, "question_label")`
+### `r varlabel("EWCS36WorkIntensity2_SQ001")`
 
-```{r eval=!is.null(data$EWCS36WorkIntensity2_SQ001), fig.height=3, fig.width=10}
+```{r eval=varexists("EWCS36WorkIntensity2_SQ001"), fig.height=3, fig.width=10}
 data %>%
   select(starts_with("EWCS36WorkIntensity2_SQ0")) %>%
-  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
+  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
   theme_light()
 ```
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
 
-### `r if (!is.null(data$WorkFamConfISSP_SQ001)) attr(data$WorkFamConfISSP_SQ001, "question_label")`
+### `r varlabel("WorkFamConfISSP_SQ001")`
 
-```{r eval=!is.null(data$WorkFamConfISSP_SQ001), fig.height=4, fig.width=10}
+```{r eval=varexists("WorkFamConfISSP_SQ001"), fig.height=4, fig.width=10}
 data %>%
   select(starts_with("WorkFamConfISSP_SQ0")) %>%
-  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
+  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
   theme_light()
 
 ```
@@ -101,7 +145,15 @@ data %>%
 
 
 
+### `r varlabel("Covid_SQ01")`
 
+```{r eval=varexists("Covid_SQ01"), fig.height=12, fig.width=10}
+data %>%
+  select(starts_with("Covid_SQ")) %>%
+  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
+  theme_light()
+
+```
 
 
 

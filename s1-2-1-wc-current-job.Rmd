@@ -5,20 +5,22 @@
 Includes questions 2-8, codes: WCJC001, WCJC003, WCJC004, WCJC005, WCJ005a, WCJC010, WCJC011. 
 
 
-### `r if (!is.null(data$WCJC001)) get_label(data$WCJC001)`
+### `r varlabel("WCJC001")`
 
-```{r your_position, eval=!is.null(data$WCJC001) }
+```{r your_position, eval=varexists("WCJC001") }
 data %>% 
     filter(!is.na(WCJC001) & hideNA) %>% 
-    ggplot(aes(x=WCJC001)) + 
+    ggplot(aes(x=WCJC001, fill=WCJC001)) + 
     geom_bar()+ 
+    scale_fill_brewer(palette="Set1") +
+    guides(fill=F) +
     labs(y="Total count") +
     theme_light() +
     theme(axis.title.x = element_blank())
 ```
 
 
-```{r your_position_tab, eval=!is.null(data$WCJC001)}
+```{r your_position_tab, eval=varexists("WCJC001")}
 
 print_frqtable(data$WCJC001) 
 ```
@@ -26,12 +28,34 @@ print_frqtable(data$WCJC001)
 <p>&nbsp;</p>
 
 
-### `r if (!is.null(data$WCJC003)) get_label(data$WCJC003)`
+### `r varlabel("WCJC003")`
 
-```{r academic_field, eval=!is.null(data$WCJC003), fig.width=10, fig.height=10}
+```{r academic_field, eval=varexists("WCJC003"), fig.width=10, fig.height=10}
 data %>% 
     filter(!is.na(WCJC003) & hideNA) %>% 
     ggplot(aes(x=WCJC003, fill=WCJC003)) + 
+    geom_bar() + 
+    coord_flip() + 
+    scale_fill_brewer(palette="Set1") +
+    labs(y="Total count") +
+    guides(fill=F) +
+    theme_light() +
+    theme(axis.title.y=element_blank())
+```
+
+```{r academic_field_tab, eval=varexists("WCJC003")}
+
+print_frqtable(data$WCJC003) 
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+### `r varlabel("WCJC003PL")`
+
+```{r academic_field_PL, eval=varexists("WCJC003PL"), fig.width=10, fig.height=10}
+data %>% 
+    filter(!is.na(WCJC003PL) & hideNA) %>% 
+    ggplot(aes(x=WCJC003PL, fill=WCJC003PL)) + 
     geom_bar() + 
     coord_flip() + 
     labs(y="Total count") +
@@ -40,16 +64,16 @@ data %>%
     theme(axis.title.y=element_blank())
 ```
 
-```{r academic_field_tab, eval=!is.null(data$WCJC004)}
+```{r academic_field_tab_PL, eval=varexists("WCJC003PL")}
 
-print_frqtable(data$WCJC003) 
+print_frqtable(data$WCJC003PL) 
 ```
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
 
-### `r if (!is.null(data$WCJC004)) get_label(data$WCJC004)`
-```{r your_post, eval=!is.null(data$WCJC004), fig.width=8, fig.height=4}
+### `r varlabel("WCJC004")`
+```{r your_post, eval=varexists("WCJC004"), fig.width=8, fig.height=4}
 data %>% 
     filter(!is.na(WCJC004) & hideNA) %>% 
     ggplot(aes(x=WCJC004, fill=WCJC004)) + 
@@ -61,17 +85,18 @@ data %>%
     theme(axis.title.y=element_blank())
 ```
 
-```{r your_post_tab, eval=!is.null(data$WCJC004)}
-print_frqtable(data$WCJC004)
+```{r your_post_tab, eval=varexists(data$WCJC004)}
+print_frqtable("WCJC004")
 ```
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
 
-### `r if (!is.null(data$WCJC005)) get_label(data$WCJC005)`
+### `r varlabel("WCJC005")`
 
-```{r net_salary, eval=!is.null(data$WCJC005)}
+```{r net_salary, eval=varexists("WCJC005")}
 data %>% 
+    filter(!is.na(WCJC005)) %>% 
     ggplot(aes(x=WCJC005)) + 
     geom_bar()+ 
     labs(y="Total count") +
@@ -80,35 +105,60 @@ data %>%
 
 ```
 
-```{r}
+```{r net_salary_tab, eval=varexists("WCJC005")}
 summary(data$WCJC005)
+#print_frqtable(data$WCJC005) 
 ```
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
 
-### `r if (!is.null(data$WCJ005a)) get_label(data$WCJ005a)`
+### `r varlabel("WCJ005a")`
 
-```{r bonus, eval=!is.null(data$WCJ005a) }
+```{r bonus, eval=varexists("WCJ005a") }
 data %>% 
     filter(!is.na(WCJ005a) & hideNA) %>% 
-    ggplot(aes(x=WCJ005a)) + 
+    ggplot(aes(x=WCJ005a, fill=WCJ005a)) + 
     geom_bar()+ 
+    scale_fill_brewer(palette="Set1") +
+    guides(fill=F) +
     labs(y="Total count") +
     theme_light() +
     theme(axis.title.x = element_blank())
 ```
 
-```{r bonus_tab, eval=!is.null(data$WCJ005a)}
-print_frqtable(data$WCJ005) 
+```{r bonus_tab, eval=varexists("WCJ005a")}
+print_frqtable(data$WCJ005a) 
 ```
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
 
-### `r if (!is.null(data$WCJC010)) get_label(data$WCJC010)`
+### `r varlabel("WCJC008")`
 
-```{r fullpart_time, eval=!is.null(data$WCJC010) }
+```{r years_employed, eval=varexists("WCJC008")}
+data %>% 
+    filter(!is.na(WCJC008) & hideNA) %>% 
+    ggplot(aes(x=WCJC008,)) + 
+    geom_bar()+ 
+    coord_flip() + 
+    labs(y="Total count") +
+    guides(fill=F) +
+    theme_light() +
+    theme(axis.title.y=element_blank())
+```
+
+```{r years_employed_tab, eval=varexists("WCJC008")}
+print_frqtable(data$WCJC008) 
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+
+### `r varlabel("WCJC010")`
+
+```{r fullpart_time, eval=varexists("WCJC010") }
 data %>% 
     filter(!is.na(WCJC010) & hideNA) %>% 
     ggplot(aes(x=WCJC010)) + 
@@ -118,7 +168,7 @@ data %>%
     theme(axis.title.x = element_blank())
 ```
 
-```{r fullpart_time_tab, eval=!is.null(data$WCJC010)}
+```{r fullpart_time_tab, eval=varexists("WCJC010")}
 print_frqtable(data$WCJC010) 
 ```
 <p>&nbsp;</p>
@@ -126,9 +176,9 @@ print_frqtable(data$WCJC010)
 
 
 
-### `r if (!is.null(data$WCJC011)) get_label(data$WCJC011)`
+### `r varlabel("WCJC011")`
 
-```{r temp_fixed, eval=!is.null(data$WCJC011) }
+```{r temp_fixed, eval=varexists("WCJC011") }
 data %>% 
     filter(!is.na(WCJC011) & hideNA) %>% 
     ggplot(aes(x=WCJC011)) + 
@@ -138,9 +188,32 @@ data %>%
     theme(axis.title.x = element_blank())
 ```
 
-```{r temp_fixed_tab, eval=!is.null(data$WCJC011)}
+```{r temp_fixed_tab, eval=varexists("WCJC011")}
 print_frqtable(data$WCJC011)
 ```
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+
+
+### `r varlabel("G01Q82")`
+
+```{r employ_unit, eval=varexists("G01Q82") }
+data %>% 
+    filter(!is.na(G01Q82) & hideNA) %>% 
+    ggplot(aes(x=G01Q82, fill=G01Q82)) + 
+    geom_bar() + 
+    coord_flip() + 
+    labs(y="Total count") +
+    guides(fill=F) +
+    theme_light() +
+    theme(axis.title.y=element_blank())
+```
+
+```{r employ_unit_tab, eval=varexists("G01Q82")}
+print_frqtable(data$G01Q82)
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
 

@@ -4,12 +4,12 @@
 Includes questions 32-37, codes: OCPER001, OCPER002, OCPER003, OCPER004, OCPER005 (txt), OCWC002 
 
 
-### `r if (!is.null(data$OCPER001_SQ001)) attr(data$OCPER001_SQ001, "question_label")`
+### `r varlabel("OCPER001_SQ001")`
 
-```{r eval=!is.null(data$OCPER001_SQ001), fig.height=4, fig.width=10}
+```{r perceptionsGE, eval=varexists("OCPER001_SQ001"), fig.height=4, fig.width=10}
 data %>%
   select(starts_with("OCPER001_SQ")) %>%
-  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, catcount = 4, cat.neutral=3 ) + 
+  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral=3 ) + 
   theme_light()
 
 ```
@@ -18,12 +18,12 @@ data %>%
 
 
 
-### `r if (!is.null(data$OCPER002_SQ001)) attr(data$OCPER002_SQ001, "question_label")`
+### `r varlabel("OCPER002_SQ001")`
 
-```{r eval=!is.null(data$OCPER002_SQ001), fig.height=4, fig.width=10}
+```{r representWomenMen, eval=varexists("OCPER002_SQ001"), fig.height=4, fig.width=10}
 data %>%
   select(starts_with("OCPER002_SQ")) %>%
-  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, catcount = 3, cat.neutral=NULL ) + 
+  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 3, cat.neutral=NULL ) + 
   theme_light()
 
 ```
@@ -31,12 +31,12 @@ data %>%
 <p>&nbsp;</p>
 
 
-### `r if (!is.null(data$OCPER003_SQ001)) attr(data$OCPER003_SQ001, "question_label")`
+### `r varlabel("OCPER003_SQ001")`
 
-```{r eval=!is.null(data$OCPER003_SQ001), fig.height=15, fig.width=10}
+```{r diffAllocation, eval=varexists("OCPER003_SQ001"), fig.height=15, fig.width=10}
 data %>%
   select(starts_with("OCPER003_SQ")) %>%
-  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T,  catcount=5, cat.neutral = 3 ) + 
+  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T,  catcount=5, cat.neutral = 3 ) + 
   theme_light()
 
 ```
@@ -44,37 +44,87 @@ data %>%
 <p>&nbsp;</p>
 
 
-### `r if (!is.null(data$OCPER004)) get_label(data$OCPER004)`
+### `r varlabel("OCPER004")`
 
-```{r eval=!is.null(data$OCPER004)}
-
-# Ease with which senior positions can be reachedc
+```{r easeSeniorPos, eval=varexists("OCPER004")}
 
 data %>% 
     filter(!is.na(OCPER004) & hideNA) %>% 
-    ggplot(aes(x=OCPER004)) + 
+    ggplot(aes(x=OCPER004, fill=OCPER004)) + 
     geom_bar()+ 
+    scale_fill_brewer(palette="Set1") +
+    coord_flip() + 
     labs(y="Total count") +
+    guides(fill=F) +
     theme_light() +
-    theme(axis.title.x = element_blank())
+    theme(axis.title.y=element_blank())
 ```
 
-```{r eval=!is.null(data$OCPER004)}
+```{r easeSeniorPos_tab, eval=varexists("OCPER004")}
 print_frqtable(data$OCPER004)
 ```
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
 
-### `r if (!is.null(data$OCWC002_SQ001)) attr(data$OCWC002_SQ001, "question_label")`
+### `r varlabel("OCWC002_SQ001")`
 
-```{r eval=!is.null(data$WCWI021_SQ001), fig.height=12, fig.width=10, fig.height=20}
-
-# Statements life work place
+```{r lifeWorkplace, eval=varexists("WCWI021_SQ001"), fig.height=12, fig.width=10, fig.height=20}
 
 data %>%
   select(starts_with("OCWC002_S")) %>%
-  plot_likert(geom.colors=pal6, values="show", show.prc.sign=T, catcount=5, cat.neutral = 3) + 
+  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount=5, cat.neutral = 3) + 
   theme_light()
 
 ```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+
+### `r varlabel("r353q0")`
+
+```{r achievedProgress, eval=varexists("r353q0"), fig.width=10,}
+
+data %>% 
+    filter(!is.na(r353q0) & hideNA) %>% 
+    ggplot(aes(x=r353q0, fill=r353q0)) + 
+    geom_bar() + 
+    scale_fill_brewer(palette="Set1") +
+    coord_flip() +
+    guides(fill=F) +
+    labs(y="Total count") +
+    guides(fill=F) +
+    theme_light() +
+    theme(axis.title.y=element_blank())
+```
+
+```{r achievedProgress_tab, eval=varexists("r353q0")}
+print_frqtable(data$r353q0) 
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+
+### `r varlabel("r59q0_SQ001")`
+
+```{r barriesImplementing, eval=varexists("r59q0_SQ001"), fig.height=12}
+
+data %>%
+  select(starts_with("r59q0_SQ0")) %>%
+  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount=5, cat.neutral = 3) + 
+  theme_light()
+
+```
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+
+
+
+
+
+
+

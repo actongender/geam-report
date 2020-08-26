@@ -1,6 +1,62 @@
 library(gpg)
+library(sjlabelled)
 library(sjmisc)
 library(stringr)
+
+
+#' Check if variable name exists in data frame. 
+#' 
+#' Useful to avoid error messages before generating figures and tables. Performs exact match.  
+#' 
+#' @param x a data frame 
+#' @param var_name String of column variable name
+#' 
+varexists <- function(needle, stack=""){
+    
+    # if no stack provided, check if globally defined column names exist (in index.Rmd)
+    if (stack == ""){
+        stack <- cnames
+    }
+    
+    exists <- needle %in% stack
+    exists
+}
+
+
+
+#' Retrieve variable label
+#' 
+#' If variable does not exists, retrieves warning message 
+#' 
+#' @param var_name String of variable name 
+#' 
+varlabel <- function(var_name, df=NULL){
+    
+    #default label 
+    label <- paste0("'",var_name,"' not found in data matrix") 
+    
+    if (is.null(df)){
+        df <- data
+    }
+    
+    
+    # if variable exists, get actual label
+    if (varexists(var_name)){
+        
+        # matrix answer items
+        if (stringr::str_detect(var_name, "_SQ")){
+            
+            label <- attr(df[,var_name], which="question_label")
+            
+            # all other questions
+        } else {
+            
+            label <- sjlabelled::get_label(df[,var_name])    
+        }
+    } 
+    
+    label
+}
 
 
 #' Splits Quesion and Answer options
@@ -18,17 +74,17 @@ library(stringr)
 #' @return string 
 #' 
 match_label <- function(x, type="answer", orgtype=""){
-    label <- get_label(x)
+    
+    # retrieve variable label which has been assigned by sourcing the LS R syntax file. 
+    label <- sjlabelled::get_label(x)
     
     # Retrieve answer option text 
     if (type == "answer"){
         label <- stringr::str_extract(label,"\\[.*\\]")
-        #label <- regmatches(label, regexpr("\\[.*\\]", label))
-    
-    # Retrieve question text    
+        
+        # Retrieve question text    
     } else if (type =="question"){
         label <- stringr::str_extract(label, "\\].*")
-        #label <- regmatches(label, gregexpr("\\].*", label))
         label <- substr(label, 3, nchar(label))
         
     } else {
@@ -36,7 +92,9 @@ match_label <- function(x, type="answer", orgtype=""){
     }
     
     # Replace {VarOrgType.shown} placeholder with selected organizational unit. 
-    label <- stringr::str_replace(label, "\\{VarOrgType.shown\\}", orgtype)
+    if (orgtype != ""){
+        label <- stringr::str_replace(label, "\\{VarOrgType.shown\\}", orgtype)
+    }
     
     label <- trimws(label)
     
@@ -62,7 +120,7 @@ print_frqtable <- function(x, fsize=12){
         
         ftb <- knitr::kable(frqtbl, col.names=c("", "", "count", "%", "valid %", "cum %"))
         
-    # word document
+        # word document
     } else {
         
         ftb <- flextable::flextable(frqtbl[[1]], col_keys = c("val", "frq", "raw.prc", "valid.prc", "cum.prc"))
