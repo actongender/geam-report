@@ -43,6 +43,7 @@ At which page did respondents abandon the questionnaire. Page 10 is the last pag
 ```{r fig.cap="Last page"}
     
     df.geam %>% 
+        mutate(lastpage = forcats::as_factor(lastpage)) %>%
         print_barplot(lastpage)
 
 ```
