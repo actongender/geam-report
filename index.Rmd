@@ -120,7 +120,10 @@ The GEAM tool is based upon the Athena Survey of Science, Engineering and Techno
 ```{r echo=FALSE, fig.align="center", out.extra=ifelse(knitr::is_html_output(), "style='float:left; padding-right:12px; padding-bottom:100px; padding-top:10px;'", "")}
 knitr::include_graphics(path="images/ccommons88x31.png")
 ```
-The GEAM reporting template has been authored by Jörg Müller and Ewa Krzaklewska and the ACT Consortium is licensed under [Attribution Non Commercial ShareAlike 4.0 International (CC BY-NC-SA 4.0) license](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+The GEAM reporting template has been coded by Jörg Müller incorporating feedback from Ewa Krzaklewska, Paulina Sekula, and Marta Warat and is licensed under [Attribution Non Commercial ShareAlike 4.0 International (CC BY-NC-SA 4.0) license](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 
 ```{r echo=FALSE, fig.align='center'}
