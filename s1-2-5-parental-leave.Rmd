@@ -5,7 +5,7 @@
 <p>&nbsp;</p>
 
 
-```{r val=exechunk("WCWI011a"), fig.cap=get_caption("WCWI011a")}
+```{r_eval=exechunk("WCWI011a"), fig.cap=get_caption("WCWI011a")}
 
 ################################################
 # Have you ever taken, or are you currently taking any form or parental leave? 
@@ -90,7 +90,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r val=exechunk("WCWI014"), fig.cap=get_caption("WCWI014") }
+```{r_eval=exechunk("WCWI014"), fig.cap=get_caption("WCWI014") }
 
 ################################################
 # Overall, how much time have you spent on any form of parental leave? 
@@ -118,7 +118,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r val=exechunk("WCWI015"), fig.cap=get_caption("WCWI015") }
+```{r_eval=exechunk("WCWI015"), fig.cap=get_caption("WCWI015") }
 
 ################################################
 # How long ago did you return to work from your most recent period of parental leave? 
@@ -147,7 +147,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r fig.height=7, fig.width=8, fig.cap=get_caption("WCWI016.SQ001.")}
+```{r eval=var_exists("WCWI016.SQ001."), fig.height=7, fig.width=8, fig.cap=get_caption("WCWI016.SQ001.")}
 
 ################################################
 # Availability of options either before, during or upon your return from your most recent/current parental leave at your 
@@ -309,7 +309,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r fig.height=7, fig.width=8, fig.cap=get_caption("WCWI018.SQ001.")}
+```{r eval=var_exists("WCWI018.SQ001."), fig.height=7, fig.width=8, fig.cap=get_caption("WCWI018.SQ001.")}
 
 ################################################
 # Please indicate how helpful each of the following was in preparing you for your parental leave:
@@ -473,7 +473,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r val=exechunk("WCWI020"), fig.cap=get_caption("WCWI020") }
+```{r eval=exechunk("WCWI020"), fig.cap=get_caption("WCWI020") }
 
 ################################################
 # Most recent parental leave: preparedness.  
@@ -504,7 +504,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r fig.height=8, fig.width=8, fig.cap=get_caption("WCWI021.SQ001.")}
+```{r eval=var_exists("WCWI021.SQ001."), fig.height=8, fig.width=8, fig.cap=get_caption("WCWI021.SQ001.")}
 
 ################################################
 # Please indicate how helpful each of the following was in facilitating your return after parental leave 

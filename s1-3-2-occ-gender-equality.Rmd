@@ -5,7 +5,7 @@
 <p>&nbsp;</p>
 
 
-```{r fig.height=7, fig.width=7, fig.cap=get_caption("OCPER001.SQ001.")}
+```{r eval=var_exists("OCPER002.SQ001."), fig.height=7, fig.width=7, fig.cap=get_caption("OCPER001.SQ001.")}
 
 ################################################
 # Please indicate the extent to which you agree or disagree with the following statements:
@@ -112,7 +112,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r fig.width=7, fig.cap=get_caption("OCPER002.SQ001.")}
+```{r eval=var_exists("OCPER002.SQ001."), fig.width=7, fig.cap=get_caption("OCPER002.SQ001.")}
 
 ################################################
 # How would you view the representation of men and women in your institution?
@@ -206,7 +206,7 @@ df.geam %>%
 Part 1 of 3. 
 
 
-```{r, fig.width=7, fig.height=7, fig.cap=get_caption("OCPER003.SQ001.")}
+```{r eval=var_exists("OCPER003.SQ001."), fig.width=7, fig.height=7, fig.cap=get_caption("OCPER003.SQ001.")}
 
 ################################################
 # Have you perceived a difference in the allocation of the following in your institution? 
@@ -243,7 +243,7 @@ df.geam %>%
 Part 2 of 3. 
 
 
-```{r, fig.width=7, fig.height=7, fig.cap=get_caption("OCPER003.SQ001.")}
+```{r eval=var_exists("OCPER003.SQ001."), fig.width=7, fig.height=7, fig.cap=get_caption("OCPER003.SQ001.")}
 
 ################################################
 # Have you perceived a difference in the allocation of the following in your institution? 
@@ -281,7 +281,7 @@ df.geam %>%
 Part 3 of 3. 
 
 
-```{r, fig.width=7, fig.height=7, fig.cap=get_caption("OCPER003.SQ001.")}
+```{r eval=var_exists("OCPER003.SQ001."), fig.width=7, fig.height=7, fig.cap=get_caption("OCPER003.SQ001.")}
 
 ################################################
 # Have you perceived a difference in the allocation of the following in your institution? 
@@ -729,7 +729,7 @@ df.geam %>%
 
 Part 1 of 3 
 
-```{r fig.width=7, fig.height=7, fig.cap=get_caption("OCWC002.SQ001.")}
+```{r eval=var_exists("OCWC002.SQ001."), fig.width=7, fig.height=7, fig.cap=get_caption("OCWC002.SQ001.")}
 
 ################################################
 # Please indicate the extent to which you agree or disagree with the following statements 
@@ -765,7 +765,7 @@ df.geam %>%
 
 Part 2 of 3. 
 
-```{r fig.width=7, fig.height=7,  fig.cap=get_caption("OCWC002.SQ001.")}
+```{r eval=var_exists("OCWC002.SQ001."), fig.width=7, fig.height=7,  fig.cap=get_caption("OCWC002.SQ001.")}
 
 ################################################
 # Please indicate the extent to which you agree or disagree with the following statements 
@@ -802,7 +802,7 @@ df.geam %>%
 Part 3 of 3. 
 
 
-```{r fig.width=7, fig.height=5, fig.cap=get_caption("OCWC002.SQ001.")}
+```{r eval=var_exists("OCWC002.SQ001."), fig.width=7, fig.height=5, fig.cap=get_caption("OCWC002.SQ001.")}
 
 ################################################
 # Please indicate the extent to which you agree or disagree with the following statements 
@@ -1160,7 +1160,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r val=exechunk("r353q0"), fig.cap=get_caption("r353q0") }
+```{r eval=var_exists("r353q0"), fig.cap=get_caption("r353q0") }
 
 ################################################
 # In your opinion, have you observed progress in your organisation when it comes 
@@ -1175,7 +1175,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r eval=exechunk("r353q0")}
+```{r eval=var_exists("r353q0")}
 df.geam %>% 
     print_frqtable("r353q0") 
 ```
@@ -1231,7 +1231,7 @@ df.geam %>%
 ### `r var_toplabel("r59q0.SQ001.")`  `r if(lsVarCode) "(r59q0)" `
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-```{r fig.cap=get_caption("r59q0.SQ001.")}
+```{r eval=var_exits("r59q0.SQ001."), fig.cap=get_caption("r59q0.SQ001.")}
 
 ################################################
 # In your opinion which of the following barriers affect the implementation of gender equality in your organisation? 

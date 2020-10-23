@@ -5,7 +5,7 @@
 <p>&nbsp;</p>
 
 
-```{r val=var_exists("WCWI006"), fig.cap=get_caption("WCWI006") }
+```{r eval=var_exists("WCWI006"), fig.cap=get_caption("WCWI006") }
 
 ################################################
 # Are you primary carer or assistant for an adult
@@ -51,7 +51,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r val=var_exists("WCWI008"), fig.cap=get_caption("WCWI008") }
+```{r eval=var_exists("WCWI008"), fig.cap=get_caption("WCWI008") }
 
 ################################################
 # Parent or legal guardian of any children
@@ -97,7 +97,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r val=var_exists("WCWI010"), fig.cap=get_caption("WCWI010") }
+```{r eval=var_exists("WCWI010"), fig.cap=get_caption("WCWI010") }
 
 ################################################
 # Are you single parent
@@ -144,7 +144,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r val=var_exists("WCWI009"), fig.cap=get_caption("WCWI009") }
+```{r eval=var_exists("WCWI009"), fig.cap=get_caption("WCWI009") }
 
 ################################################
 # How many children
@@ -173,7 +173,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r fig.height=5.2, fig.cap=get_caption("WCWI005.SQ001.")}
+```{r eval=var_exists("WCWI005.SQ001."), fig.height=5.2, fig.cap=get_caption("WCWI005.SQ001.")}
 
 ################################################
 # Awareness of follwing working options  Parent: WCWI005
@@ -446,7 +446,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r fig.height=7, fig.width=8, fig.cap=get_caption("EWCS89JobSatisfact8.SQ001.")}
+```{r eval=var_exists("EWCS89JobSatisfact8.SQ001."),fig.height=7, fig.width=8, fig.cap=get_caption("EWCS89JobSatisfact8.SQ001.")}
 
 ################################################
 # Job satisfaction parent: EWCS89JobSatisfact8
@@ -596,7 +596,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r fig.height=4.8, fig.cap=get_caption("EWCS36WorkIntensity2.SQ001.")}
+```{r eval=var_exists("EWCS36WorkIntensity2.SQ001."), fig.height=4.8, fig.cap=get_caption("EWCS36WorkIntensity2.SQ001.")}
 
 ################################################
 # Work intensity parent: EWCS36WorkIntensity2
@@ -866,7 +866,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r fig.height=5, fig.cap=get_caption("WorkFamConfISSP.SQ001.")}
+```{r eval=var_exists("WorkFamConfISSP.SQ001."), fig.height=5, fig.cap=get_caption("WorkFamConfISSP.SQ001.")}
 
 ################################################
 # Work family conflict parent: WorkFamConfISSP

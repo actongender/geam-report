@@ -7,7 +7,7 @@
 <p>&nbsp;</p>
 
 
-```{r fig.width=7, fig.height=8, fig.cap=get_caption("BIMA001.SQ001.")}
+```{r eval=var_exists("BIMA001.SQ001."), fig.width=7, fig.height=8, fig.cap=get_caption("BIMA001.SQ001.")}
 
 ################################################
 # The following items relate to your experience of microaggressions. Please rate how often you have experienced the 
@@ -162,7 +162,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r, fig.width=7, fig.height=4.8, fig.cap=get_caption("BISB001.SQ001.")}
+```{r eval=var_exists("BISB001.SQ001."), fig.width=7, fig.height=4.8, fig.cap=get_caption("BISB001.SQ001.")}
 
 ################################################
 # The following questions are related to bullying and harassment within your workplace. How confident are you
@@ -378,7 +378,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r, fig.width=7, fig.height=9, fig.cap=get_caption("Neosexism.SQ002.")}
+```{r eval=var_exists("Neosexism.SQ002."), fig.width=7, fig.height=9, fig.cap=get_caption("Neosexism.SQ002.")}
 
 ################################################
 # Neosexism

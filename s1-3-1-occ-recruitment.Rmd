@@ -8,7 +8,7 @@
 <p>&nbsp;</p>
 
 
-```{r, fig.height=6, fig.width=8, fig.cap=get_caption("BACD003.SQ001.")}
+```{r eval=var_exists("BACD003.SQ001."), fig.height=6, fig.width=8, fig.cap=get_caption("BACD003.SQ001.")}
 
 ################################################
 # Please indicate how important each of the following were when deciding to apply for or take up 
@@ -144,7 +144,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r fig.height=9, fig.width=8, fig.cap=get_caption("BACD005.SQ001.")}
+```{r eval=var_exists("BACD005.SQ001."), fig.height=9, fig.width=8, fig.cap=get_caption("BACD005.SQ001.")}
 
 ################################################
 # If you were considering to apply for a promotion, how important would the following items be to you?"
@@ -293,7 +293,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r val=exechunk("BACD007"), fig.cap=get_caption("BACD007") }
+```{r eval=var_exists("BACD007"), fig.cap=get_caption("BACD007") }
 
 ################################################
 # Hypothetically, when applying for a promotion or new post, what proportion of the 
@@ -308,7 +308,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r eval=exechunk("BACD007")}
+```{r eval=var_exists("BACD007")}
 df.geam %>% 
     print_frqtable("BACD007") 
 ```
@@ -323,8 +323,9 @@ df.geam %>%
 
 ### `r var_toplabel("GlickMasculCont8.SQ001.")`  `r if(lsVarCode) "(GlickMasculCont8)" `
 <p>&nbsp;</p>
-<p>&nbsp;</p>
-```{r fig.height=7, fig.width=8, fig.cap=get_caption("GlickMasculCont8.SQ001.")}
+
+
+```{r eval=var_exists("GlickMasculCont8.SQ001."), fig.height=7, fig.width=8, fig.cap=get_caption("GlickMasculCont8.SQ001.")}
 
 ################################################
 # In my work environment - Glick Masculinity Contest Culture 
