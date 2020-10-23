@@ -7,18 +7,24 @@ rm(list=ls())
 
 source("util/util.fn.R")
 
+# Legacy file
+# 
+# For constructing labelled data frame from the LimeSurvey ExportR plugin Syntax and Data Files. 
+# The more reliable method for preparing the result data frame is described in file "preprocess_lss.R" 
+# 
+#
+
 
 # Set global variables 
 #
 # LS survey number which determines the name of the downloaded file
-lsid <- NULL
+lsid <- 813685
 
 # Path to the folder where R data and syntax files have been stored
 download.path <- "~/Downloads/surveys/"
 
 # GPG encryption receiver. Requires corresponding public keys to be available 
-gpg.receiver <- c("name@email.com")
-
+gpg.receiver <- c("jmuller@uoc.edu")
 
 
 
@@ -61,11 +67,11 @@ if (file.exists(path_raw_csv_gpg)){
     tryCatch({
         write_gpg(data, file=path_raw_csv_gpg, receiver=gpg.receiver)        
     },
-    error = function(e){
-        message("No valid gpg encryption receiver provided. Data will be writen in plain text, i.e. non-encrypted!")
-        save(data, path_raw_csv)
-    })
-    
+        error = function(e){
+            message("No valid gpg encryption receiver provided. Data will be writen in plain text, i.e. non-encrypted!")
+            save(data, path_raw_csv)
+        })
+
 }
 
 

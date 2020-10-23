@@ -3,70 +3,467 @@
 
 ## Perceptions of Recruitment
 
-Includes questions 38-41, codes: BACD003, BACD005, BACD007, GlickMasculCont8
 
-### `r varlabel("BACD003_SQ001")`
-
-```{r eval=varexists("BACD003_SQ001"), fig.height=6, fig.width=10}
-data %>%
-  select(starts_with("BACD003_SQ")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
-  theme_light()
-
-```
-<p>&nbsp;</p>
+### `r var_toplabel("BACD003.SQ001.")`  `r if(lsVarCode) "(BACD003)" `
 <p>&nbsp;</p>
 
 
-### `r varlabel("BACD005_SQ001")`
+```{r, fig.height=6, fig.width=8, fig.cap=get_caption("BACD003.SQ001.")}
 
-```{r eval=varexists("BACD005_SQ001"), fig.height=6, fig.width=10}
-data %>%
-  select(starts_with("BACD005_SQ")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
-  theme_light()
-
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+################################################
+# Please indicate how important each of the following were when deciding to apply for or take up 
+# the post in your current institution:
+################################################
 
 
-### `r varlabel("BACD007")`
+df.geam %>% 
+  select(starts_with("BACD003.SQ")) %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                show.n = F,
+                show.total = F,
+                geom.size = .4,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 11))
 
-```{r eval=varexists("BACD007"), fig.height=4, fig.width=10}
-data %>% 
-    filter(!is.na(BACD007) & hideNA) %>% 
-    ggplot(aes(x=BACD007, fill=BACD007)) + 
-    geom_bar() + 
-    coord_flip() + 
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.y=element_blank())
-```
-
-```{r eval=varexists("BACD007")}
-print_frqtable(data$BACD007)
 ```
 
 
+\newpage
+
+
+```{r eval=exechunk("BACD003.SQ001."), fig.height=3}
+
+###############
+# Flexible working hours
+###############
+
+df.geam %>%
+    print_barplot(BACD003.SQ001.)
+```
+
+
 <p>&nbsp;</p>
+
+
+```{r eval=exechunk("BACD003.SQ002."), fig.height=3}
+
+###############
+# Worklife balance 
+###############
+
+df.geam %>%
+    print_barplot(BACD003.SQ002.)
+```
+
+
 <p>&nbsp;</p>
 
 
-### `r varlabel("GlickMasculCont8_SQ001")`
+```{r eval=exechunk("BACD003.SQ003."), fig.height=3}
 
-```{r eval=varexists("GlickMasculCont8_SQ001"), fig.height=6, fig.width=10}
-data %>%
-  select(starts_with("GlickMasculCont8_SQ")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral =3) + 
-  theme_light()
+###############
+# Childcare facilities
+###############
+
+df.geam %>%
+    print_barplot(BACD003.SQ003.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("BACD003.SQ004."), fig.height=3}
+
+###############
+# Diverse inclusive work environment
+###############
+
+df.geam %>%
+    print_barplot(BACD003.SQ004.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("BACD003.SQ005."), fig.height=3}
+
+###############
+# Equality or diversity staff networks within the organization"
+###############
+
+df.geam %>%
+    print_barplot(BACD003.SQ005.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("BACD003.SQ006."), fig.height=3}
+
+###############
+# The reputation for training or career development offered by the organization or department
+###############
+
+df.geam %>%
+    print_barplot(BACD003.SQ006.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("BACD003.SQ007."), fig.height=3}
+
+###############
+# Not needing to relocate geographically
+###############
+
+df.geam %>%
+    print_barplot(BACD003.SQ007.)
+```
+    
+\newpage
+
+
+
+
+
+
+### `r var_toplabel("BACD005.SQ001.")`  `r if(lsVarCode) "(BACD005)" `
+<p>&nbsp;</p>
+
+
+```{r fig.height=9, fig.width=8, fig.cap=get_caption("BACD005.SQ001.")}
+
+################################################
+# If you were considering to apply for a promotion, how important would the following items be to you?"
+################################################
+
+df.geam %>% 
+  select(starts_with("BACD005.SQ")) %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                show.n = F,
+                show.total = F,
+                geom.size = .4,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 11))
 
 ```
-<p>&nbsp;</p>
+
+
+\newpage
+
+
+```{r eval=exechunk("BACD005.SQ001."), fig.height=3}
+
+###############
+# Meeting the essential criteria outlined in the job description
+###############
+
+df.geam %>%
+    print_barplot(BACD005.SQ001.)
+```
+
+
 <p>&nbsp;</p>
 
 
+```{r eval=exechunk("BACD005.SQ002."), fig.height=3}
+
+###############
+# Being encouraged to apply by your manager or a senior member of staff
+###############
+
+df.geam %>%
+    print_barplot(BACD005.SQ002.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("BACD005.SQ003."), fig.height=3}
+
+###############
+# Having a mentor to discuss and review your application
+###############
+
+df.geam %>%
+    print_barplot(BACD005.SQ003.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("BACD005.SQ004."), fig.height=3}
+
+###############
+# Whether the role accommodates flexible working arrangements
+###############
+
+df.geam %>%
+    print_barplot(BACD005.SQ004.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("BACD005.SQ005."), fig.height=3}
+
+###############
+# Opportunity for a pay or salary increase"
+###############
+
+df.geam %>%
+    print_barplot(BACD005.SQ005.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("BACD005.SQ006."), fig.height=3}
+
+###############
+# Opportunity to develop new skills/take on new responsibilities
+###############
+
+df.geam %>%
+    print_barplot(BACD005.SQ006.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("BACD005.SQ007."), fig.height=3}
+
+###############
+# Obtaining a more senior job title"
+###############
+
+df.geam %>%
+    print_barplot(BACD005.SQ007.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("BACD005.SQ008."), fig.height=3}
+
+###############
+#Having access to information regarding the application and promotion process
+###############
+
+df.geam %>%
+    print_barplot(BACD005.SQ008.)
+```
+    
+    
+\newpage
+   
+
+
+
+
+
+### `r var_toplabel("BACD007")`  `r if(lsVarCode) "(BACD007)" `
+<p>&nbsp;</p>
+
+
+```{r val=exechunk("BACD007"), fig.cap=get_caption("BACD007") }
+
+################################################
+# Hypothetically, when applying for a promotion or new post, what proportion of the 
+# essential criteria do you need to meet to submit an application?
+################################################
+
+df.geam %>%
+    print_barplot(BACD007, xlangle = 60, lwidth = 30)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("BACD007")}
+df.geam %>% 
+    print_frqtable("BACD007") 
+```
+    
+    
+\newpage
+
+
+
+
+
+
+### `r var_toplabel("GlickMasculCont8.SQ001.")`  `r if(lsVarCode) "(GlickMasculCont8)" `
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+```{r fig.height=7, fig.width=8, fig.cap=get_caption("GlickMasculCont8.SQ001.")}
+
+################################################
+# In my work environment - Glick Masculinity Contest Culture 
+################################################
+
+df.geam %>% 
+  select(starts_with("GlickMasculCont8.SQ")) %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                show.n = F,
+                show.total = F,
+                geom.size = .5,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 12))
+
+```
+
+
+\newpage
+
+
+```{r eval=exechunk("GlickMasculCont8.SQ001."), fig.height=3}
+
+###############
+# Admitting you don't know the answer looks weak
+###############
+
+df.geam %>%
+    print_barplot(GlickMasculCont8.SQ001.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("GlickMasculCont8.SQ002."), fig.height=3}
+
+###############
+# Expressing any emotion other than anger or pride is seen as weak
+###############
+
+df.geam %>%
+    print_barplot(GlickMasculCont8.SQ002.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("GlickMasculCont8.SQ006."), fig.height=3}
+
+###############
+# It's important to be in good physical shape to be respected
+###############
+
+df.geam %>%
+    print_barplot(GlickMasculCont8.SQ006.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("GlickMasculCont8.SQ007."), fig.height=3}
+
+###############
+# People who are physically smaller have to work harder to get respect
+###############
+
+df.geam %>%
+    print_barplot(GlickMasculCont8.SQ007.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("GlickMasculCont8.SQ011."), fig.height=3}
+
+###############
+# To succeed you can't let family interfere with work
+###############
+
+df.geam %>%
+    print_barplot(GlickMasculCont8.SQ011.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("GlickMasculCont8.SQ012."), fig.height=3}
+
+###############
+# Taking days off is frowned upon
+###############
+
+df.geam %>%
+    print_barplot(GlickMasculCont8.SQ012.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("GlickMasculCont8.SQ016."), fig.height=3}
+
+###############
+# You're either \"in\" or you're \"out\", and once you're out, you're out"
+###############
+
+df.geam %>%
+    print_barplot(GlickMasculCont8.SQ016.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("GlickMasculCont8.SQ017."), fig.height=3}
+
+###############
+# If you don't stand up for yourself people will step on you"
+###############
+
+df.geam %>%
+    print_barplot(GlickMasculCont8.SQ017.)
+```
+    
+    
+\newpage
+  
 
 
 

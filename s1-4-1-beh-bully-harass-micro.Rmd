@@ -3,92 +3,407 @@
 ## Microagressions
 
 
-Includes questions 42, codes: BIMA001
+### `r var_toplabel("BIMA001.SQ001.")`  `r if(lsVarCode) "(BIMA001)" `
+<p>&nbsp;</p>
 
-### `r varlabel("BIMA001_SQ001")`
 
-```{r ExperienceMicroaggression, eval=varexists("BIMA001_SQ001"), fig.height=10, fig.width=10}
+```{r fig.width=7, fig.height=8, fig.cap=get_caption("BIMA001.SQ001.")}
 
-data %>%
-  select(starts_with("BIMA001_SQ")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
-  theme_light()
+################################################
+# The following items relate to your experience of microaggressions. Please rate how often you have experienced the 
+# following  microaggressions within your workplace
+################################################
+
+df.geam %>% 
+  select(starts_with("BIMA001.SQ")) %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                show.n = F,
+                show.total = F,
+                geom.size = .5,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 11))
 
 ```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+
+
+\newpage
+
+
+```{r eval=exechunk("BIMA001.SQ001."), fig.height=3}
+
+###############
+# I am often mistaken for being a lower-status worker
+###############
+
+df.geam %>%
+    print_barplot(BIMA001.SQ001.)
+```
+
+```{r eval=exechunk("BIMA001.SQ002."), fig.height=3}
+
+###############
+# I am treated like a second-class citizen"
+###############
+
+df.geam %>%
+    print_barplot(BIMA001.SQ002.)
+```
+
+```{r eval=exechunk("BIMA001.SQ003."), fig.height=3}
+
+###############
+# Sometimes I feel as if colleagues look past me or do not see me as a real person
+###############
+
+df.geam %>%
+    print_barplot(BIMA001.SQ003.)
+```
+
+```{r eval=exechunk("BIMA001.SQ004."), fig.height=3}
+
+###############
+# My contributions are dismissed or devalued"
+###############
+
+df.geam %>%
+    print_barplot(BIMA001.SQ004.)
+```
+
+```{r eval=exechunk("BIMA001.SQ005."), fig.height=3}
+
+###############
+# Colleagues have prejudices about my intelligence and abilities"
+###############
+
+df.geam %>%
+    print_barplot(BIMA001.SQ005.)
+```
+
+```{r eval=exechunk("BIMA001.SQ006."), fig.height=3}
+
+###############
+# Others assume that I will act aggressively or are scared of me"
+###############
+
+df.geam %>%
+    print_barplot(BIMA001.SQ006.)
+```
+
+```{r eval=exechunk("BIMA001.SQ007."), fig.height=3}
+
+###############
+# Colleagues ask me where I am from, suggesting that I do not belong
+###############
+
+df.geam %>%
+    print_barplot(BIMA001.SQ007.)
+```
+
+```{r eval=exechunk("BIMA001.SQ008."), fig.height=3}
+
+###############
+# I notice that there are few role models in my institution with a similar background to my own"
+###############
+
+df.geam %>%
+    print_barplot(BIMA001.SQ008.)
+```
+
+```{r eval=exechunk("BIMA001.SQ009."), fig.height=3}
+
+###############
+# Others hint that I should work hard to prove that I am not like other people from my background"
+###############
+
+df.geam %>%
+    print_barplot(BIMA001.SQ009.)
+```
+
+```{r eval=exechunk("BIMA001.SQ010."), fig.height=3}
+
+###############
+# "Others suggest that people from my background get unfair benefits"
+###############
+
+df.geam %>%
+    print_barplot(BIMA001.SQ010.)
+```
+
+```{r eval=exechunk("BIMA001.SQ011."), fig.height=3}
+
+###############
+# Some colleagues deny that people from my background face extra obstacles"
+###############
+
+df.geam %>%
+    print_barplot(BIMA001.SQ011.)
+```
+    
+    
+\newpage
+
+
+
+
 
 
 ## Bullying Harassment 
 
-Includes questions 43,44, 45, 47, 48  codes: BISB001, BISB002, BISB003, BISB005, BISB006. 
 
-### `r varlabel("BISB001_SQ001")`
-
-```{r ConfidenceReporting, eval=varexists("BISB001_SQ001"), fig.height=6, fig.width=10}
-
-data %>%
-  select(starts_with("BISB001")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
-  theme_light()
-
-```
-<p>&nbsp;</p>
+### `r var_toplabel("BISB001.SQ001.")`  `r if(lsVarCode) "(BISB001)" `
 <p>&nbsp;</p>
 
 
-### `r varlabel("BISB003")`
+```{r, fig.width=7, fig.height=4.8, fig.cap=get_caption("BISB001.SQ001.")}
 
-```{r HasExperiencedGBV, eval=varexists("BISB003")}
+################################################
+# The following questions are related to bullying and harassment within your workplace. How confident are you
+# or would you be to report incidences of bullying and harassment to:"
+################################################
 
-data %>% 
-    filter(!is.na(BISB003) & hideNA) %>% 
-    ggplot(aes(x=BISB003)) + 
-    geom_bar()+ 
-    labs(y="Total count") +
-    theme_light() +
-    theme(axis.title.x = element_blank())
-```
+df.geam %>% 
+  select(starts_with("BISB001.SQ")) %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                show.n = F,
+                show.total = F,
+                geom.size = .5,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 11))
 
-
-```{r HasExperiencedGBV_tab, eval=varexists("BISB003")}
-print_frqtable(data$BISB003) 
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
-### `r varlabel("BISB004_SQ001")`
-
-```{r GBVWhom, eval=varexists("BISB004_SQ001")}
-
-data %>%
-  select(starts_with("BISB004")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
-  theme_light()
 ```
 
 
-```{r eval=varexists("BISB004")}
-print_frqtable(data$BISB004) 
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+\newpage
 
 
+```{r eval=exechunk("BISB001.SQ001."), fig.height=3}
 
-### `r varlabel("Neosexism_SQ002")`
-(Neosexism scale)
-```{r Neosexism, eval=varexists("Neosexism_SQ002"), fig.height=12}
+###############
+# Your manager within your institution"
+###############
 
-data %>%
-  select(starts_with("Neosexism_SQ0")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
-  theme_light()
+df.geam %>%
+    print_barplot(BISB001.SQ001.)
 ```
 
 
 <p>&nbsp;</p>
+
+
+```{r eval=exechunk("BISB001.SQ002."), fig.height=3}
+
+###############
+# A representative from Human Resources "
+###############
+
+df.geam %>%
+    print_barplot(BISB001.SQ002.)
+```
+
+
 <p>&nbsp;</p>
 
 
+```{r eval=exechunk("BISB001.SQ003."), fig.height=3}
+
+###############
+# A senior colleague who is not your manager"
+###############
+
+df.geam %>%
+    print_barplot(BISB001.SQ003.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("BISB001.SQ004."), fig.height=3}
+
+###############
+# "A representative from a trade union"
+###############
+
+df.geam %>%
+    print_barplot(BISB001.SQ004.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("BISB001.SQ005."), fig.height=3}
+
+###############
+# "A representative from your equality diversity and/or inclusion committee/ organisation
+###############
+
+df.geam %>%
+    print_barplot(BISB001.SQ005.)
+```
+    
+    
+\newpage
+
+
+
+
+
+### `r var_toplabel("BISB003")` `r if(lsVarCode) "(BISB003)" `
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("BISB003"), fig.cap=get_caption("BISB003") }
+
+################################################
+# During the last 12 months, have you personally experienced harassment and/or bullying in your institution?"
+################################################
+
+df.geam %>% 
+    print_barplot(BISB003)
+```
+
+```{r eval=exechunk("BISB003")}
+df.geam %>% 
+    print_frqtable("BISB003")
+```
+
+
+\newpage
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC001", "BISB003"))}
+
+# crosstab by role 
+df.geam %>% 
+    print_xtable("BISB003","WCJC001")
+```
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("BISB003", "WCJC001")), fig.cap=get_caption("BISB003", "WCJC001", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("WCJC001","BISB003", xlangle=0, ltitle=F, legdir = "vertical", legpos = "right", lwidth=10)
+```
+
+
+\newpage
+
+
+```{r eval=var_exists(c("SDEM004.bin", "BISB003"))}
+
+# crosstab by gender 
+df.geam %>% 
+    print_xtable("BISB003","SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("BISB003", "SDEM004.bin")), fig.cap=get_caption("BISB003", "SDEM004.bin", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin", "BISB003", legpos = "right", legdir = "vertical", ltitle=F, lwidth=10)
+```
+
+
+\newpage
+
+
+
+
+
+
+### `r var_toplabel("BISB004.SQ001.")`  `r if(lsVarCode) "(BISB004)" `
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("BISB004.SQ001."), fig.height=3, fig.width=7, fig.cap=get_caption("BISB004.SQ001.")}
+
+################################################
+# Experienced sexual harassment / bullying. If yes, by whom? 
+################################################
+
+df.geam %>%
+  select(starts_with("BISB004.SQ")) %>%
+   plot_likert(geom.colors=cpal, 
+              values="sum.outside", 
+              show.n = F, 
+              show.prc.sign=T, 
+              sort.frq = "pos.asc", 
+              geom.size = .4,
+              reverse.scale = T,
+              show.legend = F,
+              digits = percdigits,
+              grid.range = c(1,.2),
+              wrap.labels = 50) + 
+  theme_light() + 
+  theme(legend.position = "bottom", 
+         axis.text.x=element_blank(),
+        axis.text = element_text(size = 12))
+```
+    
+    
+\newpage    
+ 
+
+
+
+
+
+### `r var_toplabel("Neosexism.SQ002.")`  `r if(lsVarCode) "(Neosexism)" `
+<p>&nbsp;</p>
+
+
+```{r, fig.width=7, fig.height=9, fig.cap=get_caption("Neosexism.SQ002.")}
+
+################################################
+# Neosexism
+################################################
+
+df.geam %>% 
+  select(starts_with("Neosexism.SQ")) %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                show.n = F,
+                show.total = F,
+                geom.size = .5,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 11))
+
+
+
+```
+
+    
+\newpage

@@ -1,127 +1,1268 @@
 ## Perceptions of Gender Equality 
 
 
-Includes questions 32-37, codes: OCPER001, OCPER002, OCPER003, OCPER004, OCPER005 (txt), OCWC002 
+### `r var_toplabel("OCPER001.SQ001.")`  `r if(lsVarCode) "(OCPER001)" `
+<p>&nbsp;</p>
 
 
-### `r varlabel("OCPER001_SQ001")`
+```{r fig.height=7, fig.width=7, fig.cap=get_caption("OCPER001.SQ001.")}
 
-```{r perceptionsGE, eval=varexists("OCPER001_SQ001"), fig.height=4, fig.width=10}
-data %>%
-  select(starts_with("OCPER001_SQ")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral=3 ) + 
-  theme_light()
+################################################
+# Please indicate the extent to which you agree or disagree with the following statements:
+# regarding perception of gender equality 
+################################################
+
+df.geam %>% 
+  select(starts_with("OCPER001.SQ")) %>% 
+  #shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                show.n = F,
+                show.total = F,
+                geom.size = .5,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 11))
 
 ```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
 
 
-
-### `r varlabel("OCPER002_SQ001")`
-
-```{r representWomenMen, eval=varexists("OCPER002_SQ001"), fig.height=4, fig.width=10}
-data %>%
-  select(starts_with("OCPER002_SQ")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 3, cat.neutral=NULL ) + 
-  theme_light()
-
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+\newpage
 
 
-### `r varlabel("OCPER003_SQ001")`
+```{r eval=exechunk("OCPER001.SQ001."), fig.height=3}
 
-```{r diffAllocation, eval=varexists("OCPER003_SQ001"), fig.height=15, fig.width=10}
-data %>%
-  select(starts_with("OCPER003_SQ")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T,  catcount=5, cat.neutral = 3 ) + 
-  theme_light()
+###############
+# n general, men and women are equally represented
+###############
 
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
-### `r varlabel("OCPER004")`
-
-```{r easeSeniorPos, eval=varexists("OCPER004")}
-
-data %>% 
-    filter(!is.na(OCPER004) & hideNA) %>% 
-    ggplot(aes(x=OCPER004, fill=OCPER004)) + 
-    geom_bar()+ 
-    scale_fill_brewer(palette="Set1") +
-    coord_flip() + 
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.y=element_blank())
+df.geam %>%
+    print_barplot(OCPER001.SQ001.)
 ```
 
-```{r easeSeniorPos_tab, eval=varexists("OCPER004")}
-print_frqtable(data$OCPER004)
-```
-<p>&nbsp;</p>
+
 <p>&nbsp;</p>
 
 
-### `r varlabel("OCWC002_SQ001")`
+```{r eval=exechunk("OCPER001.SQ002."), fig.height=3}
 
-```{r lifeWorkplace, eval=varexists("WCWI021_SQ001"), fig.height=12, fig.width=10, fig.height=20}
+###############
+# In general, men and women are treated equally in my institution
+###############
 
-data %>%
-  select(starts_with("OCWC002_S")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount=5, cat.neutral = 3) + 
-  theme_light()
-
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
-
-### `r varlabel("r353q0")`
-
-```{r achievedProgress, eval=varexists("r353q0"), fig.width=10,}
-
-data %>% 
-    filter(!is.na(r353q0) & hideNA) %>% 
-    ggplot(aes(x=r353q0, fill=r353q0)) + 
-    geom_bar() + 
-    scale_fill_brewer(palette="Set1") +
-    coord_flip() +
-    guides(fill=F) +
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.y=element_blank())
+df.geam %>%
+    print_barplot(OCPER001.SQ002.)
 ```
 
-```{r achievedProgress_tab, eval=varexists("r353q0")}
-print_frqtable(data$r353q0) 
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER001.SQ003."), fig.height=3}
+
+###############
+#My institution is committed to promoting gender equality"
+###############
+
+df.geam %>%
+    print_barplot(OCPER001.SQ003.)
 ```
+
+
 <p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER001.SQ004."), fig.height=3}
+
+###############
+# Myself and colleagues know who to go to if we have concerns related to gender equality"
+###############
+
+df.geam %>%
+    print_barplot(OCPER001.SQ004.)
+```
+
+
 <p>&nbsp;</p>
 
 
+```{r eval=exechunk("OCPER001.SQ005."), fig.height=3}
 
-### `r varlabel("r59q0_SQ001")`
+###############
+# My institution is responsive to concerns about gender equality"
+###############
 
-```{r barriesImplementing, eval=varexists("r59q0_SQ001"), fig.height=12}
+df.geam %>%
+    print_barplot(OCPER001.SQ005.)
+```
+    
+    
+\newpage
 
-data %>%
-  select(starts_with("r59q0_SQ0")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount=5, cat.neutral = 3) + 
-  theme_light()
+
+
+
+
+### `r var_toplabel("OCPER002.SQ001.")`  `r if(lsVarCode) "(OCPER002)" `
+<p>&nbsp;</p>
+
+
+```{r fig.width=7, fig.cap=get_caption("OCPER002.SQ001.")}
+
+################################################
+# How would you view the representation of men and women in your institution?
+################################################
+
+df.geam %>% 
+  select(starts_with("OCPER002.SQ")) %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                show.n = F,
+                show.total = F,
+                geom.size = .5,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 11))
 
 ```
+
+
+\newpage
+
+
+```{r eval=exechunk("OCPER002.SQ001."), fig.height=3}
+
+###############
+# In general
+###############
+
+df.geam %>%
+    print_barplot(OCPER002.SQ001.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER002.SQ002."), fig.height=3}
+
+###############
+# With regards to academic/ research staff?"
+###############
+
+df.geam %>%
+    print_barplot(OCPER002.SQ002.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER002.SQ003."), fig.height=3}
+
+###############
+# Technnicians
+###############
+
+df.geam %>%
+    print_barplot(OCPER002.SQ003.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER002.SQ004."), fig.height=3}
+
+###############
+# With regards to admin staff
+###############
+
+df.geam %>%
+    print_barplot(OCPER002.SQ004.)
+```
+    
+    
+\newpage
+
+
+
+
+
+### `r var_toplabel("OCPER003.SQ001.")`  `r if(lsVarCode) "(OCPER003)" `
+<p>&nbsp;</p>
+
+Part 1 of 3. 
+
+
+```{r, fig.width=7, fig.height=7, fig.cap=get_caption("OCPER003.SQ001.")}
+
+################################################
+# Have you perceived a difference in the allocation of the following in your institution? 
+################################################
+
+df.geam %>% 
+  select("OCPER003.SQ001.", "OCPER003.SQ002.", "OCPER003.SQ003.", "OCPER003.SQ004.",
+         "OCPER003.SQ005.", "OCPER003.SQ006.", "OCPER003.SQ007.", "OCPER003.SQ008.", "OCPER003.SQ009.") %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                show.n = F,
+                show.total = F,
+                geom.size = .5,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 11))
+
+
+```
+    
+    
+\newpage 
+    
+
+### `r var_toplabel("OCPER003.SQ001.")`  `r if(lsVarCode) "(OCPER003)" `
+<p>&nbsp;</p>
+
+Part 2 of 3. 
+
+
+```{r, fig.width=7, fig.height=7, fig.cap=get_caption("OCPER003.SQ001.")}
+
+################################################
+# Have you perceived a difference in the allocation of the following in your institution? 
+################################################
+
+df.geam %>% 
+  select("OCPER003.SQ010.", "OCPER003.SQ011.", "OCPER003.SQ012.", "OCPER003.SQ013.",
+         "OCPER003.SQ014.", "OCPER003.SQ015.", "OCPER003.SQ016.", "OCPER003.SQ017.", "OCPER003.SQ018.") %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                show.n = F,
+                show.total = F,
+                geom.size = .5,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 11))
+
+
+```
+
+    
+\newpage 
+
+    
+
+### `r var_toplabel("OCPER003.SQ001.")`  `r if(lsVarCode) "(OCPER003)" `
+<p>&nbsp;</p>
+
+Part 3 of 3. 
+
+
+```{r, fig.width=7, fig.height=7, fig.cap=get_caption("OCPER003.SQ001.")}
+
+################################################
+# Have you perceived a difference in the allocation of the following in your institution? 
+################################################
+
+df.geam %>% 
+  select("OCPER003.SQ019.", "OCPER003.SQ020.", "OCPER003.SQ021.", "OCPER003.SQ022.",
+         "OCPER003.SQ023.", "OCPER003.SQ024.", "OCPER003.SQ025.", "OCPER003.SQ026.", "OCPER003.SQ027.") %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                show.n = F,
+                show.total = F,
+                geom.size = .5,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 11))
+
+
+```
+
+
+\newpage
+
+
+```{r eval=exechunk("OCPER003.SQ001."), fig.height=3}
+
+###############
+# Attractive or desirable tasks or roles
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ001.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ002."), fig.height=3}
+
+###############
+# Office space
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ002.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ003."), fig.height=3}
+
+###############
+# The receipt of mentoring and/or other guidance in making career decisions
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ003.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ004."), fig.height=3}
+
+###############
+# Representation senior positions
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ004.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ005."), fig.height=3}
+
+###############
+# Responsibilities related to student care 
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ005.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ006."), fig.height=3}
+
+###############
+# Positive attention from, or additional time with, senior management"
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ006.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ007."), fig.height=3}
+
+###############
+# Access to informal circles of influence
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ007.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ008."), fig.height=3}
+
+###############
+# Receiving positive feedback from management
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ008.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ009."), fig.height=3}
+
+###############
+# Recruitment and selection of new staff"
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ009.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ010."), fig.height=3}
+
+###############
+# Promotion decisions
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ010.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ011."), fig.height=3}
+
+###############
+# Formal training and career development opportunities
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ011.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ012."), fig.height=3}
+
+###############
+# Teching responsibilities 
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ012.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ013."), fig.height=3}
+
+###############
+# Laboratory space, facilities or equipment"
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ013.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ014."), fig.height=3}
+
+###############
+# Invitations or opportunities 
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ014.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ015."), fig.height=3}
+
+###############
+# Appointments to editorships of journals, committees and panels"
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ015.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ016."), fig.height=3}
+
+###############
+# Recognition of intellectual contributions during meetings, conferences, workshops, etc. 
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ016.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ017."), fig.height=3}
+
+###############
+# Principal investigator roles
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ017.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ018."), fig.height=3}
+
+###############
+# Funds and monetary resources
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ018.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ019."), fig.height=3}
+
+###############
+# Awards and recognition of excellence
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ019.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ020."), fig.height=3}
+
+###############
+# PhD and Masters students
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ020.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ021."), fig.height=3}
+
+###############
+# Supervision responsibilities (for undergraduate and graduate students)
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ021.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ022."), fig.height=3}
+
+###############
+# Specific counselling for qualifying candidates for recruitment 
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ022.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ023."), fig.height=3}
+
+###############
+# "Support in grant preparation and writing"
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ023.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ024."), fig.height=3}
+
+###############
+# The administration of harassment and hate crime reporting
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ024.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ025."), fig.height=3}
+
+###############
+# "Student acknowledgement (e.g., recognizing feedback and guidance, teaching and mentoring)"
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ025.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ026."), fig.height=3}
+
+###############
+# Dealing with staff or student grievances or queries"
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ026.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER003.SQ027."), fig.height=3}
+
+###############
+# Authorship opportunities (including first author, corresponding author, senior author, etc.)"
+###############
+
+df.geam %>%
+    print_barplot(OCPER003.SQ027.)
+```
+    
+    
+\newpage
+  
+
+
+
+
+### `r var_toplabel("OCPER004")`  `r if(lsVarCode) "(OCPER004)" `
+<p>&nbsp;</p>
+
+
+```{r val=exechunk("OCPER004"), fig.cap=get_caption("OCPER004")}
+
+################################################
+# When comparing the ease with which individuals can reach senior positions in your institution, it is in general:
+################################################
+
+df.geam %>%
+    print_barplot(OCPER004, lwidth = 15, xlangle = 60)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCPER004")}
+df.geam %>% 
+    print_frqtable("OCPER004") 
+```
+    
+    
+\newpage
+
+
+
+
+
+
+### `r var_toplabel("OCWC002.SQ001.")`  `r if(lsVarCode) "(OCWC002)" `
+<p>&nbsp;</p>
+
+Part 1 of 3 
+
+```{r fig.width=7, fig.height=7, fig.cap=get_caption("OCWC002.SQ001.")}
+
+################################################
+# Please indicate the extent to which you agree or disagree with the following statements 
+# relating to life in your current workplace:
+################################################
+
+df.geam %>% 
+  select("OCWC002.SQ001.", "OCWC002.SQ002.", "OCWC002.SQ003.", "OCWC002.SQ004.", "OCWC002.SQ005.", 
+         "OCWC002.SQ006.", "OCWC002.SQ007.", "OCWC002.SQ008.", "OCWC002.SQ009.") %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                show.n = F,
+                show.total = F,
+                geom.size = .5,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 11))
+
+```
+    
+    
+\newpage
+    
+    
+### `r var_toplabel("OCWC002.SQ001.")`  `r if(lsVarCode) "(OCWC002)" `
+<p>&nbsp;</p>
+
+Part 2 of 3. 
+
+```{r fig.width=7, fig.height=7,  fig.cap=get_caption("OCWC002.SQ001.")}
+
+################################################
+# Please indicate the extent to which you agree or disagree with the following statements 
+# relating to life in your current workplace:
+################################################
+
+df.geam %>% 
+  select("OCWC002.SQ010.", "OCWC002.SQ011.", "OCWC002.SQ012.", "OCWC002.SQ013.", "OCWC002.SQ014.", 
+         "OCWC002.SQ015.", "OCWC002.SQ016.", "OCWC002.SQ017.", "OCWC002.SQ018.") %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                show.n = F,
+                show.total = F,
+                geom.size = .5,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 11))
+
+```
+
+
+\newpage
+    
+    
+### `r var_toplabel("OCWC002.SQ001.")`  `r if(lsVarCode) "(OCWC002)" `
+<p>&nbsp;</p>
+
+Part 3 of 3. 
+
+
+```{r fig.width=7, fig.height=5, fig.cap=get_caption("OCWC002.SQ001.")}
+
+################################################
+# Please indicate the extent to which you agree or disagree with the following statements 
+# relating to life in your current workplace:
+################################################
+
+df.geam %>% 
+  select("OCWC002.SQ019.", "OCWC002.SQ020.", "OCWC002.SQ021.", "OCWC002.SQ022.", "OCWC002.SQ023.") %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                show.n = F,
+                show.total = F,
+                geom.size = .5,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 11))
+
+```
+
+
+\newpage
+
+
+```{r eval=exechunk("OCWC002.SQ001."), fig.height=3}
+
+###############
+# I work very hard, compared to others
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ001.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ002."), fig.height=3}
+
+###############
+# My teaching is valued by students"
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ002.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ003."), fig.height=3}
+
+###############
+# My teaching is valued by senior management"
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ003.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ004."), fig.height=3}
+
+###############
+# Workload is allocated in a fair and transparent manner"
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ004.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ005."), fig.height=3}
+
+###############
+# I often work long hours"
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ005.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ006."), fig.height=3}
+
+###############
+# I could count on a good reference, if I needed one"
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ006.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ007."), fig.height=3}
+
+###############
+#"The budget is allocated fairly"
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ007.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ008."), fig.height=3}
+
+###############
+# "Laboratory and/or office space is allocated fairly"
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ008.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ009."), fig.height=3}
+
+###############
+# If I needed to, I could relocate to another geographical location"
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ009.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ010."), fig.height=3}
+
+###############
+# "I can count on the support of my family "
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ010.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ011."), fig.height=3}
+
+###############
+# "I am involved in the social life of my institution"
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ011.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ012."), fig.height=3}
+
+###############
+# Successes in my working life are celebrated by my colleagues"
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ012.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ013."), fig.height=3}
+
+###############
+#I am encouraged to undertake activities that contribute to my career development"
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ013.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ014."), fig.height=3}
+
+###############
+# I  have a formally assigned mentor who I see regularly"
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ014.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ015."), fig.height=3}
+
+###############
+# I have the opportunity to serve on important institutional committees"
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ015.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ016."), fig.height=3}
+
+###############
+# My research is valued by my colleagues"
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ016.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ017."), fig.height=3}
+
+###############
+# I don’t have enough administrative experience
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ017.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ018."), fig.height=3}
+
+###############
+# My institution values my external professional activities 
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ018.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ019."), fig.height=3}
+
+###############
+# Senior staff are inaccessible to me
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ019.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ020."), fig.height=3}
+
+###############
+# I have an unsupportive manager"
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ020.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ021."), fig.height=3}
+
+###############
+# My work environment is friendly"
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ021.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ022."), fig.height=3}
+
+###############
+#"Communication within my institution is poor"
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ022.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("OCWC002.SQ023."), fig.height=3}
+
+###############
+# "My annual performance review is not useful or valuable for my development or progression"
+###############
+
+df.geam %>%
+    print_barplot(OCWC002.SQ023.)
+```
+    
+    
+\newpage
+
+
+
+
+### `r var_toplabel("r353q0")`  `r if(lsVarCode) "(r353q0)" `
+<p>&nbsp;</p>
+
+
+```{r val=exechunk("r353q0"), fig.cap=get_caption("r353q0") }
+
+################################################
+# In your opinion, have you observed progress in your organisation when it comes 
+# to gender equality issues in the last 3 years?"
+################################################
+
+df.geam %>%
+    print_barplot(r353q0, lwidth = 20, xlangle=60)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("r353q0")}
+df.geam %>% 
+    print_frqtable("r353q0") 
+```
+
+
+\newpage
+
+
+```{r eval=var_exists(c("WCJC001", "r353q0"))}
+
+# crosstab by role 
+df.geam %>% 
+    print_xtable("r353q0","WCJC001")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("r353q0", "WCJC001")), fig.cap=get_caption("r353q0", "WCJC001", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("WCJC001","r353q0", xlangle=0, ltitle=F, legdir = "vertical", legpos = "right", lwidth=10)
+```
+
+
+\newpage
+
+
+```{r eval=var_exists(c("SDEM004.bin", "r353q0"))}
+
+# crosstab by gender 
+df.geam %>% 
+    print_xtable("r353q0","SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("r353q0", "SDEM004.bin")), fig.cap=get_caption("r353q0", "SDEM004.bin", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin", "r353q0", legpos = "right", legdir = "vertical", ltitle=F, lwidth=10)
+```
+
+
+    
+\newpage
+
+
+
+
+
+### `r var_toplabel("r59q0.SQ001.")`  `r if(lsVarCode) "(r59q0)" `
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+```{r fig.cap=get_caption("r59q0.SQ001.")}
+
+################################################
+# In your opinion which of the following barriers affect the implementation of gender equality in your organisation? 
+################################################
+
+df.geam %>% 
+  select(starts_with(("r59q0.SQ"))) %>% 
+   shorten_label(maxlength = 50) %>% 
+   plot_likert(geom.colors=cpal, 
+              values="sum.outside", 
+              show.n = F, 
+              show.prc.sign=T, 
+              sort.frq = "pos.asc", 
+              geom.size = .4,
+              reverse.scale = T,
+              show.legend = F,
+              digits = percdigits,
+              grid.range = c(1,.2),
+              wrap.labels = 60) + 
+  theme_light() + 
+  theme(legend.position = "bottom", 
+         axis.text.x=element_blank(),
+        axis.text = element_text(size = 11))
 
 
+```
 
+
+\newpage
+
+    
 
 
 

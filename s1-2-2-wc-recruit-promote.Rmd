@@ -1,44 +1,97 @@
 ## Recruitment & Promotion
 
-Includes questions 9-10, codes: WCJC013, WCJC014 
 
-### `r varlabel("WCJC013")`
-
-```{r invite_promo, eval=varexists("WCJC013") }
-data %>% 
-    filter(!is.na(WCJC013) & hideNA) %>% 
-    ggplot(aes(x=WCJC013, fill=WCJC013)) + 
-    geom_bar()+ 
-    scale_fill_brewer(palette="Set1") +
-    labs(title="") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.x = element_blank())
-```
-
-```{r invite_promot_tab, eval=varexists("WCJC013")}
-print_frqtable(data$WCJC013)
-```
-<p>&nbsp;</p>
+### `r var_toplabel("WCJC013")`  `r if(lsVarCode) "(WCJC013)" `
 <p>&nbsp;</p>
 
 
-### `r varlabel("WCJC014")`
-```{r obtain_post, eval=varexists("WCJC014"), fig.width=8, fig.height=4}
-data %>% 
-    filter(!is.na(WCJC014) & hideNA) %>% 
-    ggplot(aes(x=WCJC014, fill=WCJC014)) + 
-    geom_bar() + 
-    scale_fill_brewer(palette="Set1") +
-    coord_flip() + 
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.y=element_blank())
+```{r eval=var_exists("WCJC013"), fig.cap=get_caption("WCJC013")}
+
+################################################
+# invited promotion
+################################################
+
+df.geam %>% 
+    print_barplot(WCJC013, lwidth=20)
 ```
 
-```{r obtain_post_tab, eval=varexists("WCJC014")}
-print_frqtable(data$WCJC014) 
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("WCJC013")}
+df.geam %>% 
+    print_frqtable("WCJC013") 
 ```
+
+
 <p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC013", "SDEM004.bin")), fig.cap=get_caption("WCJC013","SDEM004.bin")}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin", "WCJC013", legpos = "right", legdir = "vertical", ltitle=F, lwidth=15)
+```
+
+
 <p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC013", "SDEM004.bin"))}
+df.geam %>% 
+    print_xtable("WCJC013", "SDEM004.bin")
+```
+
+
+  
+\newpage
+  
+
+
+
+
+### `r var_toplabel("WCJC014")`  `r if(lsVarCode) "(WCJC014)" `
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("WCJC014"), fig.cap=get_caption("WCJC014") }
+
+################################################
+#  obtain post
+################################################
+
+df.geam %>% 
+    print_barplot(WCJC014, lwidth=30, xlangle = 60)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("WCJC014")}
+df.geam %>% 
+    print_frqtable("WCJC014") 
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC014", "SDEM004.bin")), fig.cap=get_caption("WCJC014", "SDEM004.bin")}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin","WCJC013", legpos = "right", legdir = "vertical", ltitle=F, lwidth=15)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC014", "SDEM004.bin"))}
+df.geam %>% 
+    print_xtable("WCJC014", "SDEM004.bin")
+```
+    
+
+\newpage
+
+

@@ -15,7 +15,79 @@ description: "A template for generating reports from the GEAM Core questionnaire
 ---
 
 
-# Introduction {-}
+# Preamble {-}
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+
+# bookdown::render_book("index.Rmd", "bookdown::gitbook")
+# bookdown::render_book("index.Rmd", "bookdown::word_document2")
+
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  echo = FALSE, 
+  message = FALSE, 
+  warning = FALSE,
+  comment = "#>"
+)
+
+
+library(tidyverse)
+library(sjPlot)
+library(sjmisc)
+library(sjstats)
+library(xtable)
+library(flextable)
+library(RColorBrewer)
+library(gpg)
+
+
+source("config.R")
+source("util/print_xtable.R")
+source("util/print_frqtable.R")
+source("util/print_barplot.R")
+source("util/print_xbarplot.R")
+source("util/var_exists.R")
+source("util/var_toplabel.R")
+source("util/var_label.R")
+source("util/get_i18n.R")
+source("util/encrypt.R")
+source("util/shorten_label.R")
+source("util/exechunk.R")
+source("util/get_caption.R")
+
+
+
+# get rid of dplyr ungroup warning
+options(dplyr.summarise.inform=F) 
+
+
+if (!is.numeric(lsid) | lsid == 999){
+  stop("LimeSurvey ID is missing. Did you edit 'config.R' file? ")
+}
+
+
+# Read pre-processed data frame (see preprocess_labels.R)
+path_df_gpg <- paste0("data/df.",lsid,".", lsLangCode, ".rdata.gpg")
+path_df     <- paste0("data/df.",lsid,".", lsLangCode, ".rdata")
+
+
+# load data
+if (file.exists(path_df_gpg)){
+  df.geam <- read_gpg(path_df_gpg)
+  
+} else if (file.exists(path_df)) {
+  df.geam <- load(path_df)
+
+} else {
+  stop("No data frame found. Please run 'preprocess_lss.R' first.")
+}
+
+
+# available column names
+cnames <- colnames(df.geam) 
+
+```
 
 
 ```{r echo=FALSE, fig.align='center'}
@@ -23,7 +95,7 @@ knitr::include_graphics(path="images/ACT_GEAM_Logo_1.png")
 ```
 
 
-## ACTOnGender {-}
+### ACTOnGender {-}
 
 ACT is a Horizon 2020 project that involves universities, research centres and research funding organisations with the aim to advance institutional change for gender equality in the European Research Area. 
 
@@ -34,7 +106,7 @@ The ACT project website is available under <https://www-act-on-gender.eu>
 <p>&nbsp;</p>
 
 
-## Gender Equality Audit and Monitoring (GEAM) tool {-}
+### Gender Equality Audit and Monitoring (GEAM) tool {-}
 
 The GEAM is an integrated environment for carrying out survey-based gender equality audits in organizations (e.g. university or research performing organization) or organizational units (faculty, departments). It aims to enable interested researchers as well as gender equality practitioners with little experience in the social sciences and survey methodology to construct high-quality questionnaires. 
 
@@ -42,19 +114,17 @@ The GEAM tool is based upon the Athena Survey of Science, Engineering and Techno
 
 <p>&nbsp;</p>
 
-## About this report {-}
-
-The present report summarizes the results of the GEAM Survey. 
-
 
 
 ```{r echo=FALSE, fig.align='center'}
-knitr::include_graphics(path="images/ACT_logo_300dpi_high.jpg")
+knitr::include_graphics(path="images/ACT_logo_72dpi_low.jpg")
 ```
 
 ```{r echo=FALSE, fig.align='left'}
 knitr::include_graphics(path="images/EUflag.jpg")
 ```
 This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 788204
+  
+\newpage
 
  

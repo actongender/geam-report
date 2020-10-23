@@ -1,0 +1,68 @@
+# (PART) Part - Descriptive Statistics {-}
+
+
+# Introduction
+
+Describe here briefly the background of the survey carried out at your institution. 
+
+For example, this could include any additional questions there were included beyond the GEAM Core, how the survey was distributed and promoted, the challenges for conducting the survey, to whom it was directed (researcher, PhD, administration) and the total number of each group at the institution (as a point of reference).
+
+When was the survey carried out (dates), i.e. how long was it accessible to respondents? 
+
+
+## Description of meta-information
+
+```{r}
+
+totalres <- nrow(df.geam)
+partialres <- df.geam %>% 
+    filter(is.na(submitdate)) %>% 
+    summarize(n())
+
+firstsubmit <- min(df.geam$submitdate, na.rm = T)
+lastsubmit <- max(df.geam$submitdate, na.rm = T)
+
+```
+
+
+The survey has received a total of `r totalres` hits. There are `r partialres` partial responses, i.e. respondents started the survey but did not press the final submit button. 
+
+The first submission was received `r firstsubmit`. The last submission was received `r lastsubmit`. 
+
+For a visual overview of missing values, see section III of the report. 
+
+
+\newpage  
+
+
+## Dropout pages 
+
+At which page did respondents abandon the questionnaire. Page 10 is the last page and equals a submit. 
+
+
+```{r fig.cap="Last page"}
+    
+    df.geam %>% 
+        print_barplot(lastpage)
+
+```
+
+
+\newpage
+
+
+## Submission languages
+<p>&nbsp;</p>
+
+
+```{r fig.cap="Submission languages"}
+    df.geam %>% 
+        print_barplot(startlanguage, lplotperc = T)
+```
+
+
+\newpage
+    
+    
+
+

@@ -1,161 +1,1311 @@
 ## Work-life Balance
 
-Includes questions 14-21, codes: WCWI006, WCWI008, WCWI009, WCWI010, WCWI005, EWCS89JobSatisfact8, EWCS36WorkIntensity2, WorkFamConfISSP 
 
-
-### `r varlabel("WCWI006")`
-
-```{r primecare, eval=varexists("WCWI006") }
-
-data %>% 
-    filter(!is.na(WCWI006) & hideNA) %>% 
-    ggplot(aes(x=WCWI006)) + 
-    geom_bar()+ 
-    labs(title="") +
-    theme_light() +
-    theme(axis.title.x = element_blank())
-```
-
-```{r primecare_tab, eval=varexists("WCWI006")}
-print_frqtable(data$WCWI006) 
-```
-<p>&nbsp;</p>
+### `r var_toplabel("WCWI006")`  `r if(lsVarCode) "(WCWI006)" `
 <p>&nbsp;</p>
 
 
-### `r varlabel("WCWI008")`
-```{r guardian18, eval=varexists("WCWI008") }
+```{r val=var_exists("WCWI006"), fig.cap=get_caption("WCWI006") }
 
-# parent or legal guardian for children 18 years or younger
+################################################
+# Are you primary carer or assistant for an adult
+################################################
 
-data %>% 
-    filter(!is.na(WCWI008) & hideNA) %>% 
-    ggplot(aes(x=WCWI008)) + 
-    geom_bar()+ 
-    labs(title="") +
-    theme_light() +
-    theme(axis.title.x = element_blank())
-```
-
-```{r guardian18_tab, eval=varexists("WCWI008")}
-print_frqtable(data$WCWI008) 
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
-
-### `r varlabel("WCWI010")`
-```{r single_guardian18, eval=varexists("WCWI008") }
-
-# parent or legal guardian for children 18 years or younger
-
-data %>% 
-    filter(!is.na(WCWI010) & hideNA) %>% 
-    ggplot(aes(x=WCWI010)) + 
-    geom_bar()+ 
-    labs(title="") +
-    theme_light() +
-    theme(axis.title.x = element_blank())
-```
-
-```{r single_guardian18_tab, eval=varexists("WCWI010")}
-print_frqtable(data$WCWI010) 
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
-
-### `r varlabel("WCWI009")`
-```{r nr_children, eval=varexists("WCWI009"), fig.width=8, fig.height=4}
-data %>% 
-    filter(!is.na(WCJC014) & hideNA) %>% 
-    ggplot(aes(x=WCWI009, fill=WCWI009)) + 
-    geom_bar() + 
-    scale_fill_brewer(palette="Set1") +
-    coord_flip() + 
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.y=element_blank())
-```
-
-```{r nr_children_tab, eval=varexists("WCWI009")}
-print_frqtable(data$WCWI009) 
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
-### `r varlabel("WCWI005_SQ001")`
-
-```{r eval=varexists("WCWI005_SQ001"), fig.height=4, fig.width=10}
-
-data %>%
-  select(starts_with("WCWI005_SQ0")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
-  #theme_sjplot(base_size = 20, base_family = "")
-  #font_size(title=10, axis_title.x=10, axis_title.y=12, labels.x=8, labels.y=12)
-  theme_light() +
-  theme(axis.text.y = element_text(size=11))
-
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
-
-### `r varlabel("EWCS89JobSatisfact8_SQ001")`
-
-```{r eval=varexists("EWCS89JobSatisfact8_SQ001"), fig.height=8, fig.width=10}
-data %>%
-  select(starts_with("EWCS89JobSatisfact8_SQ0")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = 3) + 
-  theme_light()
-
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
-### `r varlabel("EWCS36WorkIntensity2_SQ001")`
-
-```{r eval=varexists("EWCS36WorkIntensity2_SQ001"), fig.height=3, fig.width=10}
-data %>%
-  select(starts_with("EWCS36WorkIntensity2_SQ0")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
-  theme_light()
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
-### `r varlabel("WorkFamConfISSP_SQ001")`
-
-```{r eval=varexists("WorkFamConfISSP_SQ001"), fig.height=4, fig.width=10}
-data %>%
-  select(starts_with("WorkFamConfISSP_SQ0")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
-  theme_light()
-
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
-
-### `r varlabel("Covid_SQ01")`
-
-```{r eval=varexists("Covid_SQ01"), fig.height=12, fig.width=10}
-data %>%
-  select(starts_with("Covid_SQ")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
-  theme_light()
-
+df.geam %>%
+    print_barplot(WCWI006)
 ```
 
 
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("WCWI006")}
+df.geam %>% 
+    print_frqtable("WCWI006") 
+```
+
+
+\newpage 
+
+
+```{r eval=var_exists(c("WCWI006", "SDEM004.bin"))}
+df.geam %>% 
+    print_xtable("WCWI006", "SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCWI006", "SDEM004.bin")), fig.cap=get_caption("WCWI006", "SDEM004.bin")}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin", "WCWI006", legpos = "right", legdir = "vertical", ltitle=F, lwidth = 15)
+```
+  
+\newpage
+  
+
+
+
+### `r var_toplabel("WCWI008")`  `r if(lsVarCode) "(WCWI008)" `
+<p>&nbsp;</p>
+
+
+```{r val=var_exists("WCWI008"), fig.cap=get_caption("WCWI008") }
+
+################################################
+# Parent or legal guardian of any children
+################################################
+
+df.geam %>%
+    print_barplot(WCWI008)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("WCWI008")}
+df.geam %>% 
+    print_frqtable("WCWI008") 
+```
+
+
+\newpage 
+
+
+```{r eval=var_exists(c("WCWI008", "SDEM004.bin"))}
+df.geam %>% 
+    print_xtable("WCWI008", "SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCWI008", "SDEM004.bin")), fig.cap=get_caption("WCWI008", "SDEM004.bin")}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin","WCWI008", legpos = "right", legdir = "vertical", ltitle=F, lwidth = 15)
+```
+  
+\newpage
+
+
+
+
+### `r var_toplabel("WCWI010")`  `r if(lsVarCode) "(WCWI010)" `
+<p>&nbsp;</p>
+
+
+```{r val=var_exists("WCWI010"), fig.cap=get_caption("WCWI010") }
+
+################################################
+# Are you single parent
+################################################
+
+df.geam %>%
+    print_barplot(WCWI010)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("WCWI010")}
+df.geam %>% 
+    print_frqtable("WCWI010") 
+```
+
+
+\newpage 
+
+
+```{r eval=var_exists(c("WCWI010", "SDEM004.bin"))}
+df.geam %>% 
+    print_xtable("WCWI010", "SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCWI010", "SDEM004.bin")), fig.cap=get_caption("WCWI010", "SDEM004.bin")}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin", "WCWI010", legpos = "right", legdir = "vertical", ltitle=F, lwidth = 15)
+```
+  
+\newpage
+
+
+
+
+
+### `r var_toplabel("WCWI009")`  `r if(lsVarCode) "(WCWI009)" `
+<p>&nbsp;</p>
+
+
+```{r val=var_exists("WCWI009"), fig.cap=get_caption("WCWI009") }
+
+################################################
+# How many children
+################################################
+
+df.geam %>%
+    print_barplot(WCWI009)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("WCWI009")}
+df.geam %>% 
+    print_frqtable("WCWI009") 
+```
+    
+\newpage
+
+
+
+
+
+### `r var_toplabel("WCWI005.SQ001.")`  `r if(lsVarCode) "(WCWI005)" `
+<p>&nbsp;</p>
+
+
+```{r fig.height=5.2, fig.cap=get_caption("WCWI005.SQ001.")}
+
+################################################
+# Awareness of follwing working options  Parent: WCWI005
+################################################
+
+df.geam %>% 
+  select(starts_with("WCWI005.SQ")) %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                digits = percdigits,
+                geom.size = .4,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        legend.key.width = unit(.4, "cm"),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 12))
+
+
+```
+
+
+\newpage 
+
+
+
+
+#### `r var_label("WCWI005.SQ001.")`
+
+
+```{r eval=exechunk("WCWI005.SQ001."), fig.height=3, fig.cap=get_caption("WCWI005.SQ001.", topl=c(F,T))}
+
+###############
+# Ask for time off at a short notice 
+###############
+
+df.geam %>%
+     print_barplot(WCWI005.SQ001.)
+
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC001", "WCWI005.SQ001."))}
+
+# crosstab by role 
+df.geam %>% 
+    print_xtable("WCWI005.SQ001.","WCJC001")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCWI005.SQ001.", "WCJC001")), fig.cap=get_caption("WCWI005.SQ001.", "WCJC001", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("WCJC001", "WCWI005.SQ001.", xlangle=0, ltitle=F, legdir = "vertical", legpos = "right", lwidth = 10)
+```
+
+
+\newpage
+
+
+```{r eval=var_exists(c("SDEM004.bin", "WCWI005.SQ001."))}
+
+# crosstab by gender 
+df.geam %>% 
+    print_xtable("WCWI005.SQ001.","SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCWI005.SQ001.", "SDEM004.bin")), fig.cap=get_caption("WCWI005.SQ001.", "SDEM004.bin", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin", "WCWI005.SQ001.", legpos = "right", legdir = "vertical", ltitle=F, lwidth = 15)
+```
+
+\newpage
+
+
+
+#### `r var_label("WCWI005.SQ002.")`
+
+
+```{r eval=exechunk("WCWI005.SQ002."), fig.height=3, fig.cap=get_caption("WCWI005.SQ002.", topl=c(F,T))}
+
+###############
+# Flexibility in hours and days worked
+###############
+
+df.geam %>%
+    print_barplot(WCWI005.SQ002.)
+
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC001", "WCWI005.SQ002."))}
+
+# crosstab by role 
+df.geam %>% 
+    print_xtable("WCWI005.SQ002.","WCJC001")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCWI005.SQ002.", "WCJC001")), fig.cap=get_caption("WCWI005.SQ002.", "WCJC001", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("WCJC001", "WCWI005.SQ002.", xlangle=0, ltitle=F, legdir = "vertical", legpos = "right", lwidth = 10)
+```
+
+
+\newpage
+
+
+```{r eval=var_exists(c("SDEM004.bin", "WCWI005.SQ002."))}
+
+# crosstab by gender 
+df.geam %>% 
+    print_xtable("WCWI005.SQ002.","SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCWI005.SQ002.", "SDEM004.bin")), fig.cap=get_caption("WCWI005.SQ002.", "SDEM004.bin", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin", "WCWI005.SQ002.", legpos = "right", legdir = "vertical", ltitle=F, lwidth = 15)
+```
+
+
+\newpage
+
+
+
+
+#### `r var_label("WCWI005.SQ003.")`
+
+
+```{r eval=exechunk("WCWI005.SQ003."), fig.height=3, fig.cap=get_caption("WCWI005.SQ003.", topl=c(F,T))}
+
+###############
+# Home based or remote working
+###############
+
+df.geam %>%
+    print_barplot(WCWI005.SQ003.)
+
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC001", "WCWI005.SQ003."))}
+
+# crosstab by role 
+df.geam %>% 
+    print_xtable("WCWI005.SQ003.","WCJC001")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCWI005.SQ003.", "WCJC001")), fig.cap=get_caption("WCWI005.SQ003.", "WCJC001", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("WCJC001", "WCWI005.SQ003.", xlangle=0, ltitle=F, legdir = "vertical", legpos = "right", lwidth = 10)
+```
+
+
+\newpage
+
+
+```{r eval=var_exists(c("SDEM004.bin", "WCWI005.SQ003."))}
+
+# crosstab by gender 
+df.geam %>% 
+    print_xtable("WCWI005.SQ003.","SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCWI005.SQ003.", "SDEM004.bin")), fig.cap=get_caption("WCWI005.SQ003.", "SDEM004.bin", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin", "WCWI005.SQ003.", legpos = "right", legdir = "vertical", ltitle=F, lwidth = 15)
+```
+
+
+\newpage
+
+
+
+
+#### `r var_label("WCWI005.SQ004.")`
+
+
+```{r eval=exechunk("WCWI005.SQ004."), fig.height=3, fig.cap=get_caption("WCWI005.SQ004.", topl=c(F,T))}
+
+###############
+# Job sharing with a colleague
+###############
+
+df.geam %>%
+    print_barplot(WCWI005.SQ004.)
+
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC001", "WCWI005.SQ004."))}
+
+# crosstab by role 
+df.geam %>% 
+    print_xtable("WCWI005.SQ004.","WCJC001")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCWI005.SQ004.", "WCJC001")), fig.cap=get_caption("WCWI005.SQ004.", "WCJC001", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("WCJC001", "WCWI005.SQ004.",xlangle=0, ltitle=F, legdir = "vertical", legpos = "right", lwidth = 10)
+```
+
+
+\newpage
+
+
+```{r eval=var_exists(c("SDEM004.bin", "WCWI005.SQ004."))}
+
+# crosstab by gender 
+df.geam %>% 
+    print_xtable("WCWI005.SQ004.","SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCWI005.SQ004.", "SDEM004.bin")), fig.cap=get_caption("WCWI005.SQ004.", "SDEM004.bin", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin", "WCWI005.SQ004.", legpos = "right", legdir = "vertical", ltitle=F, lwidth = 10)
+```
+
+
+\newpage
+
+
+
+
+
+### `r var_toplabel("EWCS89JobSatisfact8.SQ001.")`  `r if(lsVarCode) "(EWCS89JobSatisfact8)" `
+<p>&nbsp;</p>
+
+
+```{r fig.height=7, fig.width=8, fig.cap=get_caption("EWCS89JobSatisfact8.SQ001.")}
+
+################################################
+# Job satisfaction parent: EWCS89JobSatisfact8
+################################################
+
+df.geam %>% 
+  select(starts_with("EWCS89JobSatisfact8.SQ")) %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors ="Set1", 
+                show.n = F,
+                show.total = F,
+                geom.size = .5,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 11))
+
+```
+
+
+\newpage
+
+
+```{r eval=exechunk("EWCS89JobSatisfact8.SQ001."), fig.height=3, fig.cap=get_caption("EWCS89JobSatisfact8.SQ001.", topl=c(F,T))}
+
+###############
+# Considering efforts, I feel I get paid appropriately
+###############
+
+df.geam %>%
+    print_barplot(EWCS89JobSatisfact8.SQ001.)
+
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("EWCS89JobSatisfact8.SQ002."), fig.height=3, fig.cap=get_caption("EWCS89JobSatisfact8.SQ002.", topl=c(F,T))}
+
+###############
+# Job offers good prospoects for career advancement
+###############
+
+df.geam %>%
+    print_barplot(EWCS89JobSatisfact8.SQ002.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("EWCS89JobSatisfact8.SQ003."), fig.height=3, fig.cap=get_caption("EWCS89JobSatisfact8.SQ003.", topl=c(F,T))}
+
+###############
+# Receive the recognition I deserve
+###############
+
+df.geam %>%
+    print_barplot(EWCS89JobSatisfact8.SQ003.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("EWCS89JobSatisfact8.SQ004."), fig.height=3, fig.cap=get_caption("EWCS89JobSatisfact8.SQ004.", topl=c(F,T))}
+
+###############
+# Get on well with my colleagues
+###############
+
+df.geam %>%
+    print_barplot(EWCS89JobSatisfact8.SQ004.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("EWCS89JobSatisfact8.SQ005."), fig.height=3, fig.cap=get_caption("EWCS89JobSatisfact8.SQ005.", topl=c(F,T))}
+
+###############
+# Motivated to give best performance
+###############
+
+df.geam %>%
+    print_barplot(EWCS89JobSatisfact8.SQ005.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("EWCS89JobSatisfact8.SQ006."), fig.height=3, fig.cap=get_caption("EWCS89JobSatisfact8.SQ006.", topl=c(F,T))}
+
+###############
+# Personal life better due to job
+###############
+
+df.geam %>%
+    print_barplot(EWCS89JobSatisfact8.SQ006.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("EWCS89JobSatisfact8.SQ007."), fig.height=3, fig.cap=get_caption("EWCS89JobSatisfact8.SQ007.", topl=c(F,T))}
+
+###############
+# Might loose job next 6 month
+###############
+
+df.geam %>%
+    print_barplot(EWCS89JobSatisfact8.SQ007.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("EWCS89JobSatisfact8.SQ008."), fig.height=3, fig.cap=get_caption("EWCS89JobSatisfact8.SQ008.", topl=c(F,T))}
+
+###############
+# Easy to find a new job
+###############
+
+df.geam %>%
+    print_barplot(EWCS89JobSatisfact8.SQ008.)
+```
+    
+    
+    
+\newpage
+
+
+
+
+
+### `r var_toplabel("EWCS36WorkIntensity2.SQ001.")`  `r if(lsVarCode) "(EWCS36WorkIntensity2)" `
+<p>&nbsp;</p>
+
+
+```{r fig.height=4.8, fig.cap=get_caption("EWCS36WorkIntensity2.SQ001.")}
+
+################################################
+# Work intensity parent: EWCS36WorkIntensity2
+################################################
+
+
+df.geam %>% 
+  select(starts_with("EWCS36WorkIntensity2.SQ")) %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal,
+                geom.size = .4,
+                show.total = F, 
+                digits = percdigits, 
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 12))
+
+```
+
+
+\newpage
+
+
+#### `r var_label("EWCS36WorkIntensity2.SQ001.")`
+
+
+```{r eval=exechunk("EWCS36WorkIntensity2.SQ001."), fig.height=3, fig.cap=get_caption("EWCS36WorkIntensity2.SQ001.", topl=c(F,T))}
+
+###############
+# ...at night, for at least 2 hours
+###############
+
+df.geam %>%
+    print_barplot(EWCS36WorkIntensity2.SQ001.)
+
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC001", "EWCS36WorkIntensity2.SQ001."))}
+
+# crosstab by role 
+df.geam %>% 
+    print_xtable("EWCS36WorkIntensity2.SQ001.","WCJC001")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("EWCS36WorkIntensity2.SQ001.", "WCJC001")), fig.cap=get_caption("EWCS36WorkIntensity2.SQ001.", "WCJC001", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("WCJC001","EWCS36WorkIntensity2.SQ001.", xlangle=0, ltitle=F, legdir = "vertical", legpos = "right", lwidth = 10)
+```
+
+
+\newpage
+
+
+```{r eval=var_exists(c("SDEM004.bin", "EWCS36WorkIntensity2.SQ001."))}
+
+# crosstab by gender 
+df.geam %>% 
+    print_xtable("EWCS36WorkIntensity2.SQ001.","SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("EWCS36WorkIntensity2.SQ001.", "SDEM004.bin")), fig.cap=get_caption("EWCS36WorkIntensity2.SQ001.", "SDEM004.bin", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin","EWCS36WorkIntensity2.SQ001.", legpos = "right", legdir = "vertical", ltitle=F)
+```
+
+
+\newpage
+
+
+
+#### `r var_label("EWCS36WorkIntensity2.SQ002.")`
+
+
+```{r eval=exechunk("EWCS36WorkIntensity2.SQ002."), fig.height=3, fig.cap=get_caption("EWCS36WorkIntensity2.SQ002.", topl=c(F,T))}
+
+###############
+# ... on Sundays
+###############
+
+df.geam %>%
+    print_barplot(EWCS36WorkIntensity2.SQ002.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC001", "EWCS36WorkIntensity2.SQ002."))}
+
+# crosstab by role 
+df.geam %>% 
+    print_xtable("EWCS36WorkIntensity2.SQ002.","WCJC001")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("EWCS36WorkIntensity2.SQ002.", "WCJC001")), fig.cap=get_caption("EWCS36WorkIntensity2.SQ002.", "WCJC001", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("WCJC001","EWCS36WorkIntensity2.SQ002.", xlangle=0, ltitle=F, legdir = "vertical", legpos = "right", lwidth=10)
+```
+
+
+\newpage
+
+
+```{r eval=var_exists(c("SDEM004.bin", "EWCS36WorkIntensity2.SQ002."))}
+
+# crosstab by gender 
+df.geam %>% 
+    print_xtable("EWCS36WorkIntensity2.SQ002.","SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("EWCS36WorkIntensity2.SQ002.", "SDEM004.bin")), fig.cap=get_caption("EWCS36WorkIntensity2.SQ002.", "SDEM004.bin", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin","EWCS36WorkIntensity2.SQ002.", legpos = "right", legdir = "vertical", ltitle=F)
+```
+
+    
+\newpage
+
+
+
+#### `r var_label("EWCS36WorkIntensity2.SQ003.")`
+
+
+```{r eval=exechunk("EWCS36WorkIntensity2.SQ003."), fig.height=3, fig.cap=get_caption("EWCS36WorkIntensity2.SQ003.", topl=c(F,T))}
+
+###############
+# ... on Saturdays
+###############
+
+df.geam %>%
+    print_barplot(EWCS36WorkIntensity2.SQ003.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC001", "EWCS36WorkIntensity2.SQ003."))}
+
+# crosstab by role 
+df.geam %>% 
+    print_xtable("EWCS36WorkIntensity2.SQ003.","WCJC001")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("EWCS36WorkIntensity2.SQ003.", "WCJC001")), fig.cap=get_caption("EWCS36WorkIntensity2.SQ003.", "WCJC001", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("WCJC001","EWCS36WorkIntensity2.SQ003.", xlangle=0, ltitle=F, legdir = "vertical", legpos = "right", lwidth=10)
+```
+
+
+\newpage
+
+
+```{r eval=var_exists(c("SDEM004.bin", "EWCS36WorkIntensity2.SQ003."))}
+
+# crosstab by gender 
+df.geam %>% 
+    print_xtable("EWCS36WorkIntensity2.SQ003.","SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("EWCS36WorkIntensity2.SQ003.", "SDEM004.bin")), fig.cap=get_caption("EWCS36WorkIntensity2.SQ003.", "SDEM004.bin", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin","EWCS36WorkIntensity2.SQ003.", legpos = "right", legdir = "vertical", ltitle=F)
+```
+
+
+\newpage
+
+
+
+
+#### `r var_label("EWCS36WorkIntensity2.SQ004.")`
+
+
+```{r eval=exechunk("EWCS36WorkIntensity2.SQ004."), fig.height=3, fig.cap=get_caption("EWCS36WorkIntensity2.SQ004.", topl=c(F,T))}
+
+###############
+# ... more than 10 hours a day
+###############
+
+df.geam %>%
+    print_barplot(EWCS36WorkIntensity2.SQ004.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC001", "EWCS36WorkIntensity2.SQ004."))}
+
+# crosstab by role 
+df.geam %>% 
+    print_xtable("EWCS36WorkIntensity2.SQ004.","WCJC001")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("EWCS36WorkIntensity2.SQ004.", "WCJC001")), fig.cap=get_caption("EWCS36WorkIntensity2.SQ004.", "WCJC001", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("WCJC001","EWCS36WorkIntensity2.SQ004.", xlangle=0, ltitle=F, legdir = "vertical", legpos = "right", lwidth = 10)
+```
+
+
+\newpage
+
+
+```{r eval=var_exists(c("SDEM004.bin", "EWCS36WorkIntensity2.SQ004."))}
+
+# crosstab by gender 
+df.geam %>% 
+    print_xtable("EWCS36WorkIntensity2.SQ004.","SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("EWCS36WorkIntensity2.SQ004.", "SDEM004.bin")), fig.cap=get_caption("EWCS36WorkIntensity2.SQ004.", "SDEM004.bin", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin","EWCS36WorkIntensity2.SQ004.", legpos = "right", legdir = "vertical", ltitle=F)
+```
+
+
+\newpage
+
+
+
+
+
+### `r var_toplabel("WorkFamConfISSP.SQ001.")`  `r if(lsVarCode) "(WorkFamConfISSP)" `
+<p>&nbsp;</p>
+
+
+```{r fig.height=5, fig.cap=get_caption("WorkFamConfISSP.SQ001.")}
+
+################################################
+# Work family conflict parent: WorkFamConfISSP
+################################################
+
+df.geam %>% 
+  select(starts_with("WorkFamConfISSP.SQ")) %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal,
+                geom.size = .4,
+                show.total = F, 
+                digits = percdigits, 
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 12))
+
+```
+
+
+\newpage
+
+
+
+#### `r var_label("WorkFamConfISSP.SQ001.")`
+
+
+```{r eval=exechunk("WorkFamConfISSP.SQ001."), fig.height=3, fig.cap=get_caption("WorkFamConfISSP.SQ001.", topl=c(F,T))}
+
+###############
+# come home from work too tired
+###############
+
+df.geam %>%
+    print_barplot(WorkFamConfISSP.SQ001.)
+
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC001", "WorkFamConfISSP.SQ001."))}
+
+# crosstab by role 
+df.geam %>% 
+    print_xtable("WorkFamConfISSP.SQ001.","WCJC001")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WorkFamConfISSP.SQ001.", "WCJC001")), fig.cap=get_caption("WorkFamConfISSP.SQ001.", "WCJC001", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("WCJC001","WorkFamConfISSP.SQ001.", xlangle=0, ltitle=F, legdir = "vertical", legpos = "right", lwidth=10)
+```
+
+
+\newpage
+
+
+```{r eval=var_exists(c("SDEM004.bin", "WorkFamConfISSP.SQ001."))}
+
+# crosstab by gender 
+df.geam %>% 
+    print_xtable("WorkFamConfISSP.SQ001.","SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WorkFamConfISSP.SQ001.", "SDEM004.bin")), fig.cap=get_caption("WorkFamConfISSP.SQ001.", "SDEM004.bin", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin","WorkFamConfISSP.SQ001.", legpos = "right", legdir = "vertical", ltitle=F, lwidth=10)
+```
+
+
+\newpage
+
+
+
+
+#### `r var_label("WorkFamConfISSP.SQ002.")`
+
+
+```{r eval=exechunk("WorkFamConfISSP.SQ002."), fig.height=3, fig.cap=get_caption("WorkFamConfISSP.SQ002.", topl=c(F,T))}
+
+###############
+# difficult to fulfill commitments personal life due to work
+###############
+
+df.geam %>%
+    print_barplot(WorkFamConfISSP.SQ002.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC001", "WorkFamConfISSP.SQ002."))}
+
+# crosstab by role 
+df.geam %>% 
+    print_xtable("WorkFamConfISSP.SQ002.","WCJC001")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WorkFamConfISSP.SQ002.", "WCJC001")), fig.cap=get_caption("WorkFamConfISSP.SQ002.", "WCJC001", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("WCJC001", "WorkFamConfISSP.SQ002.", xlangle=0, ltitle=F, legdir = "vertical", legpos = "right", lwidth=10)
+```
+
+
+\newpage
+
+
+```{r eval=var_exists(c("SDEM004.bin", "WorkFamConfISSP.SQ002."))}
+
+# crosstab by gender 
+df.geam %>% 
+    print_xtable("WorkFamConfISSP.SQ002.","SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WorkFamConfISSP.SQ002.", "SDEM004.bin")), fig.cap=get_caption("WorkFamConfISSP.SQ002.", "SDEM004.bin", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin","WorkFamConfISSP.SQ002.", legpos = "right", legdir = "vertical", ltitle=F, lwidth=10)
+```
+
+    
+\newpage
+
+
+
+#### `r var_label("WorkFamConfISSP.SQ003.")`
+
+
+```{r eval=exechunk("WorkFamConfISSP.SQ003."), fig.height=3, fig.cap=get_caption("WorkFamConfISSP.SQ003.", topl=c(F,T))}
+
+###############
+# too tired at work due to household 
+###############
+
+df.geam %>%
+    print_barplot(WorkFamConfISSP.SQ003.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC001", "WorkFamConfISSP.SQ003."))}
+
+# crosstab by role 
+df.geam %>% 
+    print_xtable("WorkFamConfISSP.SQ003.","WCJC001")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WorkFamConfISSP.SQ003.", "WCJC001")), fig.cap=get_caption("WorkFamConfISSP.SQ003.", "WCJC001", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("WCJC001","WorkFamConfISSP.SQ003.", xlangle=0, ltitle=F, legdir = "vertical", legpos = "right", lwidth=10)
+```
+
+
+\newpage
+
+
+```{r eval=var_exists(c("SDEM004.bin", "WorkFamConfISSP.SQ003."))}
+
+# crosstab by gender 
+df.geam %>% 
+    print_xtable("WorkFamConfISSP.SQ003.","SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WorkFamConfISSP.SQ003.", "SDEM004.bin")), fig.cap=get_caption("WorkFamConfISSP.SQ003.", "SDEM004.bin", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin", "WorkFamConfISSP.SQ003.", legpos = "right", legdir = "vertical", ltitle=F, lwidth=10)
+```
+
+    
+\newpage
+
+
+
+
+#### `r var_label("WorkFamConfISSP.SQ004.")`
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WorkFamConfISSP.SQ004."), fig.height=3, fig.cap=get_caption("WorkFamConfISSP.SQ004.", topl=c(F,T))}
+
+###############
+# difficult to concentrate at work due to personal committments. 
+###############
+
+df.geam %>%
+    print_barplot(WorkFamConfISSP.SQ004.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC001", "WorkFamConfISSP.SQ004."))}
+
+# crosstab by role 
+df.geam %>% 
+    print_xtable("WorkFamConfISSP.SQ004.","WCJC001")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WorkFamConfISSP.SQ004.", "WCJC001")), fig.cap=get_caption("WorkFamConfISSP.SQ004.", "WCJC001", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("WCJC001","WorkFamConfISSP.SQ004.", xlangle=0, ltitle=F, legdir = "vertical", legpos = "right", lwidth=10)
+```
+
+
+\newpage
+
+
+```{r eval=var_exists(c("SDEM004.bin", "WorkFamConfISSP.SQ004."))}
+
+# crosstab by gender 
+df.geam %>% 
+    print_xtable("WorkFamConfISSP.SQ004.","SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WorkFamConfISSP.SQ004.", "SDEM004.bin")), fig.cap=get_caption("WorkFamConfISSP.SQ004.", "SDEM004.bin", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin", "WorkFamConfISSP.SQ004.", legpos = "right", legdir = "vertical", ltitle=F, lwidth=10)
+```
+
+
+\newpage
+
+
+
+
+
+### `r var_toplabel("Covid.SQ01.")`  `r if(lsVarCode) "(Covid)" `
+<p>&nbsp;</p>
+
+
+```{r fig.height=8.5, fig.width=7, fig.cap=get_caption("Covid.SQ01.")}
+
+################################################
+# Covid 
+################################################
+df.geam %>% 
+  select(starts_with("Covid.SQ")) %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors ="Set1", 
+                show.n = F, 
+                show.total=F,
+                digits = percdigits,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 12))
+
+
+```
+
+
+
+    
+\newpage
+
+
+
+```{r eval=exechunk("Covid.SQ01."), fig.height=3, fig.cap=get_caption("Covid.SQ01.", topl=c(F,T))}
+
+###############
+# I've had more time to write academic papers
+###############
+
+df.geam %>%
+    print_barplot(Covid.SQ01.)
+
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("Covid.SQ02."), fig.height=3, fig.cap=get_caption("Covid.SQ02.", topl=c(F,T))}
+
+###############
+# Not been able to concentrate on work 
+###############
+
+df.geam %>%
+    print_barplot(Covid.SQ02.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("Covid.SQ03."), fig.height=3, fig.cap=get_caption("Covid.SQ03.", topl=c(F,T))}
+
+###############
+# I have received enough support from my family or friends
+###############
+
+df.geam %>%
+    print_barplot(Covid.SQ03.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("Covid.SQ04."), fig.height=3, fig.cap=get_caption("Covid.SQ04.", topl=c(F,T))}
+
+###############
+# Due to restrictions in relation to the COVID-19 pandemic, it has been impossible for me to conduct my research (e.g. closure
+# of laboratory, no access to study participants)
+###############
+
+df.geam %>%
+    print_barplot(Covid.SQ04.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("Covid.SQ05."), fig.height=3, fig.cap=get_caption("Covid.SQ05.", topl=c(F,T))}
+
+###############
+# My household conditions have made it hard for me to work (e.g. lack of office space, constant presence of other people)
+###############
+
+df.geam %>%
+    print_barplot(Covid.SQ05.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("Covid.SQ06."), fig.height=3, fig.cap=get_caption("Covid.SQ06.", topl=c(F,T))}
+
+###############
+# I have been overwhelmed by the switch to the online teaching
+###############
+
+df.geam %>%
+    print_barplot(Covid.SQ06.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("Covid.SQ07."), fig.height=3, fig.cap=get_caption("Covid.SQ07.", topl=c(F,T))}
+
+###############
+# Due to my caring responsibilities resulting from pandemic restrictions, I have had less time for my research
+###############
+
+df.geam %>%
+    print_barplot(Covid.SQ07.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("Covid.SQ08."), fig.height=3, fig.cap=get_caption("Covid.SQ08.", topl=c(F,T))}
+
+###############
+# My psychological wellbeing has deteriorated
+###############
+
+df.geam %>%
+    print_barplot(Covid.SQ08.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("Covid.SQ09."), fig.height=3, fig.cap=get_caption("Covid.SQ09.", topl=c(F,T))}
+
+###############
+# Promotion postponed
+###############
+
+df.geam %>%
+    print_barplot(Covid.SQ09.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("Covid.SQ10."), fig.height=3, fig.cap=get_caption("Covid.SQ10.", topl=c(F,T))}
+
+###############
+# Enough support from my institution
+###############
+
+df.geam %>%
+    print_barplot(Covid.SQ10.)
+```
+
+    
+\newpage
 
 
 

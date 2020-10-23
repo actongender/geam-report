@@ -1,28 +1,75 @@
 ## Training
 
 
-Includes question 11, 12, 13 codes: WCJC019, WCJC021, WCJC022 (txt). 
+### `r var_toplabel("WCJC019.SQ001.")`  `r if(lsVarCode) "(WCJC019)" `
+<p>&nbsp;</p>
 
-### `r varlabel("WCJC019_SQ001")`
 
-```{r opport_train, eval=varexists("WCJC019_SQ001"), fig.height=12, fig.width=8}
-data %>%
-  select(starts_with("WCJC019_SQ")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T,sort.frq = "pos.desc") + 
-  theme_light()
+```{r eval=var_exists("WCJC019.SQ001."), fig.height=4, fig.cap=get_caption("WCJC019.SQ001.")}
+
+################################################
+# opportunities for training available
+################################################
+
+df.geam %>%
+  select(starts_with("WCJC019.SQ")) %>%
+  shorten_label(maxlength = 40) %>% 
+  plot_likert(geom.colors="Set1", 
+              values="sum.outside", 
+              show.n = F, 
+              digits = percdigits, 
+              show.prc.sign=T, 
+              sort.frq = "pos.asc", 
+              geom.size = .4,
+              reverse.scale = T,
+              show.legend = F,
+              grid.range = c(1,.2),
+              wrap.labels = 50) + 
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 12))
+
+
+
 ```
+
+
+
+\newpage
+   
+
+### `r var_toplabel("WCJC021.SQ001.")`  `r if(lsVarCode) "(WCJC021)" `
 <p>&nbsp;</p>
-<p>&nbsp;</p>
 
 
-### `r varlabel("WCJC021_SQ001")`
+```{r eval=var_exists("WCJC021.SQ001."), fig.height=7, fig.width=7, fig.cap=get_caption("WCJC021.SQ001.")}
 
-```{r train_past12, eval=!is.null("WCJC021_SQ001"), fig.height=12, fig.width=8}
-data %>%
-  select(starts_with("WCJC021_SQ")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, sort.frq = "pos.desc") + 
-  theme_light()
+################################################
+# barries to access training
+################################################
+
+df.geam %>%
+    select(starts_with("WCJC021.SQ")) %>%
+    shorten_label(maxlength = 40) %>% 
+    plot_likert(geom.colors="Set1", 
+              values="sum.outside", 
+              show.n = F, 
+              show.prc.sign=T, 
+              sort.frq = "pos.asc", 
+              geom.size = .4,
+              reverse.scale = T,
+              show.legend = F,
+              digits = percdigits,
+              grid.range = c(1,.2),
+              wrap.labels = 50) + 
+  theme_light() + 
+  theme(legend.position = "bottom", 
+         axis.text.x=element_blank(),
+        axis.text = element_text(size = 12))
 ``` 
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+    
+    
+    
+\newpage
 

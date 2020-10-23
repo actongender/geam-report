@@ -1,17 +1,21 @@
-# (PART) Part - Descriptive Statistics {-}
-
-
 # Socio-demographics
 
 
-## Core demographics: age, gender, ...
+## Sample description: Socio-demographic variables
 
-### `r varlabel("SDEM001")`
 
-```{r year_born, eval=varexists("SDEM001")}
+### `r var_toplabel("SDEM001")` `r if(lsVarCode) "(SDEM001)"`
+<p>&nbsp;</p>
 
-data %>% 
-    mutate(age = SDEM001) %>% 
+
+```{r eval=var_exists("SDEM001"), fig.cap=get_caption("SDEM001")}
+
+################################################
+# Year born
+################################################
+
+df.geam %>%  
+    mutate(Born = SDEM001) %>% 
     filter(!is.na(age)) %>% 
     ggplot(aes(x=SDEM001)) + 
     geom_bar()+ 
@@ -20,243 +24,378 @@ data %>%
     theme(axis.title.x = element_blank())
 
 ```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
 
-
-### `r varlabel("SDEM004")`
-```{r gender, eval=varexists("SDEM004"), fig.align='center'}
-
-data %>% 
-    filter(!is.na(SDEM004) & hideNA) %>% 
-    ggplot(aes(x=SDEM004, fill=SDEM004)) + 
-    geom_bar(width=.5) +
-    scale_fill_brewer(palette="Set1") +
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.x = element_blank())
-```
 
 <p>&nbsp;</p>
 
-```{r gender_tab, eval=varexists("SDEM004")}
 
-print_frqtable(data$SDEM004)
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
-### `r varlabel("SDEM007")`
-```{r sex_orientation, eval=varexists("SDEM007")}
-
-data %>% 
-    filter(!is.na(SDEM007) & hideNA) %>% 
-    ggplot(aes(x=SDEM007, fill=SDEM007)) + 
-    geom_bar(width=.5) +
-    scale_fill_brewer(palette="Set1") +
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.x = element_blank())
+```{r fig.cap=get_i18n("Age")}
+df.geam %>% 
+    print_barplot(age_i10)
 ```
 
 
-
-```{r sex_orientation_tab, eval=varexists("SDEM007")}
-
-print_frqtable(data$SDEM007) 
-```
-<p>&nbsp;</p>
 <p>&nbsp;</p>
 
 
-### `r varlabel("SDEM009")`
+```{r eval=var_exists("SDEM004")}
+df.geam %>%
+  print_frqtable("age_i10", lsort.frq="none")
 
-```{r disability, eval=varexists("SDEM009")}
-
-data %>% 
-    filter(!is.na(SDEM009) & hideNA) %>% 
-    ggplot(aes(x=SDEM009, fill=SDEM009)) + 
-    geom_bar(width=.5) +
-    scale_fill_brewer(palette="Set1") +
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.x = element_blank())
-```
-
-```{r disability_tab, eval=varexists("SDEM009")}
-
-print_frqtable(data$SDEM009) 
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
-### `r varlabel("SDEM005")`
-```{r trans_history, eval=varexists("SDEM005")}
-
-data %>% 
-    filter(!is.na(SDEM005) & hideNA) %>% 
-    ggplot(aes(x=SDEM005, fill=SDEM005)) + 
-    geom_bar(width=.5) +
-    scale_fill_brewer(palette="Set1") +
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.x = element_blank())
 ```
 
 
-```{r trans_history_tab, eval=varexists("SDEM005")}
-
-print_frqtable(data$SDEM005)
-```
+\newpage
+  
+  
+  
+  
+  
+### `r var_toplabel("SDEM004")`  `r if(lsVarCode) "(SDEM004)"`
 <p>&nbsp;</p>
-<p>&nbsp;</p>
 
 
-### `r varlabel("SDEM006")`
-```{r marital_status, eval=varexists("SDEM006")}
+```{r eval=var_exists("SDEM004"), fig.cap=get_caption("SDEM004")}
 
-data %>% 
-    filter(!is.na(SDEM006) & hideNA) %>% 
-    ggplot(aes(x=SDEM006, fill=SDEM006)) + 
-    geom_bar(width=.5) + 
-    scale_fill_brewer(palette="Set1") +
-    coord_flip() + 
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.y=element_blank())
+################################################
+# Gender
+################################################
+
+df.geam %>% 
+    print_barplot(SDEM004)
 ```
 
-```{r marital_status_tab, eval=varexists("SDEM006")}
 
-print_frqtable(data$SDEM006)
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("SDEM004")}
+df.geam %>% 
+    print_frqtable("SDEM004")
 ```
+
+
+\newpage
+
+   
+   
+   
+   
+### `r var_toplabel("SDEM007")`  `r if(lsVarCode) "(SDEM007)"`
 <p>&nbsp;</p>
+ 
+  
+```{r eval=var_exists("SDEM007"), fig.cap=get_caption("SDEM007")}
+
+################################################
+# Sexual orientation 
+################################################
+
+df.geam %>% 
+    print_barplot(SDEM007, xlangle = 60, lwidth=25)
+```
+
+
 <p>&nbsp;</p>
 
 
+```{r eval=var_exists("SDEM007")}
+df.geam %>% 
+    print_frqtable("SDEM007") 
+```
+
+
+\newpage
+  
+  
+  
+  
+  
+### `r var_toplabel("SDEM009")`  `r if(lsVarCode) "(SDEM009)"`
+<p>&nbsp;</p>
+ 
+  
+```{r eval=var_exists("SDEM009"), fig.cap=get_caption("SDEM009")}
+
+################################################
+# Disability 
+################################################
+
+df.geam %>% 
+    print_barplot(SDEM009)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("SDEM009")}
+df.geam %>% 
+    print_frqtable("SDEM009") 
+```
+
+
+    
+\newpage
+  
+  
+  
+  
+  
+### `r var_toplabel("SDEM005")`  `r if(lsVarCode) "(SDEM005)"`
+<p>&nbsp;</p>
+ 
+  
+```{r eval=var_exists("SDEM005"), fig.cap=get_caption("SDEM005")}
+
+################################################
+# Trans history 
+################################################
+
+df.geam %>%  
+    print_barplot(SDEM005)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("SDEM005")}
+df.geam %>% 
+    print_frqtable("SDEM005")
+```
+
+
+     
+\newpage
+  
+  
+  
+  
+  
+### `r var_toplabel("SDEM006")`  `r if(lsVarCode) "(SDEM006)"`
+<p>&nbsp;</p>
+ 
+  
+```{r eval=var_exists("SDEM006"), fig.cap=get_caption("SDEM006")}
+
+################################################
+# Marital status 
+################################################
+
+df.geam %>%  
+    print_barplot(SDEM006, xlangle = 60, lwidth=30)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("SDEM006")}
+df.geam %>% 
+    print_frqtable("SDEM006")
+```
+
+
+\newpage
+  
+  
+  
+  
+  
 ## Nationality, citizenship, social class
-
-### `r varlabel("SDEM002")`
-```{r ethnicity, eval=varexists("SDEM002")}
-
-data %>% 
-    filter(!is.na(SDEM002) & hideNA) %>% 
-    ggplot(aes(x=SDEM002, fill=SDEM002)) + 
-    geom_bar(width=.5) +
-    scale_fill_brewer(palette="Set1") +
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.x = element_blank())
-```
-<p>&nbsp;</p>
 <p>&nbsp;</p>
 
-
-### `r varlabel("SDEM012")`
-```{r nationality, eval=varexists("SDEM012")}
-
-data %>% 
-    filter(!is.na(SDEM012) & hideNA) %>% 
-    ggplot(aes(x=SDEM012)) + 
-    geom_bar(width=.5) + 
-    coord_flip() + 
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.y=element_blank())
-```
+### `r var_toplabel("SDEM002")`  `r if(lsVarCode) "(SDEM002)"`
 <p>&nbsp;</p>
-<p>&nbsp;</p>
+ 
+  
+```{r eval=var_exists("SDEM002"), fig.cap=get_caption("SDEM002")}
 
+################################################
+# Ethnicity Mintority Group 
+################################################
 
-### `r varlabel("SDEM013")`
-```{r country_citizen, eval=varexists("SDEM013")}
-
-data %>% 
-   filter(!is.na(SDEM013) & hideNA) %>% 
-    ggplot(aes(x=SDEM013)) + 
-    geom_bar(width=.5) + 
-    coord_flip() + 
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.y=element_blank())
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
-
-### `r varlabel("SDEM016")`
-```{r high_qual, eval=varexists("SDEM016"), fig.width=10, fig.height=5}
-
-data %>% 
-    filter(!is.na(SDEM016) & hideNA) %>% 
-    ggplot(aes(x=SDEM016, fill=SDEM016)) + 
-    geom_bar(width=.5) + 
-    coord_flip() +
-    labs(y="Total count") +
-    guides(fill=F) + 
-    theme_light() +
-    theme(axis.title.y=element_blank())
+df.geam %>%  
+    print_barplot(SDEM002)
 ```
 
-```{r high_qual_tab, eval=varexists("SDEM016")}
 
-print_frqtable(data$SDEM016)
-```
-<p>&nbsp;</p>
 <p>&nbsp;</p>
 
 
-### `r varlabel("SDEM017")`
-```{r high_qual_p1, eval=varexists("SDEM017"), fig.width=10, fig.height=5}
-
-data %>% 
-    filter(!is.na(SDEM017) & hideNA) %>% 
-    ggplot(aes(x=SDEM017, fill=SDEM017)) + 
-    geom_bar(width=.5) + 
-    coord_flip() +
-    labs(y="Total count") +
-    guides(fill=F) + 
-    theme_light() +
-    theme(axis.title.y=element_blank())
+```{r eval=var_exists("SDEM002")}
+df.geam %>% 
+    print_frqtable("SDEM002")
 ```
 
-```{r high_qual_p1_tab, eval=varexists("SDEM017")}
 
-print_frqtable(data$SDEM017)
+
+\newpage
+  
+  
+  
+  
+  
+### `r var_toplabel("SDEM012")`  `r if(lsVarCode) "(SDEM012)"`
+<p>&nbsp;</p>
+Note: to keep the chart readable, only nationalities which have at least 2 responses are included. 
+  
+
+```{r, eval=var_exists("SDEM012"), fig.cap=get_caption("SDEM012")}
+
+################################################
+# Country of birth  
+################################################
+
+df.geam %>% 
+  mutate(SDEM012_minfrq = forcats::fct_lump_min(SDEM012, min=2, other_level = "Other")) %>%
+  print_barplot(SDEM012_minfrq)
 ```
+
+
 <p>&nbsp;</p>
-<p>&nbsp;</p>
 
 
-### `r varlabel("SDEM018")`
-```{r high_qual_p2, eval=varexists("SDEM018"), fig.width=10, fig.height=5}
+```{r eval=var_exists("SDEM012")}
 
-data %>% 
-    filter(!is.na(SDEM018) & hideNA) %>% 
-    ggplot(aes(x=SDEM018, fill=SDEM018)) + 
-    geom_bar(width=.5) + 
-    coord_flip() +
-    labs(y="Total count") +
-    guides(fill=F) + 
-    theme_light() +
-    theme(axis.title.y=element_blank())
+# df.geam %>%
+#   mutate(SDEM012_minfrq = forcats::fct_lump_min(SDEM012, min=1, other_level = "Other")) %>% 
+#   print_frqtable("SDEM012_minfrq")
+
+df.geam %>% 
+  print_frqtable("SDEM012", min.frq=1)
+
 ```
 
-```{r high_qual_p2_tab, eval=varexists("SDEM018")}
 
-print_frqtable(data$SDEM018) 
+\newpage
+
+
+
+
+  
+### `r var_toplabel("SDEM013")`  `r if(lsVarCode) "(SDEM013)"`
+<p>&nbsp;</p>
+Note: to keep the chart readable, only nationalities which have at least 2 responses are included. 
+
+
+```{r eval=var_exists("SDEM013"), fig.cap=get_caption("SDEM013")}
+
+################################################
+# Citizenship  
+################################################
+
+# Only include nationalities that have at least 2 responses
+
+df.geam %>% 
+  mutate(SDEM013_minfrq = forcats::fct_lump_min(SDEM013, min=2, other_level = "Other")) %>%
+  print_barplot(SDEM013_minfrq)
 ```
-<p>&nbsp;</p>
+
+
 <p>&nbsp;</p>
 
+
+```{r eval=var_exists("SDEM013")}
+
+# df.geam %>%
+#   mutate(SDEM013_minfrq = forcats::fct_lump_min(SDEM013, min=1, other_level = "Other")) %>% 
+#   print_frqtable("SDEM013_minfrq")
+
+df.geam %>% 
+  print_frqtable("SDEM013", min.frq=1)
+
+```
+
+\newpage
+  
+  
+  
+  
+  
+### `r var_toplabel("SDEM016")`  `r if(lsVarCode) "(SDEM016)"`
+<p>&nbsp;</p>
+ 
+  
+```{r eval=var_exists("SDEM016"), fig.width=7, fig.cap=get_caption("SDEM016")}
+
+################################################
+# Highest Qualification
+################################################
+
+df.geam %>%  
+    print_barplot(SDEM016, lwidth=20, xlangle=60)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("SDEM016")}
+df.geam %>% 
+    print_frqtable("SDEM016")
+```
+ 
+\newpage
+
+
+
+
+  
+### `r var_toplabel("SDEM017")`  `r if(lsVarCode) "(SDEM017)"`
+<p>&nbsp;</p>
+ 
+  
+```{r eval=var_exists("SDEM017"), fig.width=7, fig.cap=get_caption("SDEM017")}
+
+################################################
+# Highest Qualification Parent 1 
+################################################
+
+df.geam %>%  
+    print_barplot(SDEM017, lwidth=20, xlangle=60)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("SDEM017")}
+df.geam %>% 
+    print_frqtable("SDEM017")
+```
+
+
+\newpage
+  
+  
+  
+  
+  
+### `r var_toplabel("SDEM018")`  `r if(lsVarCode) "(SDEM018)"`
+<p>&nbsp;</p>
+ 
+  
+```{r eval=var_exists("SDEM018"), fig.width=7, fig.cap=get_caption("SDEM018")}
+
+################################################
+# Highest Qualification Parent 2
+################################################
+
+df.geam %>%  
+    print_barplot(SDEM018, lwidth=20, xlangle=60)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("SDEM018")}
+df.geam %>% 
+    print_frqtable("SDEM018") 
+```
+
+
+\newpage
+  

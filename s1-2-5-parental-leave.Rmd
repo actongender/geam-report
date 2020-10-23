@@ -1,149 +1,659 @@
 ## Parental Leave
 
-Includes questions 22-31, codes: WCWI011a, WCWI011b, WCWI014, WCWI015, WCWI016, WCWI017, WCWI018, WCWI020, WCWI021, WCWI023. 
+
+### `r var_toplabel("WCWI011a")`  `r if(lsVarCode) "(WCWI011a)" `
+<p>&nbsp;</p>
 
 
-### `r varlabel("WCWI011a")`
+```{r val=exechunk("WCWI011a"), fig.cap=get_caption("WCWI011a")}
 
-```{r takenparental, eval=varexists("WCWI011a") }
+################################################
+# Have you ever taken, or are you currently taking any form or parental leave? 
+################################################
 
-data %>% 
-    filter(!is.na(WCWI011a) & hideNA) %>% 
-    ggplot(aes(x=WCWI011a)) + 
-    geom_bar()+ 
-    labs(title="") +
-    theme_light() +
-    theme(axis.title.x = element_blank())
+df.geam %>%
+    print_barplot(WCWI011a)
 ```
 
-```{r takenparental_tab, eval=varexists("WCWI011a")}
-print_frqtable(data$WCWI011a) 
-```
-<p>&nbsp;</p>
+
 <p>&nbsp;</p>
 
 
-
-### `r varlabel("WCWI011b_SQ001")`
-
-```{r whichleave, eval=varexists("WCWI011b_SQ001"), fig.height=3, fig.width=10}
-data %>%
-  select(starts_with("WCWI011b_SQ0")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, cat.neutral = NULL) + 
-  theme_light()
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
-### `r varlabel("WCWI014")`
-```{r timeleave, eval=varexists("WCWI014")}
-data %>% 
-    filter(!is.na(WCWI014) & hideNA) %>% 
-    ggplot(aes(x=WCWI014)) + 
-    geom_bar()+ 
-    labs(y="Total count") +
-    theme_light() +
-    theme(axis.title.x = element_blank())
+```{r eval=exechunk("WCWI011a")}
+df.geam %>% 
+    print_frqtable("WCWI011a") 
 ```
 
-```{r timeleave_tab, eval=varexists("WCWI014")}
-print_frqtable(data$WCWI014) 
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+
+\newpage
 
 
-### `r varlabel("WCWI015")`
-```{r returnleave, eval=varexists("WCWI015"), fig.width=10}
-data %>% 
-    filter(!is.na(WCWI015) & hideNA) %>% 
-    ggplot(aes(x=WCWI015, fill=WCWI015)) + 
-    geom_bar() + 
-    scale_fill_brewer(palette="Set1") +
-    coord_flip() + 
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.y=element_blank())
+```{r eval=var_exists(c("SDEM004.bin", "WCWI011a"))}
+
+# crosstab by gender 
+df.geam %>% 
+    print_xtable("WCWI011a","SDEM004.bin")
 ```
 
-```{r returnleave_tab, eval=varexists("WCWI015")}
-print_frqtable(data$WCWI015) 
-```
-<p>&nbsp;</p>
+
 <p>&nbsp;</p>
 
 
-### `r varlabel("WCWI016_SQ001")`
-
-```{r leaveOptionsExist, eval=varexists("WCWI016_SQ001"), fig.height=8, fig.width=10}
-
-# Indicate availability of parental leave  
-
-data %>%
-  select(starts_with("WCWI016_SQ0")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
-  theme_light() 
-
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
-### `r varlabel("WCWI018_SQ001")`
-
-```{r helpfulPreparing, eval=varexists("WCWI018_SQ001"), fig.height=8, fig.width=10}
-
-# Helpfullness preparing leave
-
-data %>%
-  select(starts_with("WCWI018_SQ0")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 6, cat.neutral = NULL) + 
-  theme_light()
-
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
-
-### `r varlabel("WCWI020")`
-```{r preparedLeave, eval=varexists("WCWI020"), fig.width=10}
-
-# Most recent parental leave: preparedness
-
-data %>% 
-    filter(!is.na(WCWI020) & hideNA) %>% 
-    ggplot(aes(x=WCWI020, fill=WCWI020)) + 
-    geom_bar() + 
-    scale_fill_brewer(palette="Set1") +
-    coord_flip() + 
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.y=element_blank())
+```{r eval=var_exists(c("WCWI011a", "SDEM004.bin")), fig.cap=get_caption("WCWI011a", "SDEM004.bin", c(F,T) )}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin","WCWI011a", legpos = "right", legdir = "vertical", ltitle=F, lwidth=10)
 ```
 
-```{r preparedLeave_tab, eval=varexists("WCWI020")}
-print_frqtable(data$WCWI020)
+
+\newpage
+
+
+
+
+### `r var_toplabel("WCWI011b.SQ001.")`  `r if(lsVarCode) "(WCWI011b)" `
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI011b.SQ001."), fig.height=3, fig.cap=get_caption("WCWI011b.SQ001.")}
+
+################################################
+# Which of the following forms of leave have you taken / or are you currently taking?
+################################################
+
+df.geam %>%
+    select(starts_with("WCWI011b.SQ")) %>%
+    plot_likert(geom.colors=cpal, 
+              values="sum.outside", 
+              show.n = T, 
+              show.prc.sign=T, 
+              sort.frq = "pos.asc", 
+              geom.size = .4,
+              reverse.scale = T,
+              show.legend = F,
+              digits = percdigits,
+              grid.range = c(1,.2),
+              wrap.labels = 50) + 
+    theme_light() + 
+    theme(legend.position = "bottom", 
+          axis.text.x=element_blank(),
+          axis.text = element_text(size = 12))
+``` 
+
+
+\newpage
+
+
+
+
+### `r var_toplabel("WCWI014")`  `r if(lsVarCode) "(WCWI014)" `
+<p>&nbsp;</p>
+
+
+```{r val=exechunk("WCWI014"), fig.cap=get_caption("WCWI014") }
+
+################################################
+# Overall, how much time have you spent on any form of parental leave? 
+################################################
+
+df.geam %>%
+    print_barplot(WCWI014, xlangle = 60)
 ```
+
+
 <p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI014")}
+df.geam %>% 
+    print_frqtable("WCWI014") 
+```
+    
+\newpage
+
+
+
+
+### `r var_toplabel("WCWI015")`  `r if(lsVarCode) "(WCWI015)" `
 <p>&nbsp;</p>
 
 
+```{r val=exechunk("WCWI015"), fig.cap=get_caption("WCWI015") }
 
-### `r varlabel("WCWI021_SQ001")`
+################################################
+# How long ago did you return to work from your most recent period of parental leave? 
+################################################
 
-```{r helpfulReturn, eval=varexists("WCWI021_SQ001"), fig.height=10, fig.width=10}
+df.geam %>%
+    print_barplot(WCWI015)
+```
 
-# Helpfullness preparing return
 
-data %>%
-  select(starts_with("WCWI021_SQ0")) %>%
-  plot_likert(geom.colors="Set1", values="show", show.prc.sign=T, catcount = 4, cat.neutral = NULL) + 
-  theme_light()
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI015")}
+df.geam %>% 
+    print_frqtable("WCWI015") 
+```
+    
+\newpage
+
+
+
+
+
+### `r var_toplabel("WCWI016.SQ001.")`  `r if(lsVarCode) "(WCWI016)" `
+<p>&nbsp;</p>
+
+
+```{r fig.height=7, fig.width=8, fig.cap=get_caption("WCWI016.SQ001.")}
+
+################################################
+# Availability of options either before, during or upon your return from your most recent/current parental leave at your 
+# organization.
+################################################
+
+df.geam %>% 
+  select(starts_with("WCWI016.SQ")) %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                show.n = F,
+                show.total = F,
+                geom.size = .4,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 11))
 
 ```
+
+
+\newpage
+
+
+```{r eval=exechunk("WCWI016.SQ001."), fig.height=3, fig.cap=get_caption("WCWI016.SQ001.", topl=c(F,T))}
+
+###############
+# Keeping in touch with the institution while away
+###############
+
+df.geam %>%
+    print_barplot(WCWI016.SQ001.)
+```
+
+
 <p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI016.SQ002."), fig.height=3, fig.cap=get_caption("WCWI016.SQ002.", topl=c(F,T))}
+
+###############
+# "Agreement on flexible working-time arrangements 
+###############
+
+df.geam %>%
+    print_barplot(WCWI016.SQ002.)
+```
+
+
 <p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI016.SQ003."), fig.height=3, fig.cap=get_caption("WCWI016.SQ003.", topl=c(F,T))}
+
+###############
+# Agreement on flexible workplace arrangements 
+###############
+
+df.geam %>%
+    print_barplot(WCWI016.SQ003.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI016.SQ004."), fig.height=3, fig.cap=get_caption("WCWI016.SQ004.", topl=c(F,T))}
+
+###############
+# Agreement on temporary reduction of workload
+###############
+
+df.geam %>%
+    print_barplot(WCWI016.SQ004.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI016.SQ005."), fig.height=3, fig.cap=get_caption("WCWI016.SQ005.", topl=c(F,T))}
+
+###############
+# Childcare services at workplace
+###############
+
+df.geam %>%
+    print_barplot(WCWI016.SQ005.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI016.SQ006."), fig.height=3, fig.cap=get_caption("WCWI016.SQ006.", topl=c(F,T))}
+
+###############
+# Childcare related policies at workplace, including payments and benefits
+###############
+
+df.geam %>%
+    print_barplot(WCWI016.SQ006.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI016.SQ007."), fig.height=3, fig.cap=get_caption("WCWI016.SQ007.", topl=c(F,T))}
+
+###############
+# Compensations or extensions for existing deadlines
+###############
+
+df.geam %>%
+    print_barplot(WCWI016.SQ007.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI016.SQ008."), fig.height=3, fig.cap=get_caption("WCWI016.SQ008.", topl=c(F,T))}
+
+###############
+# Adapted criteria for evaluation in annual performance review
+###############
+
+df.geam %>%
+    print_barplot(WCWI016.SQ008.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI016.SQ009."), fig.height=3, fig.cap=get_caption("WCWI016.SQ009.", topl=c(F,T))}
+
+###############
+# Health and safety assessment
+###############
+
+df.geam %>%
+    print_barplot(WCWI016.SQ009.)
+```
+    
+\newpage
+
+
+
+
+
+### `r var_toplabel("WCWI018.SQ001.")`  `r if(lsVarCode) "(WCWI018)" `
+<p>&nbsp;</p>
+
+
+```{r fig.height=7, fig.width=8, fig.cap=get_caption("WCWI018.SQ001.")}
+
+################################################
+# Please indicate how helpful each of the following was in preparing you for your parental leave:
+################################################
+
+df.geam %>% 
+  select(starts_with("WCWI018.SQ")) %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                show.n = F,
+                show.total = F,
+                geom.size = .4,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 11))
+
+
+```
+
+
+\newpage
+
+
+```{r eval=exechunk("WCWI018.SQ001."), fig.height=3, fig.cap=get_caption("WCWI018.SQ001.", topl=c(F,T))}
+
+###############
+# Information on childcare related policies, including payments and benefits
+###############
+
+df.geam %>%
+    print_barplot(WCWI018.SQ001.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI018.SQ002."), fig.height=3, fig.cap=get_caption("WCWI018.SQ002.", topl=c(F,T))}
+
+###############
+# Facilities for continued baby feeding on return to work
+###############
+
+df.geam %>%
+    print_barplot(WCWI018.SQ002.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI018.SQ003."), fig.height=3, fig.cap=get_caption("WCWI018.SQ003.", topl=c(F,T))}
+
+###############
+# Contacts for support services
+###############
+
+df.geam %>%
+    print_barplot(WCWI018.SQ003.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI018.SQ004."), fig.height=3, fig.cap=get_caption("WCWI018.SQ004.", topl=c(F,T))}
+
+###############
+# Health and safety assessment
+###############
+
+df.geam %>%
+    print_barplot(WCWI018.SQ004.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI018.SQ005."), fig.height=3, fig.cap=get_caption("WCWI018.SQ005.", topl=c(F,T))}
+
+###############
+# Time off for hospital or doctor's appointments
+###############
+
+df.geam %>%
+    print_barplot(WCWI018.SQ005.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI018.SQ006."), fig.height=3, fig.cap=get_caption("WCWI018.SQ006.", topl=c(F,T))}
+
+###############
+# Information on how and when to notify the organization of your intentions regarding your return to work post-leave
+###############
+
+df.geam %>%
+    print_barplot(WCWI018.SQ006.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI018.SQ007."), fig.height=3, fig.cap=get_caption("WCWI018.SQ007.", topl=c(F,T))}
+
+###############
+# Workplace childcare facilities
+###############
+
+df.geam %>%
+    print_barplot(WCWI018.SQ007.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI018.SQ008."), fig.height=3, fig.cap=get_caption("WCWI018.SQ008.", topl=c(F,T))}
+
+###############
+# Information regarding leave cover
+###############
+
+df.geam %>%
+    print_barplot(WCWI018.SQ008.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI018.SQ009."), fig.height=3, fig.cap=get_caption("WCWI018.SQ009.", topl=c(F,T))}
+
+###############
+# Sufficient time for handing responsibilities over to other staff
+###############
+
+df.geam %>%
+    print_barplot(WCWI018.SQ009.)
+```
+    
+    
+\newpage
+
+
+
+
+
+
+### `r var_toplabel("WCWI020")`  `r if(lsVarCode) "(WCWI020)" `
+<p>&nbsp;</p>
+
+
+```{r val=exechunk("WCWI020"), fig.cap=get_caption("WCWI020") }
+
+################################################
+# Most recent parental leave: preparedness.  
+################################################
+
+df.geam %>%
+    print_barplot(WCWI020, xlangle = 60)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI020")}
+df.geam %>% 
+    print_frqtable("WCWI020") 
+```
+    
+    
+\newpage
+
+
+
+
+
+
+### `r var_toplabel("WCWI021.SQ001.")`  `r if(lsVarCode) "(WCWI021)" `
+<p>&nbsp;</p>
+
+
+```{r fig.height=8, fig.width=8, fig.cap=get_caption("WCWI021.SQ001.")}
+
+################################################
+# Please indicate how helpful each of the following was in facilitating your return after parental leave 
+################################################
+
+df.geam %>% 
+  select(starts_with("WCWI021.SQ")) %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                show.n = F,
+                show.total = F,
+                geom.size = .4,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 11))
+
+```
+
+
+\newpage
+
+
+```{r eval=exechunk("WCWI021.SQ001."), fig.height=3, fig.cap=get_caption("WCWI021.SQ001.", topl=c(F,T))}
+
+###############
+# Keeping in touch with the institution while away 
+###############
+
+df.geam %>%
+    print_barplot(WCWI021.SQ001.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI021.SQ002."), fig.height=3, fig.cap=get_caption("WCWI021.SQ002.", topl=c(F,T))}
+
+###############
+# Agreement on flexible working-time arrangements 
+###############
+
+df.geam %>%
+    print_barplot(WCWI021.SQ002.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI021.SQ003."), fig.height=3, fig.cap=get_caption("WCWI021.SQ003.", topl=c(F,T))}
+
+###############
+# Agreement on flexible workplace arrangements
+###############
+
+df.geam %>%
+    print_barplot(WCWI021.SQ003.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI021.SQ004."), fig.height=3, fig.cap=get_caption("WCWI021.SQ004.", topl=c(F,T))}
+
+###############
+# Agreement on temporary reduction of workload related to specific tasks
+###############
+
+df.geam %>%
+    print_barplot(WCWI021.SQ004.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI021.SQ005."), fig.height=3, fig.cap=get_caption("WCWI021.SQ005.", topl=c(F,T))}
+
+###############
+# Childcare services at workplace
+###############
+
+df.geam %>%
+    print_barplot(WCWI021.SQ005.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI021.SQ006."), fig.height=3, fig.cap=get_caption("WCWI021.SQ006.", topl=c(F,T))}
+
+###############
+# Childcare related policies at workplace, including payments and benefits
+###############
+
+df.geam %>%
+    print_barplot(WCWI021.SQ006.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI021.SQ007."), fig.height=3, fig.cap=get_caption("WCWI021.SQ007.", topl=c(F,T))}
+
+###############
+# Compensations or extensions for existing deadlines
+###############
+
+df.geam %>%
+    print_barplot(WCWI021.SQ007.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI021.SQ008."), fig.height=3, fig.cap=get_caption("WCWI021.SQ008.", topl=c(F,T))}
+
+###############
+# Adapted criteria for evaluation in annual performance review
+###############
+
+df.geam %>%
+    print_barplot(WCWI021.SQ008.)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=exechunk("WCWI021.SQ009."), fig.height=3, fig.cap=get_caption("WCWI021.SQ009.", topl=c(F,T))}
+
+###############
+# Health and safety assessment
+###############
+
+df.geam %>%
+    print_barplot(WCWI021.SQ009.)
+```
+    
+    
+\newpage

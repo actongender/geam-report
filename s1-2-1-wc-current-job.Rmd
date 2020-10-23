@@ -2,218 +2,452 @@
 
 ## About your current job
 
-Includes questions 2-8, codes: WCJC001, WCJC003, WCJC004, WCJC005, WCJ005a, WCJC010, WCJC011. 
 
-
-### `r varlabel("WCJC001")`
-
-```{r your_position, eval=varexists("WCJC001") }
-data %>% 
-    filter(!is.na(WCJC001) & hideNA) %>% 
-    ggplot(aes(x=WCJC001, fill=WCJC001)) + 
-    geom_bar()+ 
-    scale_fill_brewer(palette="Set1") +
-    guides(fill=F) +
-    labs(y="Total count") +
-    theme_light() +
-    theme(axis.title.x = element_blank())
-```
-
-
-```{r your_position_tab, eval=varexists("WCJC001")}
-
-print_frqtable(data$WCJC001) 
-```
-<p>&nbsp;</p>
+### `r var_toplabel("WCJC001")`  `r if(lsVarCode) "(WCJC001)" `
 <p>&nbsp;</p>
 
 
-### `r varlabel("WCJC003")`
+```{r eval=var_exists("WCJC001"), fig.cap=get_caption("WCJC001") }
 
-```{r academic_field, eval=varexists("WCJC003"), fig.width=10, fig.height=10}
-data %>% 
-    filter(!is.na(WCJC003) & hideNA) %>% 
-    ggplot(aes(x=WCJC003, fill=WCJC003)) + 
-    geom_bar() + 
-    coord_flip() + 
-    scale_fill_brewer(palette="Set1") +
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.y=element_blank())
+################################################
+# your postition
+################################################
+
+df.geam %>% 
+    print_barplot(WCJC001, lwidth=20)
 ```
 
-```{r academic_field_tab, eval=varexists("WCJC003")}
 
-print_frqtable(data$WCJC003) 
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-### `r varlabel("WCJC003PL")`
-
-```{r academic_field_PL, eval=varexists("WCJC003PL"), fig.width=10, fig.height=10}
-data %>% 
-    filter(!is.na(WCJC003PL) & hideNA) %>% 
-    ggplot(aes(x=WCJC003PL, fill=WCJC003PL)) + 
-    geom_bar() + 
-    coord_flip() + 
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.y=element_blank())
-```
-
-```{r academic_field_tab_PL, eval=varexists("WCJC003PL")}
-
-print_frqtable(data$WCJC003PL) 
-```
-<p>&nbsp;</p>
 <p>&nbsp;</p>
 
 
-### `r varlabel("WCJC004")`
-```{r your_post, eval=varexists("WCJC004"), fig.width=8, fig.height=4}
-data %>% 
-    filter(!is.na(WCJC004) & hideNA) %>% 
-    ggplot(aes(x=WCJC004, fill=WCJC004)) + 
-    geom_bar() + 
-    coord_flip() + 
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.y=element_blank())
+```{r eval=var_exists("WCJC001")}
+df.geam %>% 
+    print_frqtable("WCJC001") 
 ```
 
-```{r your_post_tab, eval=varexists(data$WCJC004)}
-print_frqtable("WCJC004")
-```
-<p>&nbsp;</p>
+
 <p>&nbsp;</p>
 
 
-### `r varlabel("WCJC005")`
-
-```{r net_salary, eval=varexists("WCJC005")}
-data %>% 
-    filter(!is.na(WCJC005)) %>% 
-    ggplot(aes(x=WCJC005)) + 
-    geom_bar()+ 
-    labs(y="Total count") +
-    theme_light() +
-    theme(axis.title.x = element_blank())
+```{r eval=var_exists(c("WCJC001", "SDEM004.bin")), fig.cap=get_caption("WCJC001", "SDEM004.bin")}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin", "WCJC001", legpos = "right", legdir = "vertical", ltitle=F, lwidth = 10)
 
 ```
-
-```{r net_salary_tab, eval=varexists("WCJC005")}
-summary(data$WCJC005)
-#print_frqtable(data$WCJC005) 
-```
-<p>&nbsp;</p>
+    
+    
 <p>&nbsp;</p>
 
 
-### `r varlabel("WCJ005a")`
+```{r eval=var_exists(c("WCJC001", "SDEM004.bin"))}
+df.geam %>% 
+    print_xtable("WCJC001", "SDEM004.bin")
 
-```{r bonus, eval=varexists("WCJ005a") }
-data %>% 
-    filter(!is.na(WCJ005a) & hideNA) %>% 
-    ggplot(aes(x=WCJ005a, fill=WCJ005a)) + 
-    geom_bar()+ 
-    scale_fill_brewer(palette="Set1") +
-    guides(fill=F) +
-    labs(y="Total count") +
-    theme_light() +
-    theme(axis.title.x = element_blank())
-```
+```    
+\newpage
+  
 
-```{r bonus_tab, eval=varexists("WCJ005a")}
-print_frqtable(data$WCJ005a) 
-```
-<p>&nbsp;</p>
+
+
+### `r var_toplabel("WCJC003")`  `r if(lsVarCode) "(WCJC003)" `
 <p>&nbsp;</p>
 
 
-### `r varlabel("WCJC008")`
+```{r eval=var_exists("WCJC003"), fig.width=10, fig.height=10, , fig.cap=get_caption("WCJC003")}
 
-```{r years_employed, eval=varexists("WCJC008")}
-data %>% 
-    filter(!is.na(WCJC008) & hideNA) %>% 
-    ggplot(aes(x=WCJC008,)) + 
-    geom_bar()+ 
-    coord_flip() + 
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.y=element_blank())
+################################################
+# academic field
+################################################
+
+df.geam %>% 
+    print_barplot(WCJC003, lwidth=20)
 ```
-
-```{r years_employed_tab, eval=varexists("WCJC008")}
-print_frqtable(data$WCJC008) 
-```
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+  
+    
+\newpage
 
 
 
-### `r varlabel("WCJC010")`
-
-```{r fullpart_time, eval=varexists("WCJC010") }
-data %>% 
-    filter(!is.na(WCJC010) & hideNA) %>% 
-    ggplot(aes(x=WCJC010)) + 
-    geom_bar()+ 
-    labs(y="Total count") +
-    theme_light() +
-    theme(axis.title.x = element_blank())
-```
-
-```{r fullpart_time_tab, eval=varexists("WCJC010")}
-print_frqtable(data$WCJC010) 
-```
-<p>&nbsp;</p>
+  
+### `r var_toplabel("WCJC003PL")`  `r if(lsVarCode) "(WCJC003PL)" `
 <p>&nbsp;</p>
 
 
+```{r eval=var_exists("WCJC003PL")}
 
-### `r varlabel("WCJC011")`
+################################################
+# academic field PL
+################################################
 
-```{r temp_fixed, eval=varexists("WCJC011") }
-data %>% 
-    filter(!is.na(WCJC011) & hideNA) %>% 
-    ggplot(aes(x=WCJC011)) + 
-    geom_bar()+ 
-    labs(y="Total count") +
-    theme_light() +
-    theme(axis.title.x = element_blank())
+# df.geam %>% 
+#     print_barplot(WCJC003PL, turn90=T, labelwidth = 30)
+
 ```
 
-```{r temp_fixed_tab, eval=varexists("WCJC011")}
-print_frqtable(data$WCJC011)
-```
-<p>&nbsp;</p>
+
 <p>&nbsp;</p>
 
 
-### `r varlabel("G01Q82")`
-
-```{r employ_unit, eval=varexists("G01Q82") }
-data %>% 
-    filter(!is.na(G01Q82) & hideNA) %>% 
-    ggplot(aes(x=G01Q82, fill=G01Q82)) + 
-    geom_bar() + 
-    coord_flip() + 
-    labs(y="Total count") +
-    guides(fill=F) +
-    theme_light() +
-    theme(axis.title.y=element_blank())
+```{r eval=var_exists("WCJC003PL")}
+df.geam %>% 
+    print_frqtable("WCJC003PL") 
 ```
 
-```{r employ_unit_tab, eval=varexists("G01Q82")}
-print_frqtable(data$G01Q82)
-```
-<p>&nbsp;</p>
+
+\newpage
+
+
+
+  
+### `r var_toplabel("WCJC004")`  `r if(lsVarCode) "(WCJC004)" `
 <p>&nbsp;</p>
 
 
+```{r eval=var_exists("WCJC004"), fig.height=7, fig.cap=get_caption("WCJC004")}
 
+################################################
+# your post
+################################################
+
+# df.geam %>%
+#     print_barplot(WCJC004, lwidth = 20, coords90=T)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("WCJC004")}
+df.geam %>% 
+    print_frqtable("WCJC004")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC004", "SDEM004.bin")), fig.cap=get_caption("WCJC004", "SDEM004.bin")}
+# df.geam %>% 
+#   print_xbarplot("WCJC004", "SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC004", "SDEM004.bin"))}
+df.geam %>% 
+    print_xtable("WCJC004", "SDEM004.bin")
+```
+
+
+\newpage
+
+
+
+
+
+### `r var_toplabel("manager")`  `r if(lsVarCode) "(manager)" `
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("manager"), fig.cap=get_caption("manager")}
+
+################################################
+# Leadership function 
+################################################
+
+df.geam %>%
+    print_barplot(manager)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("manager")}
+df.geam %>% 
+    print_frqtable("manager")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("manager", "SDEM004.bin")), fig.cap=get_caption("manager", "SDEM004.bin")}
+df.geam %>%
+  print_xbarplot("SDEM004.bin", "manager", legpos = "right", legdir = "vertical", ltitle=F)
+```
+   
+   
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("manager", "SDEM004.bin"))}
+df.geam %>% 
+    print_xtable("manager", "SDEM004.bin")
+```
+   
+    
+\newpage  
+
+
+
+
+
+### `r var_toplabel("WCJC005")`  `r if(lsVarCode) "(WCJC005)" `
+<p>&nbsp;</p>
+
+
+```{r}
+summary(df.geam$WCJC005)
+```
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("WCJC005_i1000"), fig.cap=get_caption("WCJC005")}
+
+################################################
+# net salary 
+################################################
+
+df.geam %>% 
+  print_barplot(WCJC005_i1000, xlangle=60)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("WCJC005_i1000")}
+df.geam %>% 
+  print_frqtable("WCJC005_i1000", lsort.frq="none") 
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC005_i1000", "SDEM004.bin"))}
+# df.geam %>% 
+#   print_xbarplot("WCJC005_i1000", "SDEM004.bin")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC005_i1000", "SDEM004.bin"))}
+df.geam %>% 
+    print_xtable("WCJC005_i1000", "SDEM004.bin")
+```
+
+
+  
+\newpage
+
+
+
+
+
+  
+### `r var_toplabel("WCJ005a")`  `r if(lsVarCode) "(WCJ005a)" `
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("WCJ005a"), fig.cap=get_caption("WCJ005a")}
+
+################################################
+# Received a bonus
+################################################
+
+df.geam %>%
+    print_barplot(WCJ005a)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("WCJ005a")}
+df.geam %>% 
+    print_frqtable("WCJ005a") 
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJ005a", "SDEM004.bin")), fig.cap=get_caption("WCJ005a", "SDEM004.bin")}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin", "WCJ005a", legpos = "right", legdir = "vertical", ltitle=F)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJ005a", "SDEM004.bin"))}
+df.geam %>% 
+    print_xtable("WCJ005a", "SDEM004.bin")
+```
+
+    
+\newpage
+  
+  
+  
+  
+
+### `r var_toplabel("WCJC008")`  `r if(lsVarCode) "(WCJC008)" `
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("WCJC008"), fig.cap=get_caption("WCJC008")}
+
+################################################
+# Years employed
+################################################
+
+df.geam %>% 
+    print_barplot(WCJC008, xlangle = 60)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("WCJC008")}
+df.geam %>% 
+    print_frqtable("WCJC008") 
+```
+
+
+\newpage
+
+
+
+  
+### `r var_toplabel("WCJC010")`  `r if(lsVarCode) "(WCJC010)" `
+<p>&nbsp;</p>
+
+
+```{r val=var_exists("WCJC010"),fig.cap=get_caption("WCJC010") }
+
+################################################
+# Full or part time 
+################################################
+
+df.geam %>%
+    print_barplot(WCJC010)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("WCJC010")}
+df.geam %>% 
+    print_frqtable("WCJC010") 
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC010", "SDEM004.bin")), fig.cap=get_caption("WCJC010", "SDEM004.bin")}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin", "WCJC010", legpos = "right", legdir = "vertical", ltitle=F)
+```
+  
+  
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC010", "SDEM004.bin"))}
+df.geam %>% 
+    print_xtable("WCJC010", "SDEM004.bin")
+```
+
+
+\newpage
+  
+  
+  
+  
+  
+### `r var_toplabel("WCJC011")` `r if(lsVarCode) "(WCJC011)" `
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("WCJC011"), fig.cap=get_caption("WCJC011")}
+
+################################################
+# Type of contract: part time or fixed
+################################################
+
+df.geam %>% 
+    print_barplot(WCJC011)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("WCJC011")}
+df.geam %>% 
+    print_frqtable("WCJC011")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC011", "SDEM004.bin")), fig.cap=get_caption("WCJC011", "SDEM004.bin")}
+df.geam %>% 
+  print_xbarplot("SDEM004.bin","WCJC011", legpos = "right", legdir = "vertical", ltitle=F)
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists(c("WCJC011", "SDEM004.bin"))}
+df.geam %>% 
+    print_xtable("WCJC011", "SDEM004.bin")
+```
+
+
+
+\newpage
+
+
+
+
+
+### `r var_toplabel("G01Q82")`  `r if(lsVarCode) "(G01Q82)" `
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("G01Q82") }
+
+################################################
+# Unit employed
+################################################
+
+# df.geam %>% 
+#     print_barplot(G01Q82, coords90 =T, lwidth = 15) 
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("G01Q82")}
+df.geam %>% 
+    print_frqtable("G01Q82")
+```
+  
+\newpage
+  
