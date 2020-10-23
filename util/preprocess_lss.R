@@ -43,7 +43,7 @@ csvraw.read.path <- paste0("data-raw/survey_", lsid ,"_R_data_file.csv")
 
 # Indicate language version for labels. Assumes that 
 # this language version is available in the *.lss file. 
-lsLangCode <- "pl"
+lsLangCode <- "en"
 
 # remove timing meta-info columns? 
 rmtiming = TRUE
@@ -104,6 +104,10 @@ if (file.exists(csvgpg.read.path)){
     df.geam = lsExportResponses(lsid, completionStatus = "all", headingType = "code", responseType="short", lang=lsLangCode)
     
     lsReleaseSessionKey()
+    
+    if (exists("df.geam") & !is.null(df.geam)){
+        message("Data downloaded OK!")
+    }
 }
 
 
@@ -233,8 +237,8 @@ tryCatch({
     write_gpg(df.geam, file=dfgpg.save.path, receiver=gpg.receiver)        
 },
 error = function(e){
-    message("No valid gpg encryption receiver provided. Data frame will be written without encryption.")
-    save(df.geam, df.save.path)
+    message("No valid gpg encryption receiver provided. \nData frame will be written without encryption to ", df.save.path)
+    save(df.geam, file=df.save.path)
 })
 
 
