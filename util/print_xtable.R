@@ -12,6 +12,11 @@ print_xtable <- function(data,
                          fsize=11,
                          tcap = "", ...){
     
+    if (nlevels(data[[var1]]) <= 1 | nlevels(data[[var2]]) <=1){
+        warning("cross-tab for variables with less than 2 levels.")
+        return(NULL)
+    }
+    
 
     # get auto numbering of tables 
     caption_auto <- officer::run_autonum(seq_id = "tab", 
