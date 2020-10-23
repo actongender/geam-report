@@ -1136,7 +1136,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r fig.height=8.5, fig.width=7, fig.cap=get_caption("Covid.SQ01.")}
+```{r eval=exechunk("Covid.SQ01."), fig.height=8.5, fig.width=7, fig.cap=get_caption("Covid.SQ01.")}
 
 ################################################
 # Covid 
