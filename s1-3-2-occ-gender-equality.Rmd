@@ -1231,7 +1231,7 @@ df.geam %>%
 ### `r var_toplabel("r59q0.SQ001.")`  `r if(lsVarCode) "(r59q0)" `
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-```{r eval=var_exits("r59q0.SQ001."), fig.cap=get_caption("r59q0.SQ001.")}
+```{r eval=var_exists("r59q0.SQ001."), fig.cap=get_caption("r59q0.SQ001.")}
 
 ################################################
 # In your opinion which of the following barriers affect the implementation of gender equality in your organisation? 

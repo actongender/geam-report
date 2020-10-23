@@ -92,7 +92,7 @@ df.geam %>%
 ################################################
 
 df.geam %>% 
-    print_barplot(SDEM007, xlangle = 60, lwidth=25)
+    print_barplot(SDEM007, xlangle = 0, lwidth=10)
 ```
 
 
@@ -184,7 +184,7 @@ df.geam %>%
 ################################################
 
 df.geam %>%  
-    print_barplot(SDEM006, xlangle = 60, lwidth=30)
+    print_barplot(SDEM006, xlangle = 0, lwidth=15)
 ```
 
 

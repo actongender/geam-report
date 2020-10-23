@@ -8,7 +8,7 @@ library(visdat)
 ## Data types 
 
 ```{r fig.height=6, fig.width=10}
-vis_dat(data)
+vis_dat(df.geam)
 ```
 <p>&nbsp;</p>
 <p>&nbsp;</p>
@@ -17,26 +17,25 @@ vis_dat(data)
 ## Missing values
 
 ```{r fig.height=6, fig.width=10}
-vis_miss(data)
+vis_miss(df.geam)
 ```
 
 
 ```{r fig.height=8, fig.width=15}
-vis_miss(data[,1:60])
+vis_miss(df.geam[,1:60])
 ```
 
 ```{r fig.height=8, fig.width=15}
-vis_miss(data[,61:120])
+vis_miss(df.geam[,61:120])
 ```
 
 ```{r fig.height=8, fig.width=15}
-vis_miss(data[,121:180])
+vis_miss(df.geam[,121:180])
 ```
 
 ```{r fig.height=8, fig.width=15}
-vis_miss(data[,181:260])
+vis_miss(df.geam[,181:260])
 ```
-
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
