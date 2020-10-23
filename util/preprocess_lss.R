@@ -1,10 +1,24 @@
 library(dplyr)
 library(readr)
 library(purrr)
+library(forcats)
+library(gpg)
+
+
+# LimeRLabel can be installed from Github: 
+#  
+# library(remotes)
+# remotes::install_github("jmueller17/LimeRLabel")
+library(LimeRLabel)
+
+
+# For direct download vie LimeSurvey Remote Api, install LimeRick
+# 
+# library(remotes)
+# remotes::install_github("k127/LimeRick")
 library(LimeRick)
 library(httr)
-library(LimeRLabel)
-library(forcats)
+
 
 
 # 1. Setup global variables 
@@ -20,7 +34,6 @@ gpg.receiver <- c("")
 lss.read.path <- paste0("data-raw/limesurvey_survey_",lsid,".lss") 
 
 # csv manually downloaded 
-csvraw.read.path <- NULL #paste0("~/Downloads/surveys/survey_", lsid ,"_R_data_file.csv")
 csvraw.read.path <- paste0("data-raw/survey_", lsid ,"_R_data_file.csv") 
 
 

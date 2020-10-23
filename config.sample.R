@@ -4,6 +4,8 @@
 #' in addition, the graphics and tables can be modified individually directly by 
 #' modifying the corresponding code sections. 
 #' 
+#' Rename this file to config.R and insert the survey ID below. 
+#' 
 #' 
 #' 
 #' ################## 
