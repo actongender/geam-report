@@ -12,7 +12,7 @@ print_xtable <- function(data,
                          fsize=11,
                          tcap = "", ...){
     
-    if (nlevels(data[[var1]]) <= 1 | nlevels(data[[var2]]) <=1){
+    if (nlevels(data[[var1]]) <= 2 | nlevels(data[[var2]]) <=2){
         warning("cross-tab for variables with less than 2 levels.")
         return(NULL)
     }
