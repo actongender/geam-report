@@ -11,12 +11,7 @@ print_xtable <- function(data,
                          var2, 
                          fsize=11,
                          tcap = "", ...){
-    
-    if (nlevels(data[[var1]]) <= 2 | nlevels(data[[var2]]) <=2){
-        warning("cross-tab for variables with less than 2 levels.")
-        return(NULL)
-    }
-    
+
 
     # get auto numbering of tables 
     caption_auto <- officer::run_autonum(seq_id = "tab", 
@@ -56,8 +51,15 @@ print_xtable <- function(data,
         xtp_c <- round(prop.table(xt, 2), 3)
         
         # chqui squared 
-        cst <- chisq.test(data[[var1]], data[[var2]])
+        cst <- tryCatch({
+            chisq.test(data[[var1]], data[[var2]])            
+        }, 
+        error = function(e){
+            cst <- data.frame(statistic=NA, p.value=NA, parameter=NA)
+            return(cst)
+        }) 
         
+        #fisher test
         fpval <- tryCatch({
                 fst <- fisher.test(data[[var1]], data[[var2]])
                 round(fst$p.value, 3)
