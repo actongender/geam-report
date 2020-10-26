@@ -36,7 +36,7 @@ or an interactive, web-based format:
 
 
 ```
-bookdown::render_book("index.Rmd", "bookdown::word_gitbook")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
 ```
 
 <p>&nbsp;</p>
