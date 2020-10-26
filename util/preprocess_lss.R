@@ -151,23 +151,28 @@ isofrom <- df.geam %>%
     distinct() %>% 
     pull()
 
-# need the question id for SDEM012 and SDEM013 from qlabels in order to retrieve corresponding 
-# answer labels. 
-id12 <- qlabels %>% 
-    filter(qcode == "SDEM012" | qcode == "SDEM013") %>% 
-    distinct(qid) %>% 
-    pull(qid)
 
-# retrieve the mapping for answer codes between languages. This constructs one map per
-# available language. For example, if the target language is "en" and submissions exist in 
-# "pl", "es", then there will be two mappings: "pl->en" and "es->en". 
-mcs1 <- bind_rows(lapply(isofrom, map_iso3166, lsLangCode, alabels, id12[1]))
-df.geam$SDEM012 <- purrr::map2_chr(df.geam$SDEM012, df.geam$startlanguage, convert_iso3166, mcs1)
+# if there are no other languages, skip this step. 
+if (length(isofrom) > 0){
 
+    # need the question id for SDEM012 and SDEM013 from qlabels in order to retrieve corresponding 
+    # answer labels. 
+    id12 <- qlabels %>% 
+        filter(qcode == "SDEM012" | qcode == "SDEM013") %>% 
+        distinct(qid) %>% 
+        pull(qid)
+    
+    # retrieve the mapping for answer codes between languages. This constructs one map per
+    # available language. For example, if the target language is "en" and submissions exist in 
+    # "pl", "es", then there will be two mappings: "pl->en" and "es->en". 
+    mcs1 <- bind_rows(lapply(isofrom, map_iso3166, lsLangCode, alabels, id12[1]))
+    df.geam$SDEM012 <- purrr::map2_chr(df.geam$SDEM012, df.geam$startlanguage, convert_iso3166, mcs1)
+    
+    
+    mcs2 <- bind_rows(lapply(isofrom, map_iso3166, lsLangCode, alabels, id12[2]))
+    df.geam$SDEM013 <- purrr::map2_chr(df.geam$SDEM013, df.geam$startlanguage, convert_iso3166, mcs2)
 
-mcs2 <- bind_rows(lapply(isofrom, map_iso3166, lsLangCode, alabels, id12[2]))
-df.geam$SDEM013 <- purrr::map2_chr(df.geam$SDEM013, df.geam$startlanguage, convert_iso3166, mcs2)
-
+}
 
 # 3.2. Assign corrected labels to data frame 
 df.geam <- set_question_labels(df.geam, qlabels, lsLangCode)
