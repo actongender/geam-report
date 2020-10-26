@@ -79,7 +79,7 @@ df.geam %>%
 
 ```{r eval=var_exists(c("WCJC014", "SDEM004.bin")), fig.cap=get_caption("WCJC014", "SDEM004.bin")}
 df.geam %>% 
-  print_xbarplot("SDEM004.bin","WCJC013", legpos = "right", legdir = "vertical", ltitle=F, lwidth=15)
+  print_xbarplot("SDEM004.bin","WCJC014", legpos = "right", legdir = "vertical", ltitle=F, lwidth=15)
 ```
 
 
