@@ -141,6 +141,34 @@ alabels <- alabels %>%
 
 
 
+# Replace VarOrgType.shown with selected default answer 
+#
+if ("VarOrgType" %in% names(df.geam)){
+    
+    
+    # Retrieve question id 
+    votid <- qlabels %>% 
+        filter(qcode == "VarOrgType") %>% 
+        select(qid) %>%
+        distinct() %>% 
+        pull()
+    
+    # retrieve default answer code 
+    votacode <- unique(df.geam$VarOrgType)
+    
+    # retrieve corresponding default label 
+    votlab <- alabels %>% 
+        filter(qid == votid & lang == lsLangCode & acode == votacode) %>% 
+        select(atxt) %>% 
+        pull()
+    
+    # replace in question and subquestion labels
+    qlabels$qtxt <- stringr::str_replace_all(qlabels$qtxt, "\\{VarOrgType.shown\\}", votlab)
+    qlabels$subqtxt <- stringr::str_replace_all(qlabels$subqtxt, "\\{VarOrgType.shown\\}", votlab)
+    
+}
+
+
 
 # convert nationality answer codes for variable SDEM012, SDEM013
 # in how many different languages have respondents submitted data, other than the 
