@@ -5,7 +5,7 @@
 <p>&nbsp;</p>
 
 
-```{r_eval=exechunk("WCWI011a"), fig.cap=get_caption("WCWI011a")}
+```{r eval=exechunk("WCWI011a"), fig.cap=get_caption("WCWI011a")}
 
 ################################################
 # Have you ever taken, or are you currently taking any form or parental leave? 
@@ -90,7 +90,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r_eval=exechunk("WCWI014"), fig.cap=get_caption("WCWI014") }
+```{r eval=exechunk("WCWI014"), fig.cap=get_caption("WCWI014") }
 
 ################################################
 # Overall, how much time have you spent on any form of parental leave? 
@@ -118,7 +118,7 @@ df.geam %>%
 <p>&nbsp;</p>
 
 
-```{r_eval=exechunk("WCWI015"), fig.cap=get_caption("WCWI015") }
+```{r eval=exechunk("WCWI015"), fig.cap=get_caption("WCWI015") }
 
 ################################################
 # How long ago did you return to work from your most recent period of parental leave? 

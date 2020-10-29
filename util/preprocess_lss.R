@@ -2,6 +2,7 @@ library(dplyr)
 library(readr)
 library(purrr)
 library(forcats)
+library(sjlabelled)
 library(gpg)
 
 
@@ -48,6 +49,9 @@ lsLangCode <- "en"
 # remove timing meta-info columns? 
 rmtiming = TRUE
 
+# export SPSS file
+exportspss = FALSE
+
 
 
 # Set some internal paths. No need to change anything.  
@@ -62,7 +66,9 @@ dfgpg.save.path <- paste0("data/df.", lsid, ".", lsLangCode, ".rdata.gpg")
 
 # save R data frame without encryption 
 df.save.path <- paste0("data/df.", lsid, ".", lsLangCode, ".rdata")
- 
+
+# export R data frame as SPSS file 
+df.save.spss.path <- paste0("data/df.", lsid, ".", lsLangCode, ".sav")
 
 
 
@@ -154,7 +160,11 @@ if ("VarOrgType" %in% names(df.geam)){
         pull()
     
     # retrieve default answer code 
-    votacode <- unique(df.geam$VarOrgType)
+    votacode <- df.geam %>%
+        filter(!is.na(VarOrgType)) %>% 
+        select(VarOrgType) %>% 
+        distinct() %>% 
+        pull()
     
     # retrieve corresponding default label 
     votlab <- alabels %>% 
@@ -273,6 +283,12 @@ error = function(e){
     message("No valid gpg encryption receiver provided. \nData frame will be written without encryption to ", df.save.path)
     save(df.geam, file=df.save.path)
 })
+
+
+
+if (exportspss){
+    sjlabelled::write_spss(df.geam, df.save.spss.path)    
+}
 
 
 
