@@ -262,7 +262,7 @@ df.geam$age_i10 <- cut(df.geam$age, c(seq(0,80,by=10),130))
 # make net salary discrete in steps of 1000
 maxsalary <- max(df.geam$WCJC005, na.rm=T)
 salarysteps <- 1000
-df.geam$WCJC005_i1000 <- cut(df.geam$WCJC005, breaks=c(seq(0,maxsalary, by=salarysteps), (maxsalary+salarysteps)), dig.lab=5)
+df.geam$WCJC005_i1000 <- cut(df.geam$WCJC005, breaks=c(seq(0,10000, by=salarysteps), (maxsalary+1)), dig.lab=5)
 
 
 
