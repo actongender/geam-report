@@ -61,10 +61,19 @@ df.geam %>%
 ################################################
 
 df.geam %>% 
-    print_barplot(WCJC003, lwidth=20)
+    print_barplot(WCJC003, lwidth=20, xlangle = 60)
 ```
   
-    
+
+<p>&nbsp;</p>
+
+
+```{r eval=var_exists("WCJC003")}
+df.geam %>% 
+    print_frqtable("WCJC003", min.frq=1) 
+```
+
+  
 \newpage
 
 
@@ -91,7 +100,7 @@ df.geam %>%
 
 ```{r eval=var_exists("WCJC003PL")}
 df.geam %>% 
-    print_frqtable("WCJC003PL") 
+    print_frqtable("WCJC003PL", min.frq=1) 
 ```
 
 

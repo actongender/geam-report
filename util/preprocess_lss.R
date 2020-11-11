@@ -49,8 +49,8 @@ lsLangCode <- "en"
 # remove timing meta-info columns? 
 rmtiming = TRUE
 
-# export SPSS file
-exportspss = FALSE
+# export SPSS file. 
+export2spss = FALSE
 
 
 
@@ -166,6 +166,11 @@ if ("VarOrgType" %in% names(df.geam)){
         distinct() %>% 
         pull()
     
+    # if code is default placeholder-check-de, switch to "institution"
+    if (votacode == "A8") {
+        votacode <- "A2"
+    }
+    
     # retrieve corresponding default label 
     votlab <- alabels %>% 
         filter(qid == votid & lang == lsLangCode & acode == votacode) %>% 
@@ -256,7 +261,10 @@ df.geam$age_i10 <- cut(df.geam$age, c(seq(0,80,by=10),130))
 
 # make net salary discrete in steps of 1000
 maxsalary <- max(df.geam$WCJC005, na.rm=T)
-df.geam$WCJC005_i1000 <- cut(df.geam$WCJC005, breaks=c(seq(0,10000, by=1000), maxsalary), dig.lab=5)
+salarysteps <- 1000
+df.geam$WCJC005_i1000 <- cut(df.geam$WCJC005, breaks=c(seq(0,maxsalary, by=salarysteps), (maxsalary+salarysteps)), dig.lab=5)
+
+
 
 
 # make binary gender variable.
@@ -286,7 +294,7 @@ error = function(e){
 
 
 
-if (exportspss){
+if (export2spss){
     sjlabelled::write_spss(df.geam, df.save.spss.path)    
 }
 
