@@ -208,12 +208,15 @@ if (length(isofrom) > 0){
     # retrieve the mapping for answer codes between languages. This constructs one map per
     # available language. For example, if the target language is "en" and submissions exist in 
     # "pl", "es", then there will be two mappings: "pl->en" and "es->en". 
-    mcs1 <- bind_rows(lapply(isofrom, map_iso3166, lsLangCode, alabels, id12[1]))
-    df.geam$SDEM012 <- purrr::map2_chr(df.geam$SDEM012, df.geam$startlanguage, convert_iso3166, mcs1)
+    if (exists("df.geam$SDEM012")){
+        mcs1 <- bind_rows(lapply(isofrom, map_iso3166, lsLangCode, alabels, id12[1]))
+        df.geam$SDEM012 <- purrr::map2_chr(df.geam$SDEM012, df.geam$startlanguage, convert_iso3166, mcs1)
+    }
     
-    
-    mcs2 <- bind_rows(lapply(isofrom, map_iso3166, lsLangCode, alabels, id12[2]))
-    df.geam$SDEM013 <- purrr::map2_chr(df.geam$SDEM013, df.geam$startlanguage, convert_iso3166, mcs2)
+    if (exists("df.geam$SDEM013")){
+        mcs2 <- bind_rows(lapply(isofrom, map_iso3166, lsLangCode, alabels, id12[2]))
+        df.geam$SDEM013 <- purrr::map2_chr(df.geam$SDEM013, df.geam$startlanguage, convert_iso3166, mcs2)
+    }
 
 }
 
@@ -254,15 +257,27 @@ levels(df.geam$WCJC019.SQ001.)
 # calculate age
 curyear <- as.numeric(format(Sys.Date(), format="%Y"))
 
-df.geam$age <- curyear - df.geam$SDEM001
+if (is.numeric(df.geam$SDEM001)){
+    df.geam$age <- curyear - df.geam$SDEM001
+    
+    # make age discrete in 10 year steps. 
+    df.geam$age_i10 <- cut(df.geam$age, c(seq(0,80,by=10),130))    
+    
+    # for some questionnaires, age question is a factor     
+} else if (is.factor(df.geam$SDEM001)){
+    df.geam$age_i10 <- df.geam$SDEM001
+}
 
-# make age discrete in 10 year steps. 
-df.geam$age_i10 <- cut(df.geam$age, c(seq(0,80,by=10),130))
 
 # make net salary discrete in steps of 1000
-maxsalary <- max(df.geam$WCJC005, na.rm=T)
-salarysteps <- 1000
-df.geam$WCJC005_i1000 <- cut(df.geam$WCJC005, breaks=c(seq(0,10000, by=salarysteps), (maxsalary+1)), dig.lab=5)
+if (is.numeric(df.geam$WCJC005)){
+    maxsalary <- max(df.geam$WCJC005, na.rm=T)
+    salarysteps <- 1000
+    df.geam$WCJC005_i1000 <- cut(df.geam$WCJC005, breaks=c(seq(0,10000, by=salarysteps), (maxsalary+1)), dig.lab=5)
+    
+} else if (is.factor(df.geam$WCJC005)){
+    df.geam$WCJC005_i1000 <- df.geam$WCJC005
+}
 
 
 
