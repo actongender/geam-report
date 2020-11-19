@@ -33,9 +33,12 @@ print_xtable <- function(data,
     #html / pdf
     if (isHTML) {
         
-        xtbl <- sjPlot::tab_xtab(data[[var1]], data[[var2]], ... )
-
-        ft <-xtbl
+        ft <- tryCatch({
+            sjPlot::tab_xtab(data[[var1]], data[[var2]], ... )            
+        }, 
+        error = function(e){
+            return(" WARNING! Cell-entries likely contain 0 cases")
+        })
 
     # word document
     } else {
@@ -52,12 +55,12 @@ print_xtable <- function(data,
         
         # chqui squared 
         cst <- tryCatch({
-            chisq.test(data[[var1]], data[[var2]])            
-        }, 
-        error = function(e){
-            cst <- data.frame(statistic=NA, p.value=NA, parameter=NA)
-            return(cst)
-        }) 
+                chisq.test(data[[var1]], data[[var2]])            
+            }, 
+            error = function(e){
+                cst <- data.frame(statistic=NA, p.value=NA, parameter=NA)
+                return(cst)
+            }) 
         
         #fisher test
         fpval <- tryCatch({
@@ -67,8 +70,7 @@ print_xtable <- function(data,
             }, 
             error = function(e){
                 return(" WARNING! ")
-            }
-        )
+            })
          
         
         
