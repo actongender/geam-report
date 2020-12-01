@@ -1,0 +1,259 @@
+# Working overtime
+
+There are four items used from the 5th and 6th European Working Conditions Survey to capture working overtime. The corresponding publications are: 
+
+Eurofund, Francis Green, and Tarek Mostafa. 2012. “Trends in Job Quality in Europe. A Report   Based upon the 5th European Working Conditions Survey.” Luxembourg: Publications Office of the European Union. https://doi.org/10.2806/35164.
+
+Parent-Thirion, Agnès, Isabella Biletta, Jorge Cabrita, Oscar Vargas, Greet Vermeylen, Aleksandra Wilcynska, and Mathijn Wilkens. 2016. “6th European Working Conditions Survey.” Publications Office of the European Union. https://www.eurofound.europa.eu/publications/report/2016/working-conditions/sixth-european-working-conditions-survey-overview-report.
+
+Overall, the four items are: 
+
+```{r prepare_overtime}
+
+# prepare 
+df.wi <- df.geam %>% 
+    mutate(CareResp = if_else( (WCWI006 == "Yes" | WCWI008 == "Yes"), "Yes","No"),
+           WI2RE.SQ001. = (as.numeric(EWCS36WorkIntensity2.SQ001.)-1), 
+           WI2RE.SQ002. = (as.numeric(EWCS36WorkIntensity2.SQ002.)-1), 
+           WI2RE.SQ003. = (as.numeric(EWCS36WorkIntensity2.SQ003.)-1), 
+           WI2RE.SQ004. = (as.numeric(EWCS36WorkIntensity2.SQ004.)-1)) %>% 
+    rowwise() %>% 
+    mutate(WI2RE.Sum = sum(WI2RE.SQ001.,WI2RE.SQ002.,WI2RE.SQ003.,WI2RE.SQ004., na.rm=T))
+
+```
+
+
+
+```{r fig.height=4, fig.cap=get_caption("EWCS36WorkIntensity2.SQ001.")}
+
+################################################
+# Work intensity parent: EWCS36WorkIntensity2
+################################################
+
+
+df.geam %>% 
+  select(starts_with("EWCS36WorkIntensity2.SQ")) %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal,
+                geom.size = .4,
+                show.total = F, 
+                digits = percdigits, 
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 12))
+
+```
+
+<p>&nbsp;</p>
+
+We can construct an overall index for work intensity by aggregating the numerical values across all four items. Scores are recoded as "0=Never", "1=Rarely", "2=Sometimes", and "3=Very often". Thus, "0=Never" responses will not contribute to the work-intensity index. The higher the mean score, the more frequently respondents work overtime. 
+
+<p>&nbsp;</p>
+
+
+## Working overtime by gender and job position
+
+From the outset it is not clear if there is a difference in terms of working overtime between gender and job position. 
+
+```{r}
+
+tbl6 <- df.wi %>% 
+    filter(!is.na(SDEM004.bin) & !is.na(WCJC001)) %>% 
+    group_by(SDEM004.bin, WCJC001) %>% 
+    summarize(total  = n(), 
+              mean_wi = round(mean(WI2RE.Sum, na.rm = T),3))
+
+names(tbl6) <- c("Gender", "Job Position", "Total", "Mean Work Overtime")
+
+print_misctable(tbl6, tcap="Mean overtime by gender and job position")
+```
+
+<p>&nbsp;</p>
+
+```{r}
+
+df.aov <- df.wi %>% 
+    filter(!is.na(SDEM004.bin) & !is.na(WCJC001)) %>% 
+    select(Overtime=WI2RE.Sum, Gender=SDEM004.bin, Position=WCJC001)
+
+wi2Xgender.aov <- aov(Overtime ~ Gender * Position, data=df.aov)
+
+```
+
+There are `r if (!isig(wi2Xgender.aov)) "**no**"` statistically **significant** differences for working overtime by **gender** and **job position**.
+
+```{r}
+print_aovtable(wi2Xgender.aov, tcap="Anova: Overtime differences by gender and position")
+
+```
+
+<p>&nbsp;</p>
+
+By applying the Tukey HSD test, we can see for which concrete pairs `r if (!isig(wi2Xgender.aov)) "**significant**"`  differences of mean working overtime exist: 
+
+
+```{r}
+tuk.aov <- TukeyHSD(wi2Xgender.aov)
+
+print_aovtable(tuk.aov, tcap="Group wise overtime differences by gender and job position")
+```
+
+
+\newpage
+
+
+## Working Overtime by gender and type of contract
+
+Working overtime could be more prone in contractual positions that are more precarious, i.e. part-time. 
+
+```{r}
+
+
+df.wi$WCJC011.RE <- df.wi$WCJC011
+
+# which rows have "Other" or "I do not want to answer" for Gender? 
+dropL <- which( (as.numeric(df.wi$WCJC011) == 3))
+df.wi[dropL, "WCJC011.RE"] <- NA 
+
+
+tbl7 <- df.wi %>% 
+    filter(!is.na(SDEM004.bin) & !is.na(WCJC011.RE)) %>% 
+    group_by(SDEM004.bin, WCJC011.RE) %>% 
+    summarize(total  = n(), 
+                mean_wi = round(mean(WI2RE.Sum, na.rm = T),3))
+
+names(tbl7) <- c("Gender", "Type of Contract", "Total", "Mean Work Overtime")
+
+print_misctable(tbl7, tcap="Mean overtime differences by gender and type of contract")
+
+```
+
+<p>&nbsp;</p>
+
+
+```{r}
+df.aov <- df.wi %>% 
+    filter(!is.na(SDEM004.bin) & !is.na(WCJC011.RE)) %>% 
+    select(Overtime=WI2RE.Sum, Gender=SDEM004.bin, Contract=WCJC011.RE)
+
+wi2XGenderContract.aov <- aov(Overtime ~ Gender * Contract, data=df.aov)
+```
+
+
+There are `r if (!isig(wi2XGenderContract.aov)) "**no**"` statistically **significant** differences for working overtime by **gender** and **type of contract**.
+
+
+```{r}
+print_aovtable(wi2XGenderContract.aov, tcap="Anova: overtime differences by gender and type of contract")
+```
+
+By applying the Tukey HSD test, we can see for which concrete pairs `r if (!isig(wi2XGenderContract.aov)) "**significant**"`  differences of mean working overtime exist: 
+
+```{r}
+tuk.aov <- TukeyHSD(wi2XGenderContract.aov)
+
+print_aovtable(tuk.aov, tcap="Group wise overtime differences by gender and type of contract")
+```
+
+
+\newpage
+
+
+## Working Overtime by Gender and Age Group 
+
+Working overtime could be related to age groups, i.e. the more experienced and older staff is, the more responsibilities they can have. 
+
+```{r}
+
+tbl8 <- df.wi %>% 
+    filter(!is.na(SDEM004.bin) & !is.na(age_4g)) %>% 
+    group_by(SDEM004.bin, age_4g) %>% 
+    summarize(total  = n(), 
+              mean_wi = round(mean(WI2RE.Sum, na.rm = T),3))
+
+names(tbl8) <- c("Gender", "Age group", "Total", "Mean Work Overtime")
+
+print_misctable(tbl8, tcap="Mean overtime by gender and age group")
+```
+
+<p>&nbsp;</p>
+
+```{r}
+df.aov <- df.wi %>% 
+    filter(!is.na(SDEM004.bin) & !is.na(age_4g)) %>% 
+    select(Overtime=WI2RE.Sum, Gender=SDEM004.bin, Age=age_4g)
+
+wi2XGenderAge.aov <- aov(Overtime ~ Gender * Age, data=df.aov)
+```
+
+There are `r if (!isig(wi2XGenderAge.aov)) "**no**"` statistically **significant** differences for working overtime by **gender** and **age groups**.
+
+```{r}
+print_aovtable(wi2XGenderAge.aov, tcap="Anova: overtime differences by gender and age")
+```
+
+By applying the Tukey HSD test, we can see for which concrete pairs `r if (!isig(wi2XGenderAge.aov)) "**significant**"`  differences of mean working overtime exist: 
+
+```{r}
+tuk.aov <- TukeyHSD(wi2XGenderAge.aov)
+
+print_aovtable(tuk.aov, tcap="Group wise overtime differences by gender and age")
+```
+
+
+\newpage
+
+
+## Working overtime by gender and care responsibilities 
+
+Working overtime could be related to care responsibilities as these interfere with work and push work tasks to off-hours. 
+
+```{r}
+
+tbl9 <- df.wi %>% 
+    filter(!is.na(SDEM004.bin) & !is.na(CareResp)) %>% 
+    group_by(SDEM004.bin, CareResp) %>% 
+    summarize(total  = n(), 
+              mean_wi = round(mean(WI2RE.Sum, na.rm = T),3))
+
+names(tbl9) <- c("Gender", "Care Resp.", "Total", "Mean Work Overtime")
+
+print_misctable(tbl9, tcap="Mean overtime by gender and care responsibilities")
+```
+
+<p>&nbsp;</p>
+
+```{r}
+df.aov <- df.wi %>% 
+    filter(!is.na(SDEM004.bin) & !is.na(CareResp)) %>% 
+    select(Overtime=WI2RE.Sum, Gender=SDEM004.bin, CareResp)
+
+wi2XGenderCare.aov <- aov(Overtime ~ Gender * CareResp, data=df.aov)
+```
+
+There are `r if (!isig(wi2XGenderCare.aov)) "**no**"` statistically **significant** differences for working overtime by **gender** and **care responsibilities**.
+
+```{r}
+print_aovtable(wi2XGenderCare.aov, tcap="Anova: overtime differences by gender and care responsibilities")
+```
+
+By applying the Tukey HSD test, we can see for which concrete pairs `r if (!isig(wi2XGenderCare.aov)) "**significant**"`  differences of mean working overtime exist: 
+
+```{r}
+tuk.aov <- TukeyHSD(wi2XGenderCare.aov)
+
+print_aovtable(tuk.aov, tcap="Group wise overtime differences by gender and care responsibilities")
+```
+
+
+\newpage
+
+
+
+
+
+

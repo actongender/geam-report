@@ -1,0 +1,339 @@
+# Masculinity Contest Culture 
+
+The aim of the Masculinity Contest Culture (MCC) scale is to assess how strongly an organization or organizational unit endorses masculine norms. Since the MCC is an organizational level variable, it correlates primarily with organizational level outcomes. A comparative analysis in the framework of the GEAM would be especially pertinent to explore differences between departments or faculties within one and the same organization (e.g. male dominated areas vs. female dominated areas). A possible proxy for this type of exploration could be disciplinary background on respondents (e.g. computer science or engineering versus arts & humanities.) As an organizational level measure, the MCC is a useful instrument to track the impact of organization level policies - when administered before and after the implementation of certain measures. 
+
+The concepts and measurement scale is introduced in the following two articles: 
+
+Glick, Peter, Jennifer L. Berdahl, and Natalya M. Alonso. 2018. “Development and Validation of the Masculinity Contest Culture Scale.” Journal of Social Issues 74 (3): 449–76. https://doi.org/10.1111/josi.12280.
+
+Berdahl, Jennifer L., Marianne Cooper, Peter Glick, Robert W. Livingston, and Joan C. Williams. 2018. “Work as a Masculinity Contest: Work as a Masculinity Contest.” Journal of Social Issues 74 (3): 422–48. https://doi.org/10.1111/josi.12289.
+
+Overall, the MCC is made up of 4 factors that together constitute "masculine" norms at the organizational level: 
+
+* show no weakness
+* demonstrate strength and stamina
+* put work first
+* engage in dog-eat-dog competition
+
+Organizational level outcomes are expected to trickle down to individual level outcomes, i.e. turn-over intentions, burnout, lower job-satisfaction, overall individual well-being. More specifically, "[...] both men and women experienced masculinity contest workplaces as dysfunctional, rife with negative social behaviors, dissatisfying, and personallyl harmful." (Glick et al., 2018). Masculinity contest norms correalte with having toxic leaders, a heterosexist culture, lower psychological team safety, and less support for work-life balance.  and bullying in general as well as sexual and ethnic harassment. Respondents from workplaces with higher masculinity contest norms reported "more personal experiences with coworkers bullying, sexual harassment and ethnic harassment. The MCC is also moderately correlated with employees alientation from an organization. 
+
+
+To recall, overall responses to the MCC: 
+
+
+```{r prepare_mcc}
+
+# prepare for analysis; subset data from df.geam
+df.mcc <- df.geam %>% 
+  modify_at(vars(starts_with("GlickMasculCont8.SQ")), as.numeric) %>% 
+  rowwise() %>% 
+  mutate(MCC            = mean(c_across(starts_with("GlickMasculCont8.SQ")), na.rm = T), 
+         MCC1_Weakness  = mean(c(GlickMasculCont8.SQ001., GlickMasculCont8.SQ002.), na.rm=T), 
+         MCC2_Stamina   = mean(c(GlickMasculCont8.SQ006., GlickMasculCont8.SQ007.), na.rm=T), 
+         MCC3_WorkFirst = mean(c(GlickMasculCont8.SQ011., GlickMasculCont8.SQ012.), na.rm=T), 
+         MCC4_Compete   = mean(c(GlickMasculCont8.SQ016., GlickMasculCont8.SQ017.), na.rm=T)) %>% 
+  select(Gender=SDEM004.bin, Position=WCJC001,  Agegroup=age_4g, starts_with("MCC"), SexHarass=BISB003)
+
+```
+
+
+
+```{r fig.height=7, fig.width=8, fig.cap=get_caption("GlickMasculCont8.SQ001.")}
+
+# show MCC chart for all items. 
+df.geam %>% 
+  select(starts_with("GlickMasculCont8.SQ")) %>% 
+  shorten_label(maxlength = 50) %>% 
+  plot_stackfrq(geom.colors =cpal, 
+                show.n = F,
+                show.total = F,
+                geom.size = .5,
+                coord.flip = T,
+                digits = 0,
+                show.axis.prc = T) +
+  theme_light() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "vertical",
+        legend.justification = c(1,0),
+        axis.text.x=element_blank(),
+        axis.text = element_text(size = 12))
+
+```
+
+The response scale used is "1=Not at all true", "2=Somewhat true", "3-Neither true nor untrue", "4-Somewhat true", "5-Entirely true". Higher mean scores therefore indicate a stronger masculinity norm culture. 
+
+
+\newpage
+
+
+## Masculinity Contest by gender and position
+
+We expect that differences exist for women and men how they experience masculinity norms within their organization. Women might be especially affected, since MCC reflects a system of male dominance. 
+
+```{r}
+tbl1 <- df.mcc %>% 
+  filter(!is.na(Gender) & !is.na(Position)) %>% 
+  group_by(Gender, Position) %>% 
+  summarize(Total = n(),
+            MCCMean = round(mean(MCC, na.rm = T),3))
+
+print_misctable(tbl1, tcap="Mean masculinity contest scores by gender and job position")
+```
+<p>&nbsp;</p>
+
+
+
+```{r}
+mccdiff1.aov <- aov(MCC ~ Gender * Position, data=df.mcc)
+```
+
+There are `r if (!isig(mccdiff1.aov)) "**no**"` statistically **significant** differences for the masculinity contest scores by **gender** and **job position**.
+
+```{r}
+print_aovtable(mccdiff1.aov, tcap="Anova: MCC scores by gender and job position")
+```
+
+By applying the Tukey HSD test, we can see for which concrete pairs `r if (!isig(mccdiff1.aov)) "**significant**"`  differences of masculinity contest scores exist. 
+
+```{r}
+tuk.aov <- TukeyHSD(mccdiff1.aov)
+
+print_aovtable(tuk.aov, tcap="Group wise MCC differences by gender and job position")
+
+```
+
+
+\newpage
+
+
+## The four factor structure
+
+Let's explore the four factor structure of the MCC in more detail. 
+
+### Show no weakness. 
+
+This dimension comprises two questions: 
+
+* "Admitting you don't know the answer looks weak" (GlickMasculCont8.SQ001.)
+* "Expressing any emotion other than anger or pride is seen as weak" (GlickMasculCont8.SQ002.)
+
+Mean scores by gender: 
+
+```{r}
+tbl2 <- df.mcc %>%
+  filter(!is.na(Gender)) %>% 
+  group_by(Gender) %>% 
+  summarize(Total = n(), 
+            Weakness = mean(MCC1_Weakness, na.rm=T))
+
+print_misctable(tbl2, tcap="Mean MCC1 'weakness' score by gender")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r}
+weakness.aov <- aov(MCC1_Weakness ~ Gender, data=df.mcc)
+print_aovtable(weakness.aov, tcap="Anova MCC1 'weakness' score by gender")
+```
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+
+### Demonstrate strength and stamina 
+
+This dimension comprises two questions: 
+
+* "It's important to be in good physical shape to be respected" (GlickMasculCont8.SQ006.)
+* "People who are physically smaller have to work harder to get respect" (GlickMasculCont8.SQ007.)
+
+Mean score by gender: 
+
+```{r}
+tbl3 <- df.mcc %>%
+  filter(!is.na(Gender)) %>% 
+  group_by(Gender) %>% 
+  summarize(Total = n(), 
+            Stamina = mean(MCC2_Stamina, na.rm=T))
+
+print_misctable(tbl3, tcap="Mean 'stamina' score by gender")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r}
+stamina.aov <- aov(MCC2_Stamina ~ Gender, data=df.mcc)
+print_aovtable(stamina.aov, tcap="Anova: MCC2 'strength and stamina' score by gender")
+```
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### Put work first 
+
+Regarding the third factor, one can suspect that gender differences exist in terms of how important respondents rate to be an exclusive focus on work. This factor is captured with the following two items: 
+
+* "To succeed you can't let family interfere with work" (GlickMasculCont8.SQ011.)
+* "Taking days off is frowned upon" (GlickMasculCont8.SQ012.)
+
+Mean values of agreement by gender: 
+
+```{r}
+tbl4 <- df.mcc %>%
+  filter(!is.na(Gender)) %>% 
+  group_by(Gender) %>% 
+  summarize(Total = n(),
+            WorkFirst = round(mean(MCC3_WorkFirst, na.rm=T),3))
+
+print_misctable(tbl4, tcap="Mean 'work first' score by gender")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r}
+workfirst.aov <- aov(MCC3_WorkFirst ~ Gender, data=df.mcc)
+print_aovtable(workfirst.aov, tcap="Anova: MCC3 'put work first' score by gender")
+```
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+### Dog eats dog competition
+
+The fourth factor captures respondents view regarding the competetiveness of their work environment. It is capture with the following two items: 
+
+* "You're either 'in' or you're 'out', and once you're out, you're out" (GlickMasculCont8.SQ016.)
+* "If you don't stand up for yourself people will step on you" (GlickMasculCont8.SQ017.)
+
+Mean scores by gender: 
+
+```{r}
+tbl5 <- df.mcc %>%
+  filter(!is.na(Gender)) %>% 
+  group_by(Gender) %>% 
+  summarize(Total = n(),
+            Compete = round(mean(MCC4_Compete, na.rm=T),3))
+
+print_misctable(tbl5, tcap="Mean 'competition' score by gender")
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r}
+compete.aov <- aov(MCC4_Compete ~ Gender, data=df.mcc)
+print_aovtable(compete.aov, tcap="Anova: MCC1 'competition' score by gender")
+```
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+## MCC and Microagression 
+
+The literature suggests that MCC scores correlated moderately and highly with bullying experiences, including sexual harassment and ethnic harrasment. In the GEAM Core, measurement scales regarding microagressions are available with the "BIMA001" items. 
+
+We calculate correlation between mean MCC scores and the eleven BIMA001 scores. We expect a relativel strong correlation (> .3) between the mean scores of both scales. 
+
+
+```{r}
+
+
+tbl6 <- df.geam %>% 
+  select(starts_with("GlickMasculCont8.SQ"), starts_with("BIMA001.")) %>% 
+  modify(as.numeric) %>% 
+  rowwise() %>% 
+  mutate(MCC   = mean(c_across(starts_with("GlickMasculCont8.SQ")), na.rm = T), 
+         MIAG = mean(c_across(starts_with("BIMA001.")), na.rm=T) ) %>% 
+  select(MasculinityCcontest=MCC, MicroAggresion=MIAG) %>% 
+  correlation()
+
+print_misctable(tbl6, tcap="Correlation between MCC and Microagression")
+```
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+## MCC and sexual harassment
+
+We expect a significant difference in MCC scores between those respondents that indicate to have experienced sexual harassment and those they don't. 
+
+```{r}
+
+tbl7 <- df.mcc %>% 
+  filter(!is.na(SexHarass)) %>% 
+  group_by(SexHarass) %>% 
+  summarize(Total = n(), 
+            MCC_Mean = mean(MCC, na.rm=T))
+
+print_misctable(tbl7, tcap="Mean MCC by having 'experienced sexual harassment' in the past.")
+
+```
+
+
+<p>&nbsp;</p>
+
+
+```{r}
+sexharass.aov <- aov(MCC ~ SexHarass, data=df.mcc)
+print_aovtable(sexharass.aov, tcap="Anova: MCC score by having experienced sexual harassment")
+```
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+## MCC and institutional policies
+
+As an organizational level measure, the MCC should capture the availability (or absence) of institutional level policies that aim to establish a better working culture with respect to to work-life balance. To the degree that parental leave measures and work-life balance measures exist, the working culture should improve (or be scored lower). 
+
+The MCC should also correlated negatively with organizational committment: the higher masculinity contest norms, the lower organizational engagement. 
+
+```{r}
+
+
+tbl8 <- df.geam %>% 
+  select(starts_with("GlickMasculCont8.SQ"), EWCS89JobSatisfact8.SQ005.) %>% 
+  modify(as.numeric) %>% 
+  rowwise() %>% 
+  mutate(MCC   = mean(c_across(starts_with("GlickMasculCont8.SQ")), na.rm = T)) %>% 
+  select(MasculinityContest=MCC, OrgEngage=EWCS89JobSatisfact8.SQ005.) %>% 
+  correlation()
+
+print_misctable(tbl8, tcap="Correlation between MCC and organizational engagement")
+
+```
+
+
+
+\newpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

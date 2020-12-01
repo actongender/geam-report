@@ -40,6 +40,8 @@ library(xtable)
 library(flextable)
 library(RColorBrewer)
 library(gpg)
+library(lsr)
+library(correlation)
 
 
 source("config.R")
@@ -55,6 +57,9 @@ source("util/encrypt.R")
 source("util/shorten_label.R")
 source("util/exechunk.R")
 source("util/get_caption.R")
+source("util/is_sig.R")
+source("util/print_misctable.R")
+source("util/print_aovtable.R")
 
 
 

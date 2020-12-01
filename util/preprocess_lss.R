@@ -261,11 +261,18 @@ if (is.numeric(df.geam$SDEM001)){
     df.geam$age <- curyear - df.geam$SDEM001
     
     # make age discrete in 10 year steps. 
-    df.geam$age_i10 <- cut(df.geam$age, c(seq(0,80,by=10),130))    
+    df.geam$age_i10 <- cut(df.geam$age, c(seq(0,80,by=10),130))  
+    
+    # age groups: junior, middle, senior.
+    # Junior < 30, Middle 31-45, Senior 46-65, > 65
+    df.geam$age_4g <- cut(df.geam$age, c(0,30,45,65,100), labels=c("Junior (<30)", "Middle (31-45)", "Senior (46-65)", "+65"))
+    
     
     # for some questionnaires, age question is a factor     
 } else if (is.factor(df.geam$SDEM001)){
     df.geam$age_i10 <- df.geam$SDEM001
+    
+    df.geam$age_4g <- df.geam$SDEM001
 }
 
 
@@ -291,6 +298,16 @@ df.geam[dropL, "SDEM004.bin"] <- NA
 
 # remove "other" and "I do not want to answer" from factor. 
 df.geam$SDEM004.bin <- forcats::fct_drop(df.geam$SDEM004.bin)
+
+
+# recode Work Family Conflict Scale as indicated by the literature 
+# It is recommended to invert items before interpreting the item scores so that higher scores represent 
+# a greater work-family conflict (1 = “never” to 4 = “several times a week”).
+df.geam$WorkFamConfISSP.RE.SQ001. <- as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ001.))
+df.geam$WorkFamConfISSP.RE.SQ002. <- as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ002.))
+df.geam$WorkFamConfISSP.RE.SQ003. <- as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ003.))
+df.geam$WorkFamConfISSP.RE.SQ004. <- as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ004.))
+
 
 
 

@@ -1,3 +1,5 @@
+# (PART) Part - Analysis of Missing {-}
+
 # Data Overview 
 
 ```{r}
@@ -36,6 +38,7 @@ vis_miss(df.geam[,121:180])
 ```{r fig.height=8, fig.width=15}
 vis_miss(df.geam[,181:260])
 ```
+
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>

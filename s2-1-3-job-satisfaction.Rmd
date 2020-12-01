@@ -1,0 +1,115 @@
+# Job Satisfaction
+
+**ANALYSIS OF DATA STILL PENDING**
+
+Job satisfaction has been measured across several items taken from the European Working Conditions Survey. The relevant publications are: 
+
+Eurofund, Francis Green, and Tarek Mostafa. 2012. “Trends in Job Quality in Europe. A Report   Based upon the 5th European Working Conditions Survey.” Luxembourg: Publications Office of the European Union. https://doi.org/10.2806/35164.
+
+Parent-Thirion, Agnès, Isabella Biletta, Jorge Cabrita, Oscar Vargas, Greet Vermeylen, Aleksandra Wilcynska, and Mathijn Wilkens. 2016. “6th European Working Conditions Survey.” Publications Office of the European Union. https://www.eurofound.europa.eu/publications/report/2016/working-conditions/sixth-european-working-conditions-survey-overview-report.
+
+It has been conceptualized as a four dimensionsal construct, including:  
+
+* earnings
+* job proposects
+* intrinsic job quality
+* working time quality
+
+
+The items used in the GEAM Core do not correspond exactly to the items used in the Working Conditions Survey. The differences are listed in what follows: 
+
+## Earnings
+
+"Considering all my efforts and achievements in my job, I feel I get paid appropriately" (EWCS89JobSatisfact8.SQ001.)
+
+Earnings can be complemented by the absolute salary, variable WCJC005
+
+<p>&nbsp;</p>
+
+
+## Job prospects
+
+Three items measure job security, career progression and contract security: 
+
+"I might lose my job in the next 6 months" (reverse coded!) (EWCS89JobSatisfact8.SQ007.)
+"My job offers good prospects for career advancement" (EWCS89JobSatisfact8.SQ002.)
+"If I were to lose or quit my current job, it would be easy for me to find a job of similar" (EWCS89JobSatisfact8.SQ008.)
+
+<p>&nbsp;</p>
+
+
+## Intrinsic job quality 
+
+Intrinsic job qualiy is furthermore composed of four sub-dimensions: 
+
+**Skills and discretion.** No item used as this refers mainly to manual or assembly line work where pacing is dictated externally for example. Given that the GEAM Core targets academic work primarily, we expect quite uniform discretion. 
+**Good social environment.** Measure with two items: 
+"I generally get on well with my work colleagues" (EWCS89JobSatisfact8.SQ004.)
+"I receive the recognition I deserve for my work" (EWCS89JobSatisfact8.SQ003.)
+**Good Physical Environment** No item used. 
+**Work Intensity** No item used. 
+
+<p>&nbsp;</p>
+
+
+## Working Time Quality 
+
+Is comprised of two sub-dimensions: 
+
+**Overtime** Measured by four items comprising "EWCS36WorkIntensity2" 
+"...at night, for at least 2 hours between 10.00 pm and 05.00 am?" (EWCS36WorkIntensity2.SQ001.)
+"... on Sundays" (EWCS36WorkIntensity2.SQ002.)
+"... on Saturdays" (EWCS36WorkIntensity2.SQ003.)
+"...more than 10 hours a day" (EWCS36WorkIntensity2.SQ004.)
+
+**Work-live balance** Measured by the Work-Family Conflict Scale. 
+
+
+
+```{r}
+# df.tmp %>% 
+#   select(starts_with("EWCS89Job")) %>% 
+#   sjlabelled::get_label()
+
+
+# Earnings 
+#   EWCS89JobSatisfact8.SQ001. - "Considering all my efforts and achievements in my job, I feel I get paid appropriately "
+#
+# Propspects
+#  Job security, Career Progression, Contract Security
+#   EWCS89JobSatisfact8.SQ007. - "I might lose my job in the next 6 months" (reverse coded!)
+#   EWCS89JobSatisfact8.SQ002. - "My job offers good prospects for career advancement"
+#   EWCS89JobSatisfact8.SQ008. - "If I were to lose or quit my current job, it would be easy for me to find a job of similar salary" 
+# 
+#
+# Intrinsic Job Quality 
+#  Skills and Discretion 
+#   -> NONE
+#  Good Social Environment 
+#   EWCS89JobSatisfact8.SQ004. - "I generally get on well with my work colleagues"
+# ? EWCS89JobSatisfact8.SQ003. - "I receive the recognition I deserve for my work "
+#  Good Physical Environment 
+#   -> NONE
+#  Work Intensity
+#   -> NONE
+#  
+# Working Time Quality
+#  Overtime
+#   WI2 items. 
+#  Work-Family Conflict Scale
+#   4-items 
+# 
+# 
+# Worker Engagement - This is not part of the job satisfaction. 
+#   EWCS89JobSatisfact8.SQ005. - "The organisation I work for motivates me to give my best job performance " 
+#
+# In the original one, this is about "getting better on with children". 
+# ? EWCS89JobSatisfact8.SQ006. - "I get on better with others in my personal life because I have a job" 
+
+```
+
+
+\newpage 
+
+
+
