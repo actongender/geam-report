@@ -52,6 +52,10 @@ rmtiming = TRUE
 # export SPSS file. 
 export2spss = FALSE
 
+# recode certain variables nedded for in-depth analysis and 
+# add them to data frame
+recode = FALSE
+
 
 
 # Set some internal paths. No need to change anything.  
@@ -185,9 +189,15 @@ if ("VarOrgType" %in% names(df.geam)){
 
 
 
-# convert nationality answer codes for variable SDEM012, SDEM013
-# in how many different languages have respondents submitted data, other than the 
-# target language? 
+#' Convert nationality answer codes for variable SDEM012, SDEM013
+#' 
+#' The order of response items for SDEM012 and SDEM013 is not identical across languages as 
+#' country names are ordered alphabetically, i.e. German versus Deutschland will be at different
+#' positions in the dropdown menu.    
+#' 
+#' The following section makes sure that country names match across languages, i.e. no matter in which 
+#' language the given result data set is build. 
+#' 
 isofrom <- df.geam %>% 
     select(startlanguage) %>% 
     filter(startlanguage != lsLangCode) %>% 
@@ -271,7 +281,6 @@ if (is.numeric(df.geam$SDEM001)){
     # for some questionnaires, age question is a factor     
 } else if (is.factor(df.geam$SDEM001)){
     df.geam$age_i10 <- df.geam$SDEM001
-    
     df.geam$age_4g <- df.geam$SDEM001
 }
 
@@ -287,8 +296,6 @@ if (is.numeric(df.geam$WCJC005)){
 }
 
 
-
-
 # make binary gender variable.
 df.geam$SDEM004.bin <- df.geam$SDEM004
 
@@ -300,17 +307,40 @@ df.geam[dropL, "SDEM004.bin"] <- NA
 df.geam$SDEM004.bin <- forcats::fct_drop(df.geam$SDEM004.bin)
 
 
-# recode Work Family Conflict Scale as indicated by the literature 
-# It is recommended to invert items before interpreting the item scores so that higher scores represent 
-# a greater work-family conflict (1 = “never” to 4 = “several times a week”).
-df.geam$WorkFamConfISSP.RE.SQ001. <- as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ001.))
-df.geam$WorkFamConfISSP.RE.SQ002. <- as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ002.))
-df.geam$WorkFamConfISSP.RE.SQ003. <- as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ003.))
-df.geam$WorkFamConfISSP.RE.SQ004. <- as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ004.))
+#' Following variables are used mainly for the in-depth statistical analysis
+#' They are not included in the descriptive statistical report. 
+#' 
+if (recode){
 
+    #' create global care responsibility variable when WCWI006 "Are you the primary carer or assistant for
+    #' an adult requiring care?" or WCWI008 "Are you the parent or legal guardian of any children aged 17 years or younger?"
+    #' are true. 
+    #'
+    df.geam %<>% 
+        mutate(CareResp = if_else( (as.numeric(WCWI006) == 2 | as.numeric(WCWI008) == 2), TRUE,FALSE))
+    
+    
+    
+    #' recode Work Family Conflict Scale as indicated by the literature 
+    #' It is recommended to invert items before interpreting the item scores so that higher scores represent 
+    #' a greater work-family conflict (1 = “never” to 4 = “several times a week”).
+    df.geam %<>%
+        mutate(WorkFamConfISSP.RE.SQ001. = as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ001.)),
+               WorkFamConfISSP.RE.SQ002. = as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ002.)),
+               WorkFamConfISSP.RE.SQ003. = as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ003.)),
+               WorkFamConfISSP.RE.SQ004. = as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ004.)))
+    
+        
+    #' create mean values for components "work-family" and "family-work" conflict and overall mean values. 
+    #' 
+    df.geam %<>% 
+        rowwise() %>% 
+        mutate(WorkFamMean = mean(c(WorkFamConfISSP.RE.SQ001., WorkFamConfISSP.RE.SQ002.), na.rm=T), 
+               FamWorkMean = mean(c(WorkFamConfISSP.RE.SQ003., WorkFamConfISSP.RE.SQ004.), na.rm=T), 
+               WorkFamISSPMean = (WorkFamMean+FamWorkMean)/2 ) %>% 
+        ungroup()
 
-
-
+}
 
 
 # 6. Store clean data frame, ready for analysis

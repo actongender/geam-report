@@ -33,6 +33,7 @@ knitr::opts_chunk$set(
 
 
 library(tidyverse)
+library(magrittr)
 library(sjPlot)
 library(sjmisc)
 library(sjstats)
