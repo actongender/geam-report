@@ -95,7 +95,7 @@ if (file.exists(csvgpg.read.path)){
     },
     error = function(e){
         message("No valid gpg encryption receiver provided. Data will be writen in plain text!")
-        save(df.geam, path_raw_csv)
+        save(df.geam, df.save.path)
     })
 
     
@@ -324,11 +324,16 @@ if (recode){
     #' recode Work Family Conflict Scale as indicated by the literature 
     #' It is recommended to invert items before interpreting the item scores so that higher scores represent 
     #' a greater work-family conflict (1 = “never” to 4 = “several times a week”).
+    # df.geam %<>%
+    #     mutate(WorkFamConfISSP.RE.SQ001. = as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ001.)),
+    #            WorkFamConfISSP.RE.SQ002. = as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ002.)),
+    #            WorkFamConfISSP.RE.SQ003. = as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ003.)),
+    #            WorkFamConfISSP.RE.SQ004. = as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ004.)))
     df.geam %<>%
-        mutate(WorkFamConfISSP.RE.SQ001. = as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ001.)),
-               WorkFamConfISSP.RE.SQ002. = as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ002.)),
-               WorkFamConfISSP.RE.SQ003. = as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ003.)),
-               WorkFamConfISSP.RE.SQ004. = as.numeric(forcats::fct_rev(df.geam$WorkFamConfISSP.SQ004.)))
+        mutate(WFC.RE.SQ001. = fct_rev(WorkFamConfISSP.SQ001.), 
+               WFC.RE.SQ002. = fct_rev(WorkFamConfISSP.SQ002.), 
+               WFC.RE.SQ003. = fct_rev(WorkFamConfISSP.SQ003.),
+               WFC.RE.SQ004. = fct_rev(WorkFamConfISSP.SQ004.))
     
         
     #' create mean values for components "work-family" and "family-work" conflict and overall mean values. 
