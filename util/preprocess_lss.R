@@ -95,7 +95,7 @@ if (file.exists(csvgpg.read.path)){
     },
     error = function(e){
         message("No valid gpg encryption receiver provided. Data will be writen in plain text!")
-        save(df.geam, df.save.path)
+        save(df.geam, file=df.save.path)
     })
 
     
